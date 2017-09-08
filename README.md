@@ -4,6 +4,9 @@
 ## Master application [![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces.svg?branch=master)](https://travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces)
 ### [https://moonfaces.herokuapp.com](https://moonfaces.herokuapp.com)
 
+## Develop application [![Build Status](https://api.travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces.svg?branch=develop)](https://github.com/frontend-park-mail-ru/2017_2_MoonFaces/tree/develop)
+### [https://moonfaces.herokuapp.com](https://bacterio.herokuapp.com/)
+
 
 ## Members
 * [@Praron](https://github.com/Praron) - Ремизов Константин
