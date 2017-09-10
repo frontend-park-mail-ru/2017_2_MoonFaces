@@ -11,11 +11,11 @@ const about = document.getElementsByClassName('about')[0];
 const mainMenu = document.getElementsByClassName('main')[0];
 
 mainMenu.onclick = function () {
-    let curr = liveSectionsArray
+    liveSectionsArray
         .find(section => section.hidden === false)
         .hidden = true;
 
-    let next = liveSectionsArray
+    liveSectionsArray
         .find(section => section.id === 'login')
         .hidden = false;
 
@@ -24,19 +24,19 @@ mainMenu.onclick = function () {
 
 signup.onclick = function () {
     event.target.parentElement.hidden = true;
-    const nextSection = liveSectionsArray
-        .find(section => section.id === 'signup');
+    liveSectionsArray
+        .find(section => section.id === 'signup')
+        .hidden = false;
 
-    nextSection.hidden = false;
     mainMenu.hidden = false;
 };
 
 records.onclick = function () {
     event.target.parentElement.hidden = true;
     const nextSection = liveSectionsArray
-        .find(section => section.id === 'records');
+        .find(section => section.id === 'records')
+        .hidden = false;
 
-    nextSection.hidden = false;
     mainMenu.hidden = false;
 };
 
