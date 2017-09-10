@@ -4,7 +4,9 @@
   "description": "Empty",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "webpack",
+    "server": "webpack-dev-server --content-base dist --host 0.0.0.0 --colors"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,18 @@
   "bugs": {
     "url": "https://github.com/frontend-park-mail-ru/2017_2_MoonFaces/issues"
   },
-  "homepage": "https://github.com/frontend-park-mail-ru/2017_2_MoonFaces#readme"
+  "homepage": "https://github.com/frontend-park-mail-ru/2017_2_MoonFaces#readme",
+  "devDependencies": {
+    "webpack": "^3.5.6"
+  },
+  "dependencies": {
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "image-webpack-loader": "^3.4.2",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack-dev-server": "^2.7.1"
+  }
 }
