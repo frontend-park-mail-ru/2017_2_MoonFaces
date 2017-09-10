@@ -1,12 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<link rel="stylesheet" href="style.css">
-<script type="text/javascript" src="bundle.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bacter.io</title>
 </head>
-
 <body>
-webpack<br>
-<img src="images/logo.jpg">
+<div id="application">
+    <h1>Bacter.io</h1>
+    <div id="pages">
+        <section id="login">
+            <form action="" id="login-form">
+                <input type="text" name="login" placeholder="Your login">
+                <br>
+                <input type="password" name="password" placeholder="Password">
+                <br>
+                <input type="submit" class="signin-button" value="Sign in">
+            </form>
+            <input type="submit" class="signup" value="Sign up">
+
+            <h1>OR</h1>
+
+            <form action="" id="guest-form">
+                <input type="text" name="nickname" placeholder="Your nickname">
+                <br>
+                <input type="submit" class="guest-button" value="Play as a guest">
+            </form>
+            <br><br>
+            <input type="submit" class="records" value="Top players">
+            <br><br>
+            <input type="submit" class="about" value="About">
+
+        </section>
+
+        <section id="signup" hidden>
+            <form action="" id="signup-form">
+                <input type="text" name="login" placeholder="Your login">
+                <br>
+                <input type="email" name="email" placeholder="Your email">
+                <br>
+                <input type="password" name="login" placeholder="Your password">
+                <br>
+                <input type="password" name="login" placeholder="Repeat your password">
+                <br>
+                <input type="submit" class="signup-button" value="Sign up">
+            </form>
+        </section>
+
+        <section id="about" hidden>
+            <h2>Sample text</h2>
+        </section>
+
+        <section id="records" hidden>
+            <h2>10/10 Player of the year</h2>
+        </section>
+
+        <br><br>
+        <input type="submit" class="main" value="Main menu" hidden>
+    </div>
+</div>
+
+<script src="app.js"></script>
+
 </body>
 </html>
