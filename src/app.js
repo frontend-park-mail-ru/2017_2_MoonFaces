@@ -1,4 +1,6 @@
 'use strict';
+import './index.html';
+import './style.scss';
 
 const application = document.getElementById('application');
 
