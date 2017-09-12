@@ -1,3 +1,8 @@
-body{
-    background: #0000c4;
-}
+$logo_background_color: rgba(lighten(#000, 50%), .8);
+$logo_text_color: #fff;
+
+@import "sass/base";
+@import "sass/logo";
+@import "sass/form";
+@import "sass/columns";
+@import "sass/buttons";
