@@ -1,4 +1,7 @@
 'use strict';
+import './index.html';
+import './style.scss';
+import './images/background.jpg'
 
 const application = document.getElementById('application');
 
