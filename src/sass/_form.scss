@@ -3,9 +3,13 @@
         width: 100%;
         box-sizing: border-box;
         margin: 5px 0;
+        outline: none;
     }
     input[type=text],
     input[type=password] {
+        &:focus{
+            border-color: lighten(#000, 25%);
+        }
         border: solid 2px lighten(#000, 60%);
         padding: 5px;
         text-align: center;

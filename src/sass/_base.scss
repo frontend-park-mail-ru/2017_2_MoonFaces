@@ -10,6 +10,10 @@ body {
     font-family: Consolas, serif;
 }
 
+input{
+    font-family: Consolas, serif;
+}
+
 .centered{
     width: 400px;
     margin: auto;
@@ -20,4 +24,15 @@ body {
     font-size: 36px;
     margin: 10px;
     text-align: center;
+}
+
+.right-corner{
+    input, a{
+        margin-left: 10px;
+        display: inline-block;
+    }
+    margin: 15px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }

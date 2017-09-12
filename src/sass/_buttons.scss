@@ -39,3 +39,12 @@
                     rgba(lighten(#f00, 20%), .9)
     );
 }
+
+.button-gray {
+    @include button(
+                    rgba(lighten(#000, 45%), 1),
+                    rgba(lighten(#000, 65%), .9),
+                    rgba(#fff, 1),
+                    rgba(lighten(#000, 45%), .9)
+    );
+}
