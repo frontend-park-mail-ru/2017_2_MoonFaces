@@ -2,6 +2,7 @@
 import './index.html';
 import './style.scss';
 import './images/background.jpg'
+import './fonts/consola.ttf'
 
 const application = document.getElementById('application');
 
@@ -44,17 +45,26 @@ about.onclick = function () {
     mainMenu.hidden = false;
 };
 
+
+//отсюда новый модуль будет
 const email = document.getElementsByName('email')[0];
+const passwordsCollection = document.getElementsByName('password');
+const passwordsArray = Array.from(passwordsCollection);
+const passwordRepeat = document.getElementsByName('password-repeat')[0];
 
 email.onchange = function () {
     if(!/^\w+@[a-z]+\.[a-z]+$/g.test(email.value))
         alert('Invalid email');
 };
 
-const passwordsCollection = document.getElementsByName('password');
-const passwordsArray = Array.from(passwordsCollection);
+passwordsArray.map((password) => {
+    password.onchange = () => {
+        if (password.value.length < 8)
+            alert('Your password must be at least 8 characters long');
+    }
+});
 
-passwordsArray[0].onchange = function () {
-    if (passwordsArray[0].value.length < 8)
-        alert('Password must be at least 8 characters long');
+passwordRepeat.onchange = () => {
+    if (passwordRepeat !== passwordsArray[1])
+        alert('Passwords does not match');
 };

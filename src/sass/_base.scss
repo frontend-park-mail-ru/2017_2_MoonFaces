@@ -1,17 +1,38 @@
+@font-face {
+    font-family: Consolas;
+    src: url('../fonts/consola.ttf');
+}
+
 body {
-    background-image: url('images/background.jpg');
+    background-image: url('../images/background.jpg');
     margin: 0;
     padding: 0;
+    font-family: Consolas, serif;
+}
+
+input{
+    font-family: Consolas, serif;
 }
 
 #pages{
     width: 400px;
     margin: auto;
-    display: flex;
-    flex-direction: column;
+    display: block;
+}
 
-    div {
-        flex-basis: 0;
-        flex-grow: 1;
+.divider-center{
+    font-size: 36px;
+    margin: 10px;
+    text-align: center;
+}
+
+.right-corner{
+    input, a{
+        margin-left: 10px;
+        display: inline-block;
     }
+    margin: 15px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
