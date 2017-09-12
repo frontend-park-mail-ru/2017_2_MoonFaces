@@ -10,30 +10,35 @@
 <body>
 <div id="application">
     <div class="logo">
-        <h1>Bacter.io</h1>
+        <h1>bacter.io</h1>
     </div>
     <div id="pages">
         <section class="centered" id="login">
-            <form action="" id="login-form">
-                <input type="text" name="login" placeholder="Your login">
-                <br>
-                <input type="password" name="password" placeholder="Password">
-                <br>
-                <input type="submit" class="signin-button" value="Sign in">
-            </form>
-            <input type="submit" class="signup" value="Sign up">
+            <div class="form">
+                <form action="" id="login-form">
+                    <input type="text" name="login" placeholder="Your login">
+                    <input type="password" name="password" placeholder="Password">
+                    <div class="columns">
+                        <div>
+                            <input type="submit" class="button-green signin-button" value="Sign in">
+                        </div>
+                        <div>
+                            <a href="#" class="button-red button signup">Sign up</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-            <h1>OR</h1>
+            <h2 class="divider-center">OR</h2>
+            <div class="form">
 
-            <form action="" id="guest-form">
-                <input type="text" name="nickname" placeholder="Your nickname">
-                <br>
-                <input type="submit" class="guest-button" value="Enter as a guest">
-            </form>
-            <br><br>
-            <input type="submit" class="records" value="Top players">
-            <br><br>
-            <input type="submit" class="about" value="About">
+                <form action="" id="guest-form">
+                    <input type="text" name="nickname" placeholder="Your nickname">
+                    <input type="submit" class="button-green guest-button" value="Enter as a guest">
+                </form>
+            </div>
+            <input type="submit" class="button records" value="Top players">
+            <input type="submit" class="button about" value="About">
 
         </section>
 

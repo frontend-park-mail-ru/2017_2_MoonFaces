@@ -1,0 +1,14 @@
+.form {
+    input, a{
+        width: 100%;
+        box-sizing: border-box;
+        margin: 5px 0;
+    }
+    input[type=text],
+    input[type=password] {
+        border: solid 2px lighten(#000, 60%);
+        padding: 5px;
+        text-align: center;
+        font-size: 23px;
+    }
+}

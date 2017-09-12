@@ -2,6 +2,7 @@
 import './index.html';
 import './style.scss';
 import './images/background.jpg'
+import './fonts/consola.ttf'
 
 const application = document.getElementById('application');
 

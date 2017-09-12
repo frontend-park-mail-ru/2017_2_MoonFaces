@@ -1,6 +1,14 @@
 .logo{
+    h1{
+        padding-top: 7px;
+        font-size: 45px;
+    }
     margin: auto;
     width: 400px;
     text-align: center;
-    background: #c4c4c4;
+    background: $logo_background_color;
+    color: $logo_text_color;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
