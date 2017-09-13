@@ -5,7 +5,7 @@ const passwordsCollection = document.getElementsByName('password');
 const passwordsArray = Array.from(passwordsCollection);
 const passwordRepeat = document.getElementsByName('password-repeat')[0];
 
-email.onchange = function () {
+email.onchange = () => {
     if(!/^\w+@[a-z]+\.[a-z]+$/g.test(email.value))
         alert('Invalid email');
 };

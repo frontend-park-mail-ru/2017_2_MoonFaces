@@ -19,7 +19,7 @@ const transitFromMainMenu = (sectionName) => {
     mainMenu.style.visibility = "visible";
 };
 
-mainMenu.onclick = function () {
+mainMenu.onclick = () => {
     liveSectionsArray
         .find(section => section.hidden === false)
         .hidden = true;
