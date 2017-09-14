@@ -13,7 +13,7 @@ const setSectionHidden = (id, bool) => liveSectionsArray
     .find(section => section.id === id)
     .hidden = bool;
 
-const transitFromMainMenu = (sectionName) => {
+const transitFromMainMenu = sectionName => {
     setSectionHidden('login', true);
     setSectionHidden(sectionName, false);
     mainMenu.style.visibility = "visible";

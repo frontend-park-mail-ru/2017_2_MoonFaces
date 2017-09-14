@@ -10,7 +10,7 @@ email.onchange = () => {
         alert('Invalid email');
 };
 
-passwordsArray.map((password) => {
+passwordsArray.map(password => {
     password.onchange = () => {
         if (password.value.length < 8)
             alert('Your password must be at least 8 characters long');
@@ -19,5 +19,5 @@ passwordsArray.map((password) => {
 
 passwordRepeat.onchange = () => {
     if (passwordRepeat.value !== passwordsArray[1].value)
-        alert('Passwords does not match');
+        alert('Passwords do not match');
 };
