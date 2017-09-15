@@ -15,15 +15,22 @@ input{
 }
 
 #pages{
-    width: 400px;
+    min-width: 200px;
+    max-width: 500px;
     margin: auto;
     display: block;
+    box-sizing: border-box;
 }
 
 .divider-center{
     font-size: 36px;
     margin: 10px;
     text-align: center;
+}
+
+.divider-line{
+    border-bottom: solid 2px #fff;
+    margin: 40px 40px;
 }
 
 .right-corner{
@@ -35,4 +42,15 @@ input{
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.outer-container{
+    border-radius: 10px;
+    padding: 15px;
+    background: $secondary_bg;
+    display: block;
+}
+
+.divider-center{
+    color: #fff;
 }

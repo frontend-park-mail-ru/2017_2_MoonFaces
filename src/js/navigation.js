@@ -9,22 +9,22 @@ const records = document.getElementsByClassName('records')[0];
 const about = document.getElementsByClassName('about')[0];
 const mainMenu = document.getElementsByClassName('main')[0];
 
-const setSectionHidden = (id, bool) => liveSectionsArray
+const setSectionHidden = (id, display) => liveSectionsArray
     .find(section => section.id === id)
-    .hidden = bool;
+    .style.display = display;
 
 const transitFromMainMenu = sectionName => {
-    setSectionHidden('login', true);
-    setSectionHidden(sectionName, false);
-    mainMenu.style.visibility = "visible";
+    setSectionHidden('login', 'none');
+    setSectionHidden(sectionName, 'block');
+    mainMenu.style.display = 'block';
 };
 
 mainMenu.onclick = () => {
     liveSectionsArray
-        .find(section => section.hidden === false)
-        .hidden = true;
-    setSectionHidden('login', false);
-    mainMenu.style.visibility = "hidden";
+        .find(section => section.style.display === 'block')
+        .style.display = 'none';
+    setSectionHidden('login', 'block');
+    mainMenu.style.display = 'none';
 };
 
 signup.onclick = () => transitFromMainMenu('signup');
