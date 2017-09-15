@@ -4,7 +4,8 @@
         font-size: 45px;
     }
     margin: auto;
-    width: 400px;
+    max-width: 400px;
+    min-width: 200px;
     text-align: center;
     background: $logo_background_color;
     color: $logo_text_color;

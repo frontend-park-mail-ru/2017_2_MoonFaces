@@ -14,8 +14,9 @@ input{
     font-family: Consolas, serif;
 }
 
-.centered{
-    width: 400px;
+#pages{
+    min-width: 200px;
+    max-width: 500px;
     margin: auto;
     display: block;
     box-sizing: border-box;

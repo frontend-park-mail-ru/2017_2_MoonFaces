@@ -6,7 +6,8 @@
         outline: none;
     }
     input[type=text],
-    input[type=password] {
+    input[type=password],
+    input[type=email]{
         &:focus{
             border-color: lighten(#000, 25%);
         }
