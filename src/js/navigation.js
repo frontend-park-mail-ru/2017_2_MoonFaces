@@ -7,7 +7,7 @@ const liveSectionsArray = Array.from(liveSectionsCollection);
 const signup = document.getElementsByClassName('signup')[0];
 const records = document.getElementsByClassName('records')[0];
 const about = document.getElementsByClassName('about')[0];
-const mainMenuList = document.getElementsByClassName('main');
+const mainMenuList = Array.from(document.getElementsByClassName('main'));
 
 const setSectionHidden = (id, display) => liveSectionsArray
     .find(section => section.id === id)
@@ -18,7 +18,7 @@ const transitFromMainMenu = sectionName => {
     setSectionHidden(sectionName, 'block');
 };
 
-for(let mainMenu of mainMenuList){
+for(var mainMenu of mainMenuList){
     mainMenu.onclick = () => {
         liveSectionsArray
             .find(section => section.style.display === 'block')
