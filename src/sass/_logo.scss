@@ -4,8 +4,13 @@
         font-size: 45px;
     }
     margin: auto;
-    max-width: 400px;
-    min-width: 200px;
+    @media screen and (max-width: 450px) {
+        width: 100%;
+    }
+    @media screen and (min-width: 450px){
+        max-width: 400px;
+        min-width: 300px;
+    }
     text-align: center;
     background: $logo_background_color;
     color: $logo_text_color;
