@@ -9,9 +9,15 @@ const app = express();
 
 
 app.use(morgan('dev'));
-app.use(express.static('dist'));
+// app.use(express.static('dist'));
 app.use(body.json());
 app.use(cookie());
+app.use(express.static("dist", {
+        setHeaders: (res) => {
+            res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/');
+        }
+    }
+));
 
 
 const users = {

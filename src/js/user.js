@@ -6,7 +6,7 @@ class User {
     }
 
     is_authenticated(callback) {
-        Http.Get('/me', function (error, response) {
+        Http.Get('/current', function (error, response) {
             window.User.authenticated = error === null;
             callback();
 
@@ -23,7 +23,7 @@ class User {
     }
 
     login(login, password, callback) {
-        Http.Post('/login', {login, password},
+        Http.Post('/signin', {login, password},
             function (xhr) {
                 window.User.authenticated = true;
                 callback(xhr);

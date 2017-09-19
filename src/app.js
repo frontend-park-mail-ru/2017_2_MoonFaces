@@ -6,6 +6,8 @@ import './js/http';
 import './js/user';
 import './js/forms';
 
+window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
+
 (function () {
 
     const importedNavigation = require('./js/navigation');

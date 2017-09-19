@@ -13,6 +13,7 @@
          * @param {Function} callback - функция-коллбек
          */
         static Get(address, callback) {
+            address = window.remoteBackendUrl + address;
             const xhr = new XMLHttpRequest();
             xhr.open('GET', address, true);
             xhr.withCredentials = true;
@@ -37,6 +38,7 @@
          * @param {Function} callback - функция-коллбек
          */
         static Post(address, body, callback) {
+            address = window.remoteBackendUrl + address;
             const xhr = new XMLHttpRequest();
             xhr.open('POST', address, true);
             xhr.withCredentials = true;
