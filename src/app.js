@@ -9,6 +9,7 @@ import './js/forms';
 (function () {
 
     const importedNavigation = require('./js/navigation');
+    window.navigation = importedNavigation;
     const importedValidation = require('./js/validation');
 
     window.User.is_authenticated(importedNavigation.navigation);

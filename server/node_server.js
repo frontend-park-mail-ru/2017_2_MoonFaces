@@ -15,10 +15,10 @@ app.use(cookie());
 
 
 const users = {
-    'a.ostapenko@corp.mail.ru': {
+    'kek': {
         login: 'kek',
-        email: 'a.ostapenko@corp.mail.ru',
-        password: 'password',
+        email: 'kek@mail.ru',
+        password: 'qweqqweq',
         score: 72,
     },
 };
@@ -37,14 +37,14 @@ app.post('/signup', function (req, res) {
     ) {
         return res.status(400).json({error: 'Не валидные данные пользователя'});
     }
-    if (users[email]) {
+    if (users[login]) {
         return res.status(400).json({error: 'Пользователь уже существует'});
     }
 
     const id = uuid();
     const user = {login, password, email, score: 0};
-    ids[id] = email;
-    users[email] = user;
+    ids[id] = login;
+    users[login] = user;
 
     res.cookie('sessionid', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
     res.status(201).json({id});
@@ -52,16 +52,16 @@ app.post('/signup', function (req, res) {
 
 app.post('/login', function (req, res) {
     const password = req.body.password;
-    const email = req.body.email;
-    if (!password || !email) {
+    const login = req.body.login;
+    if (!password || !login) {
         return res.status(400).json({error: 'Не указан E-Mail или пароль'});
     }
-    if (!users[email] || users[email].password !== password) {
+    if (!users[login] || users[login].password !== password) {
         return res.status(400).json({error: 'Не верный E-Mail и/или пароль'});
     }
 
     const id = uuid();
-    ids[id] = email;
+    ids[id] = login;
 
     res.cookie('sessionid', id, {expires: new Date(Date.now() + 1000 * 60 * 10)});
     res.status(201).json({id});
@@ -70,17 +70,15 @@ app.post('/login', function (req, res) {
 app.get('/me', function (req, res) {
     const id = req.cookies['sessionid'];
 
-    const email = ids[id];
+    const login = ids[id];
     if (
-        !email ||
-        !users[email]
+        !login ||
+        !users[login]
     ) {
         return res.status(401).end();
     }
 
-    users[email].score += 1;
-
-    res.json(users[email]);
+    res.json(users[login]);
 });
 
 const port = process.env.PORT || 3000;

@@ -14,11 +14,20 @@ class User {
     }
 
     sign_up(login, email, password, callback) {
-        Http.Post('/signup', {login, email, password}, callback);
+        Http.Post('/signup', {login, email, password},
+            function (xhr) {
+                window.User.authenticated = true;
+                callback(xhr);
+            }
+        );
     }
 
-    login(login, email, password, callback) {
-        Http.Post('/login', {login, password}, callback);
+    login(login, password, callback) {
+        Http.Post('/login', {login, password},
+            function (xhr) {
+                window.User.authenticated = true;
+                callback(xhr);
+            });
     }
 }
 
