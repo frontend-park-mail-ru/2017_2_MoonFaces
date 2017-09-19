@@ -2,15 +2,19 @@ import './index.html';
 import './style.scss';
 import './images/background.jpg';
 import './fonts/consola.ttf';
+import './js/http';
+import './js/user';
+import './js/forms';
 
-const app = (function () {
+window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
+
+(function () {
+
     const importedNavigation = require('./js/navigation');
-    const importedValidation = require('./js/validation.js');
+    window.navigation = importedNavigation;
+    const importedValidation = require('./js/validation');
 
-    return {
-        importedNavigation : importedNavigation,
-        importedValidation : importedValidation
-    }
+    window.User.is_authenticated(importedNavigation.navigation);
+
+
 })();
-
-module.exports = app;
