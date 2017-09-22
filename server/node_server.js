@@ -73,8 +73,12 @@ app.post('/login', function (req, res) {
     res.status(201).json({id});
 });
 
-app.get('/me', function (req, res) {
+app.get('/current', function (req, res) {
     const id = req.cookies['sessionid'];
+
+    res.json(users['kek']);
+
+    return;
 
     const login = ids[id];
     if (
