@@ -76,10 +76,6 @@ app.post('/login', function (req, res) {
 app.get('/current', function (req, res) {
     const id = req.cookies['sessionid'];
 
-    res.json(users['kek']);
-
-    return;
-
     const login = ids[id];
     if (
         !login ||

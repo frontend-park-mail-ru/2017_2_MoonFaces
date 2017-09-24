@@ -13,14 +13,3 @@ window.remoteBackendUrl = '';
 // window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
 
 window.User = new User();
-
-// (function () {
-//
-//     const importedNavigation = require('./js/navigation');
-//     window.navigation = importedNavigation;
-//     const importedValidation = require('./js/validation');
-//
-//     window.User.is_authenticated(importedNavigation.navigation);
-//
-//
-// })();
