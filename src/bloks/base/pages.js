@@ -26,7 +26,13 @@
 
 const topPlayers = document.getElementsByClassName('records')[0];
 const about = document.getElementsByClassName('about')[0];
+const signup = document.getElementsByClassName('signup')[0];
 const main = Array.from(document.getElementsByClassName('main'));
+
+signup.addEventListener('click', (event) => {
+    event.preventDefault();
+    document.Pages.showPage('signup')
+});
 
 topPlayers.addEventListener('click', (event) => {
     event.preventDefault();
