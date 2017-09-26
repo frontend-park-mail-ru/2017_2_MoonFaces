@@ -56,7 +56,7 @@ app.post('/signup', function (req, res) {
     res.status(201).json({id});
 });
 
-app.post('/login', function (req, res) {
+app.post('/signin', function (req, res) {
     const password = req.body.password;
     const login = req.body.login;
     if (!password || !login) {
@@ -85,6 +85,17 @@ app.get('/current', function (req, res) {
     }
 
     res.json(users[login]);
+});
+
+app.get('/top', function (req, res){
+    let data = {users:[
+        {name: 'John', score: '82'},
+        {name: 'Billy', score: '33'},
+        {name: 'Klark', score: '28'},
+        {name: 'Bob', score: '16'},
+        {name: 'Kerson', score: '10'}
+    ]};
+    return res.json(data);
 });
 
 const port = process.env.PORT || 3000;
