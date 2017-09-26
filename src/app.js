@@ -5,9 +5,10 @@ import './fonts/consola.ttf';
 // import './js/user';
 // import './js/forms';
 
-import './bloks/base/pages';
+import './blocks/base/pages';
+import './blocks/top';
 import './js/http';
-import {User} from './bloks/base/user';
+import {User} from './blocks/base/user';
 
 window.remoteBackendUrl = '';
 // window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';

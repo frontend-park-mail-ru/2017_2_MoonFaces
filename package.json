@@ -9,7 +9,8 @@
     "build": "webpack",
     "server": "webpack-dev-server --host=0.0.0.0",
     "watch": "webpack --watch",
-    "node_server": "node server/node_server.js"
+    "node_server": "node server/node_server.js",
+    "compile-pug": "pug -c --extension 'pug.js' --name-after-file src/blocks/"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,9 @@
     "image-webpack-loader": "^3.4.2",
     "morgan": "^1.8.2",
     "node-sass": "^4.5.3",
+    "pug": "^2.0.0-rc.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "pug-loader": "^2.3.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uuid": "^3.1.0",

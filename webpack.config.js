@@ -49,6 +49,10 @@ module.exports = {
                 ]
             },
             {
+                test: /\.pug$/,
+                loader: 'pug-loader'
+            },
+            {
                 test: /\.(png|jpg)$/,
                 use: [
                     'file-loader?limit=100000&name=./images/[name].[ext]',
