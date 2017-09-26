@@ -1,0 +1,33 @@
+.top-players{
+    h2{
+        color: #fff;
+        text-align: center;
+    }
+    table{
+        thead{
+            font-size: 25px;
+            padding-bottom: 5px;
+            th{
+                border-bottom: solid 2px #fff;
+            }
+        }
+        tbody{
+            font-size: 20px;
+            td {
+                text-align: center;
+                padding: 8px;
+                border-bottom: 1px solid #fff;
+            }
+            td:first-child{
+                border-right: 1px solid #fff;
+            }
+        }
+        th{
+            width: 50%;
+        }
+        width: 100%;
+        color: #fff;
+        border-spacing: 0;
+        margin-bottom: 20px;
+    }
+}

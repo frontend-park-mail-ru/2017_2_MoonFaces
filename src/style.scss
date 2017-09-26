@@ -1,0 +1,13 @@
+$secondary_bg: rgba(#545ab1, 0.9);
+$logo_background_color: $secondary_bg;//rgba(lighten(#000, 50%), .8);
+$logo_text_color: #fff;
+$color_green: green;
+$color_red: red;
+
+@import "sass/base";
+@import "sass/logo";
+@import "sass/form";
+@import "sass/columns";
+@import "sass/buttons";
+@import "blocks/about/about";
+@import "blocks/top/top_players";
