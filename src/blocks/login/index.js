@@ -1,4 +1,7 @@
-const loginForm = document.getElementById('login-form');
+const loginForm = document.getElementById('login-form')
+
+window.addNodeValidation(loginForm.querySelector('[name=login]'), 'login');
+window.addNodeValidation(loginForm.querySelector('[name=password]'), 'password');
 
 loginForm.addEventListener('submit', function (event) {
     window.User.signIn(

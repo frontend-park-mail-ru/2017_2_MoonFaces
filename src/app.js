@@ -5,6 +5,7 @@ import './fonts/consola.ttf';
 // import './js/user';
 // import './js/forms';
 
+import './blocks/base/validation';
 import './blocks/base/pages';
 import './blocks/top';
 import './js/http';
