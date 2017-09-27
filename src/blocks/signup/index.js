@@ -13,7 +13,7 @@
             signUpForm.querySelector('[name=email]').value,
             signUpForm.querySelector('[name=password]').value,
             function () {
-                window.navigation.navigation();
+                document.Pages.showPage('login');
             }
         );
         event.returnValue = false;
