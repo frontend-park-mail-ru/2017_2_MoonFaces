@@ -46,12 +46,9 @@
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState !== 4) return;
-                if (+xhr.status >= 400) {
-                    return callback(xhr, null);
+                if (+xhr.status === 200) {
+                    callback();
                 }
-
-                const response = JSON.parse(xhr.responseText);
-                callback(null, response);
             };
 
             xhr.send(JSON.stringify(body));

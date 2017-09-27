@@ -24,6 +24,7 @@
 
 })();
 
+
 const topPlayers = document.getElementsByClassName('records')[0];
 const about = document.getElementsByClassName('about')[0];
 const signup = document.getElementsByClassName('signup')[0];
@@ -44,7 +45,7 @@ about.addEventListener('click', (event) => {
     document.Pages.showPage('about')
 });
 
-for(let button of main){
+for (let button of main) {
     button.addEventListener('click', (event) => {
         event.preventDefault();
         document.Pages.showPage('login')

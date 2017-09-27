@@ -12,7 +12,7 @@ import {User} from './blocks/base/user';
 import './blocks/login'
 import './blocks/signup'
 
-window.remoteBackendUrl = '';
-//window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
+//window.remoteBackendUrl = '';
+window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
 
 window.User = new User();
