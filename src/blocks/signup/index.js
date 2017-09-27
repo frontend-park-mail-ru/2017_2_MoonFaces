@@ -12,7 +12,7 @@
             signUpForm.querySelector('[name=login]').value,
             signUpForm.querySelector('[name=email]').value,
             signUpForm.querySelector('[name=password]').value,
-            function (xhr) {
+            function () {
                 window.navigation.navigation();
             }
         );

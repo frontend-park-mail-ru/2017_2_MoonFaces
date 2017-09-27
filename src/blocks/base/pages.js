@@ -32,22 +32,22 @@ const main = Array.from(document.getElementsByClassName('main'));
 
 signup.addEventListener('click', (event) => {
     event.preventDefault();
-    document.Pages.showPage('signup')
+    document.Pages.showPage('signup');
 });
 
 topPlayers.addEventListener('click', (event) => {
     event.preventDefault();
-    document.Pages.showPage('records')
+    document.Pages.showPage('records');
 });
 
 about.addEventListener('click', (event) => {
     event.preventDefault();
-    document.Pages.showPage('about')
+    document.Pages.showPage('about');
 });
 
 for (let button of main) {
     button.addEventListener('click', (event) => {
         event.preventDefault();
-        document.Pages.showPage('login')
-    })
+        document.Pages.showPage('login');
+    });
 }

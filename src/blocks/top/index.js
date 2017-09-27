@@ -2,7 +2,7 @@
 
     const topContainer = document.getElementById('top-template');
 
-    let topPlayers = require("./top.pug");
+    let topPlayers = require('./top.pug');
 
     let data = {users:[
         {name: 'John', score: '82'},
