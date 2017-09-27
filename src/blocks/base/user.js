@@ -14,14 +14,13 @@ export class User {
                 user.score = response.score;
                 document.Pages.showPage('profile');
             }
-
         });
     }
 
     signUp(login, email, password, callback) {
         Http.Post('/signup', {login, email, password},
             function (xhr) {
-                window.User.is_authenticated(callback);
+                window.Pages.showPage('login');
                 callback(xhr);
             }
         );
@@ -30,7 +29,6 @@ export class User {
     signIn(login, password, callback) {
         Http.Post('/signin', {login, password},
             function (xhr) {
-                window.User.is_authenticated(callback);
                 callback(xhr);
             });
     }
