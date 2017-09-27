@@ -14,7 +14,7 @@ passwordsArray.map(password => {
     password.onchange = () => {
         if (password.value.length < 8)
             alert('Your password must be at least 8 characters long');
-    }
+    };
 });
 
 passwordRepeat.onchange = () => {
