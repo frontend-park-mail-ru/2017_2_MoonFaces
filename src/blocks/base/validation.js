@@ -71,6 +71,6 @@ window.addNodeValidation = (inputNode, validationType, secondaryNode = null) => 
             break
     }
 
-    inputNode.addEventListener('change', validation);
+    inputNode.addEventListener('blur', validation);
 };
 

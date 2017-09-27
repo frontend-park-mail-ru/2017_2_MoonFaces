@@ -20,7 +20,7 @@
 
     }
 
-    document.Pages = new Pages();
+    window.Pages = new Pages();
 
 })();
 
@@ -31,22 +31,22 @@ const main = Array.from(document.getElementsByClassName('main'));
 
 signup.addEventListener('click', (event) => {
     event.preventDefault();
-    document.Pages.showPage('signup')
+    window.Pages.showPage('signup')
 });
 
 topPlayers.addEventListener('click', (event) => {
     event.preventDefault();
-    document.Pages.showPage('records')
+    window.Pages.showPage('records')
 });
 
 about.addEventListener('click', (event) => {
     event.preventDefault();
-    document.Pages.showPage('about')
+    window.Pages.showPage('about')
 });
 
 for(let button of main){
     button.addEventListener('click', (event) => {
         event.preventDefault();
-        document.Pages.showPage('login')
+        window.Pages.showPage('login')
     })
 }
