@@ -20,16 +20,26 @@ export class User {
     signUp(login, email, password, callback) {
         Http.Post('/signup', {login, email, password},
             function (xhr) {
-                window.Pages.showPage('login');
                 callback(xhr);
             }
         );
     }
 
+
     signIn(login, password, callback) {
         Http.Post('/signin', {login, password},
             function (xhr) {
+                window.User.is_authenticated=true;
                 callback(xhr);
             });
+    }
+
+    logOut(callback) {
+        Http.Post('/logout', {},
+            function (xhr) {
+                window.User.is_authenticated=false;
+                callback(xhr);
+            }
+        );
     }
 }
