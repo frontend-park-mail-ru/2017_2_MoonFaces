@@ -46,4 +46,4 @@ export function navigation() {
     if(window.User.authenticated){
         transitFromMainMenu('profile');
     }
-};
+}

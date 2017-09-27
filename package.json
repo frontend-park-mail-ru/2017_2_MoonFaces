@@ -1,5 +1,5 @@
 {
-  "name": "MoonFaces",
+  "name": "moonfaces",
   "version": "0.0.1",
   "description": "Empty",
   "main": "index.js",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/frontend-park-mail-ru/2017_2_MoonFaces#readme",
   "devDependencies": {
+    "eslint": "^4.7.2",
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
@@ -37,6 +38,6 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uuid": "^3.1.0",
-    "webpack": "^3.5.6"
+    "webpack": "^3.6.0"
   }
 }
