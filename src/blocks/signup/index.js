@@ -12,7 +12,7 @@
             signUpForm.querySelector('[name=login]').value,
             signUpForm.querySelector('[name=email]').value,
             signUpForm.querySelector('[name=password]').value,
-            function(error, response){
+            function(error){
                 window.removeError(signUpForm);
                 if(error){
                     window.addError(signUpForm, JSON.parse(error.responseText).description);

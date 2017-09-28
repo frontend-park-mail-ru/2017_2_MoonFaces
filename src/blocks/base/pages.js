@@ -36,7 +36,7 @@ const main = Array.from(document.getElementsByClassName('main'));
 
 signup.addEventListener('click', (event) => {
     event.preventDefault();
-    window.Pages.showPage('signup')
+    window.Pages.showPage('signup');
 });
 
 topPlayers.map (
@@ -57,6 +57,6 @@ main.map(button => {
     button.addEventListener('click', (event) => {
         event.preventDefault();
 
-        window.Pages.showPage('login')
-    })
+        window.Pages.showPage('login');
+    });
 });

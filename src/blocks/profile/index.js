@@ -9,7 +9,7 @@ window.renderProfile = () => {
         {
             name: window.User.login,
             email: window.User.email,
-            score: 123
+            score: window.User.score
         }};
 
 
