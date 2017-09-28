@@ -15,7 +15,11 @@
 
         showPage(sectionName){
             this.hideAll();
-            document.getElementById(sectionName).style.display = 'block';
+            if (sectionName === 'login' && window.User.is_authenticated === true) {
+                document.getElementById('profile').style.display = 'block';
+            } else {
+                document.getElementById(sectionName).style.display = 'block';
+            }
         }
 
     }
@@ -24,8 +28,9 @@
 
 })();
 
-const topPlayers = document.getElementsByClassName('records')[0];
-const about = document.getElementsByClassName('about')[0];
+
+const topPlayers = Array.from(document.getElementsByClassName('records'));
+const about = Array.from(document.getElementsByClassName('about'));
 const signup = document.getElementsByClassName('signup')[0];
 const main = Array.from(document.getElementsByClassName('main'));
 
@@ -34,19 +39,24 @@ signup.addEventListener('click', (event) => {
     window.Pages.showPage('signup')
 });
 
-topPlayers.addEventListener('click', (event) => {
-    event.preventDefault();
-    window.Pages.showPage('records')
-});
+topPlayers.map (
+    button => button.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.Pages.showPage('records');
+    })
+);
 
-about.addEventListener('click', (event) => {
-    event.preventDefault();
-    window.Pages.showPage('about')
-});
+about.map (
+    button => button.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.Pages.showPage('about');
+    })
+);
 
-for(let button of main){
+main.map(button => {
     button.addEventListener('click', (event) => {
         event.preventDefault();
+
         window.Pages.showPage('login')
     })
-}
+});

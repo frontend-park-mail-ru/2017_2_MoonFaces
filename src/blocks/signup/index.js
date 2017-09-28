@@ -12,8 +12,13 @@
             signUpForm.querySelector('[name=login]').value,
             signUpForm.querySelector('[name=email]').value,
             signUpForm.querySelector('[name=password]').value,
-            function (xhr) {
-                window.navigation.navigation();
+            function(error, response){
+                window.removeError(signUpForm);
+                if(error){
+                    window.addError(signUpForm, JSON.parse(error.responseText).description);
+                } else {
+                    window.Pages.showPage('login');
+                }
             }
         );
         event.returnValue = false;

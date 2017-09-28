@@ -1,4 +1,5 @@
-const loginForm = document.getElementById('login-form')
+const loginForm = document.getElementById('login-form');
+const logoutButton = document.getElementsByClassName('logout')[0];
 
 window.addNodeValidation(loginForm.querySelector('[name=login]'), 'login');
 window.addNodeValidation(loginForm.querySelector('[name=password]'), 'password');
@@ -10,8 +11,9 @@ loginForm.addEventListener('submit', function (event) {
             loginForm.querySelector('[name=login]').value,
             loginForm.querySelector('[name=password]').value,
             function(error, response){
+                window.removeError(loginForm);
                 if(error){
-                    alert(error.responseText);
+                    window.addError(loginForm, JSON.parse(error.responseText).description);
                 }else{
                     window.User.is_authenticated = true;
                     window.User.login = response.login;
@@ -22,5 +24,12 @@ loginForm.addEventListener('submit', function (event) {
             }
         );
     }
+    event.returnValue = false;
+});
+
+logoutButton.addEventListener('click', function (event) {
+    window.User.logOut(
+        function () {window.Pages.showPage('login');}
+    );
     event.returnValue = false;
 });

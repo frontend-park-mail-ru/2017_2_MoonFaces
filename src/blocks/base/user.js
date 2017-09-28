@@ -14,7 +14,6 @@ export class User {
                 user.score = response.score;
                 window.Pages.showPage('profile');
             }
-
         });
     }
 
@@ -26,10 +25,20 @@ export class User {
         );
     }
 
+
     signIn(login, password, callback) {
         Http.Post('/signin', {login, password},
             function (error, response) {
                 callback(error, response);
             });
+    }
+
+    logOut(callback) {
+        Http.Post('/logout', {},
+            function (xhr) {
+                window.User.is_authenticated=false;
+                callback(xhr);
+            }
+        );
     }
 }
