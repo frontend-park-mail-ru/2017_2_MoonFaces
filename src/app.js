@@ -12,6 +12,7 @@ import './js/http';
 import {User} from './blocks/base/user';
 import './blocks/login';
 import './blocks/signup';
+import './blocks/profile';
 
 //window.remoteBackendUrl = '';
 window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';

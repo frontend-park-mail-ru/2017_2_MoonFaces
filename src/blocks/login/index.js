@@ -15,10 +15,12 @@ loginForm.addEventListener('submit', function (event) {
                 if(error){
                     window.addError(loginForm, JSON.parse(error.responseText).description);
                 }else{
+                    debugger;
                     window.User.is_authenticated = true;
                     window.User.login = response.login;
                     window.User.email = response.email;
                     window.User.score = response.score;
+                    window.renderProfile();
                     window.Pages.showPage('profile');
                 }
             }

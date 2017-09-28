@@ -12,6 +12,7 @@ export class User {
                 user.login = response.login;
                 user.email = response.email;
                 user.score = response.score;
+                window.renderProfile();
                 window.Pages.showPage('profile');
             }
         });
