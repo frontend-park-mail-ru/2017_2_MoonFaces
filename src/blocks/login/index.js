@@ -14,8 +14,7 @@ loginForm.addEventListener('submit', function (event) {
                 window.removeError(loginForm);
                 if(error){
                     window.addError(loginForm, JSON.parse(error.responseText).description);
-                }else{
-                    debugger;
+                } else {
                     window.User.is_authenticated = true;
                     window.User.login = response.login;
                     window.User.email = response.email;
