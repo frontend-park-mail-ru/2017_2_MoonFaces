@@ -4,11 +4,11 @@ export class User {
     constructor() {
         Http.Get('/current', function (error, response) {
             let user = window.User;
-            if(error){
-                user.is_authenticated = false;
+            if(error) {
+                user.isAuthenticated = false;
                 window.Pages.showPage('login');
             }else{
-                user.is_authenticated = true;
+                user.isAuthenticated = true;
                 user.login = response.login;
                 user.email = response.email;
                 user.score = response.score;
@@ -37,7 +37,7 @@ export class User {
     logOut(callback) {
         Http.Post('/logout', {},
             function (xhr) {
-                window.User.is_authenticated=false;
+                window.User.isAuthenticated=false;
                 callback(xhr);
             }
         );

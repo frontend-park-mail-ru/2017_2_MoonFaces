@@ -14,7 +14,7 @@ import './blocks/login';
 import './blocks/signup';
 import './blocks/profile';
 
-//window.remoteBackendUrl = '';
-window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
+window.remoteBackendUrl = 'localhost';
+//window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
 
 window.User = new User();

@@ -6,16 +6,16 @@ window.addNodeValidation(loginForm.querySelector('[name=password]'), 'password')
 
 loginForm.addEventListener('submit', function (event) {
     const errors = loginForm.getElementsByClassName('error-row');
-    if(errors.length === 0){
+    if(errors.length === 0) {
         window.User.signIn(
             loginForm.querySelector('[name=login]').value,
             loginForm.querySelector('[name=password]').value,
-            function(error, response){
+            function(error, response) {
                 window.removeError(loginForm);
-                if(error){
+                if(error) {
                     window.addError(loginForm, JSON.parse(error.responseText).description);
                 } else {
-                    window.User.is_authenticated = true;
+                    window.User.isAuthenticated = true;
                     window.User.login = response.login;
                     window.User.email = response.email;
                     window.User.score = response.score;

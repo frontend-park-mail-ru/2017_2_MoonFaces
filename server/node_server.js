@@ -87,7 +87,7 @@ app.get('/current', function (req, res) {
     res.json(users[login]);
 });
 
-app.get('/top', function (req, res){
+app.get('/top', function (req, res) {
     let data = {users:[
         {name: 'John', score: '82'},
         {name: 'Billy', score: '33'},

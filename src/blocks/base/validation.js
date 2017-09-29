@@ -1,4 +1,4 @@
-window.addNodeValidation = (inputNode, validationType,) => {
+window.addNodeValidation = (inputNode, validationType) => {
 
     const addError = (node, error) => {
         const errorBlock = document.createElement('div');
