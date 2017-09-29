@@ -16,9 +16,9 @@
             (response) => {
                 window.Pages.showPage('login');
             }
-        ).catch((error) => {
-            window.addError(signUpForm, 'Произошла ошибка');
-        });
+        ).catch(errorPromise => errorPromise.then(error => {
+            window.addError(loginForm, error.description);
+        }));
         event.returnValue = false;
     });
 })();

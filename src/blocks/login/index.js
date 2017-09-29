@@ -19,10 +19,9 @@ loginForm.addEventListener('submit', function (event) {
                 window.User.score = response.score;
                 window.renderProfile();
                 window.Pages.showPage('profile');
-            },
-            error => {
-                window.addError(loginForm, 'Произошла ошибка');
-            });
+            }).catch(errorPromise => errorPromise.then(error => {
+                window.addError(loginForm, error.description);
+            }));
     }
     event.returnValue = false;
 });

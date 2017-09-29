@@ -42,9 +42,12 @@
                     }
                 }).then(response => {
                     if (response.status >= 400) {
-                        return reject(response.json());
+                        reject(response.json());
+                    }else{
+                        resolve(response.json());
                     }
-                    return resolve(response.json());
+                }).catch(error => {
+                    console.log(error);
                 })
             );
         }
