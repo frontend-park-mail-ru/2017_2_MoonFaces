@@ -8,19 +8,18 @@
     window.addNodeValidation(signUpForm.querySelector('[name=password-repeat]'), 'passwordMatch');
 
     signUpForm.addEventListener('submit', function (event) {
+        window.removeError(signUpForm);
         window.User.signUp(
             signUpForm.querySelector('[name=login]').value,
             signUpForm.querySelector('[name=email]').value,
-            signUpForm.querySelector('[name=password]').value,
-            function(error){
-                window.removeError(signUpForm);
-                if(error){
-                    window.addError(signUpForm, JSON.parse(error.responseText).description);
-                } else {
-                    window.Pages.showPage('login');
-                }
+            signUpForm.querySelector('[name=password]').value).then(
+            (response) => {
+                console.log(response);
+                window.Pages.showPage('login');
             }
-        );
+        ).catch((error) => {
+            window.addError(signUpForm, 'Произошла ошибка');
+        });
         event.returnValue = false;
     });
 })();

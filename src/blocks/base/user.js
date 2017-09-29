@@ -2,44 +2,30 @@
 
 export class User {
     constructor() {
-        Http.Get('/current', function (error, response) {
-            let user = window.User;
-            if(error){
-                user.is_authenticated = false;
-                window.Pages.showPage('login');
-            }else{
-                user.is_authenticated = true;
-                user.login = response.login;
-                user.email = response.email;
-                user.score = response.score;
-                window.renderProfile();
-                window.Pages.showPage('profile');
-            }
+        Http.Get('/current').then((response) => {
+            console.log(self);
+            window.User.is_authenticated = true;
+            window.User.login = response.login;
+            window.User.email = response.email;
+            window.User.score = response.score;
+            window.renderProfile();
+            window.Pages.showPage('profile');
+        }, () => {
+            window.User.is_authenticated = false;
+            window.Pages.showPage('login');
         });
     }
 
-    signUp(login, email, password, callback) {
-        Http.Post('/signup', {login, email, password},
-            function (error, response) {
-                callback(error, response);
-            }
-        );
+    signUp(login, email, password) {
+        return Http.Post('/signup', {login, email, password});
     }
 
 
-    signIn(login, password, callback) {
-        Http.Post('/signin', {login, password},
-            function (error, response) {
-                callback(error, response);
-            });
+    signIn(login, password) {
+        return Http.Post('/signin', {login, password});
     }
 
-    logOut(callback) {
-        Http.Post('/logout', {},
-            function (xhr) {
-                window.User.is_authenticated=false;
-                callback(xhr);
-            }
-        );
+    logOut() {
+        return Http.Post('/logout', {});
     }
 }

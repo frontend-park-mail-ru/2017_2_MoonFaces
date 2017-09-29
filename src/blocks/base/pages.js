@@ -1,19 +1,19 @@
-(function(){
+(function () {
 
-    class Pages{
-        constructor(){
+    class Pages {
+        constructor() {
             this.sections = Array.from(document.getElementsByTagName('section'));
 
 
         }
 
-        hideAll(){
-            for(let section of this.sections){
+        hideAll() {
+            for (let section of this.sections) {
                 section.style.display = 'none';
             }
         }
 
-        showPage(sectionName){
+        showPage(sectionName) {
             this.hideAll();
             if (sectionName === 'login' && window.User.is_authenticated === true) {
                 document.getElementById('profile').style.display = 'block';
@@ -39,14 +39,14 @@ signup.addEventListener('click', (event) => {
     window.Pages.showPage('signup');
 });
 
-topPlayers.map (
+topPlayers.map(
     button => button.addEventListener('click', (event) => {
         event.preventDefault();
         window.Pages.showPage('records');
     })
 );
 
-about.map (
+about.map(
     button => button.addEventListener('click', (event) => {
         event.preventDefault();
         window.Pages.showPage('about');

@@ -9,25 +9,17 @@ const app = express();
 
 
 app.use(morgan('dev'));
-// app.use(express.static('dist'));
 app.use(body.json());
 app.use(cookie());
 app.use(express.static('dist', {
-    setHeaders: (res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/');
+        setHeaders: (res) => {
+            res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/');
+        }
     }
-}
 ));
 
 
-const users = {
-    'kek': {
-        login: 'kek',
-        email: 'kek@mail.ru',
-        password: 'qweqqweq',
-        score: 72,
-    },
-};
+const users = {};
 const ids = {};
 
 app.post('/signup', function (req, res) {
@@ -87,14 +79,16 @@ app.get('/current', function (req, res) {
     res.json(users[login]);
 });
 
-app.get('/top', function (req, res){
-    let data = {users:[
-        {name: 'John', score: '82'},
-        {name: 'Billy', score: '33'},
-        {name: 'Klark', score: '28'},
-        {name: 'Bob', score: '16'},
-        {name: 'Kerson', score: '10'}
-    ]};
+app.get('/top', function (req, res) {
+    let data = {
+        users: [
+            {name: 'John', score: '82'},
+            {name: 'Billy', score: '33'},
+            {name: 'Klark', score: '28'},
+            {name: 'Bob', score: '16'},
+            {name: 'Kerson', score: '10'}
+        ]
+    };
     return res.json(data);
 });
 

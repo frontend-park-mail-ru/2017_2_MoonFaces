@@ -10,51 +10,43 @@
         /**
          * Выполняет GET-запрос по указанному адресу
          * @param {string} address - адрес запроса
-         * @param {Function} callback - функция-коллбек
          */
-        static Get(address, callback) {
+        static Get(address) {
             address = window.remoteBackendUrl + address;
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', address, true);
-            xhr.withCredentials = true;
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState !== 4) return;
-                if (+xhr.status >= 400) {
-                    return callback(xhr, null);
+            return fetch(address, {
+                method: 'get',
+                mode: 'cors',
+                credentials: 'include'
+            }).then(function (response) {
+                if (response.status >= 400) {
+                    throw response;
                 }
-
-                const response = JSON.parse(xhr.responseText);
-                callback(null, response);
-            };
-
-            xhr.send();
+                return response.json();
+            });
         }
 
         /**
          * Выполняет POST-запрос по указанному адресу
          * @param {string} address - адрес запроса
          * @param {*} body - тело запроса (объект)
-         * @param {Function} callback - функция-коллбек
          */
-        static Post(address, body, callback) {
+        static Post(address, body) {
             address = window.remoteBackendUrl + address;
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', address, true);
-            xhr.withCredentials = true;
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState !== 4) return;
-                if (+xhr.status >= 400) {
-                    return callback(xhr, null);
-                }
-
-                const response = JSON.parse(xhr.responseText);
-                callback(null, response);
-            };
-
-            xhr.send(JSON.stringify(body));
+            return new Promise((resolve, reject) => fetch(address, {
+                    method: 'post',
+                    mode: 'cors',
+                    credentials: 'include',
+                    body: JSON.stringify(body),
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                }).then(response => {
+                    if (response.status >= 400) {
+                        return reject(response.json());
+                    }
+                    return resolve(response.json());
+                })
+            );
         }
     }
 
