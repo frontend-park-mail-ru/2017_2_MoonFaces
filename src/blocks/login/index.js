@@ -4,7 +4,7 @@ const logoutButton = document.getElementsByClassName('logout')[0];
 window.addNodeValidation(loginForm.querySelector('[name=login]'), 'login');
 window.addNodeValidation(loginForm.querySelector('[name=password]'), 'password');
 
-loginForm.addEventListener('submit', function (event) {
+loginForm.addEventListener('submit', function(event) {
     window.removeError(loginForm);
 
     const errors = loginForm.getElementsByClassName('error-row');
@@ -13,23 +13,23 @@ loginForm.addEventListener('submit', function (event) {
             loginForm.querySelector('[name=login]').value,
             loginForm.querySelector('[name=password]').value).then(
             response => {
-                window.User.is_authenticated = true;
+                window.User.isAuthenticated = true;
                 window.User.login = response.login;
                 window.User.email = response.email;
                 window.User.score = response.score;
                 window.renderProfile();
                 window.Pages.showPage('profile');
             }).catch(errorPromise => errorPromise.then(error => {
-                window.addError(loginForm, error.description);
-            }));
+            window.addError(loginForm, error.description);
+        }));
     }
     event.returnValue = false;
 });
 
-logoutButton.addEventListener('click', function (event) {
+logoutButton.addEventListener('click', function(event) {
     window.User.logOut().then(
         response => {
-            window.User.is_authenticated = false;
+            window.User.isAuthenticated = false;
             window.Pages.showPage('login');
         },
         error => {

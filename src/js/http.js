@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
 
@@ -17,7 +17,7 @@
                 method: 'get',
                 mode: 'cors',
                 credentials: 'include'
-            }).then(function (response) {
+            }).then(function(response) {
                 if (response.status >= 400) {
                     throw response;
                 }
@@ -33,22 +33,22 @@
         static Post(address, body) {
             address = window.remoteBackendUrl + address;
             return new Promise((resolve, reject) => fetch(address, {
-                    method: 'post',
-                    mode: 'cors',
-                    credentials: 'include',
-                    body: JSON.stringify(body),
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8'
-                    }
-                }).then(response => {
-                    if (response.status >= 400) {
-                        reject(response.json());
-                    }else{
-                        resolve(response.json());
-                    }
-                }).catch(error => {
-                    console.log(error);
-                })
+                method: 'post',
+                mode: 'cors',
+                credentials: 'include',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }).then(response => {
+                if (response.status >= 400) {
+                    reject(response.json());
+                }else{
+                    resolve(response.json());
+                }
+            }).catch(error => {
+                console.log(error);
+            })
             );
         }
     }

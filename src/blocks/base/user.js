@@ -3,14 +3,14 @@
 export class User {
     constructor() {
         Http.Get('/current').then((response) => {
-            window.User.is_authenticated = true;
+            window.User.isAuthenticated = true;
             window.User.login = response.login;
             window.User.email = response.email;
             window.User.score = response.score;
             window.renderProfile();
             window.Pages.showPage('profile');
         }, () => {
-            window.User.is_authenticated = false;
+            window.User.isAuthenticated = false;
             window.Pages.showPage('login');
         });
     }

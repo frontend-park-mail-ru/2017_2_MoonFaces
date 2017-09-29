@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     class Pages {
         constructor() {
@@ -15,7 +15,7 @@
 
         showPage(sectionName) {
             this.hideAll();
-            if (sectionName === 'login' && window.User.is_authenticated === true) {
+            if (sectionName === 'login' && window.User.isAuthenticated === true) {
                 document.getElementById('profile').style.display = 'block';
             } else {
                 document.getElementById(sectionName).style.display = 'block';

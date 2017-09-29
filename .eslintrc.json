@@ -29,15 +29,53 @@
             "error",
             "always"
         ],
-	"no-unused-vars": [
-	    "warn", 
-	    { 
-            "vars": "all",
-            "args": "after-used",
-            "ignoreRestSiblings": false
-	    }
-	],
-
-	"no-console": "off"
+	    "no-unused-vars": [
+	        "warn", 
+	        { 
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+	        }
+        ],
+        "func-call-spacing": [
+            "error",
+            "never"
+        ],
+        "brace-style": [
+            "error",
+            "1tbs", 
+            { 
+                "allowSingleLine": true 
+            }
+        ],
+        "camelcase": [
+            "error",
+            { 
+                "properties": "always"
+            }
+        ],
+        "comma-spacing": [
+            "error",
+            {
+                "before": false, 
+                "after": true
+            }
+        ],
+        "space-before-blocks": [
+            "error",
+            "always"
+        ],
+        "arrow-spacing": [
+            "error",
+            { 
+                "before": true, 
+                "after": true 
+            }
+        ],
+        "space-before-function-paren": [
+            "error", 
+            "never"
+        ],
+	    "no-console": "off"
     }
 }

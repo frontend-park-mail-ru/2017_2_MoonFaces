@@ -10,7 +10,8 @@
     "server": "webpack-dev-server --host=0.0.0.0",
     "watch": "webpack --watch",
     "node_server": "node server/node_server.js",
-    "compile-pug": "pug -c --extension 'pug.js' --name-after-file src/blocks/"
+    "compile-pug": "pug -c --extension 'pug.js' --name-after-file src/blocks/",
+    "eslint": "eslint . --fix"
   },
   "repository": {
     "type": "git",

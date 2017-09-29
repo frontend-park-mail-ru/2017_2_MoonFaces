@@ -12,17 +12,17 @@ app.use(morgan('dev'));
 app.use(body.json());
 app.use(cookie());
 app.use(express.static('dist', {
-        setHeaders: (res) => {
-            res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/');
-        }
+    setHeaders: (res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/');
     }
+}
 ));
 
 
 const users = {};
 const ids = {};
 
-app.post('/signup', function (req, res) {
+app.post('/signup', function(req, res) {
     const password = req.body.password;
     const email = req.body.email;
     const login = req.body.login;
@@ -48,7 +48,7 @@ app.post('/signup', function (req, res) {
     res.status(201).json({id});
 });
 
-app.post('/signin', function (req, res) {
+app.post('/signin', function(req, res) {
     const password = req.body.password;
     const login = req.body.login;
     if (!password || !login) {
@@ -65,7 +65,7 @@ app.post('/signin', function (req, res) {
     res.status(201).json({id});
 });
 
-app.get('/current', function (req, res) {
+app.get('/current', function(req, res) {
     const id = req.cookies['sessionid'];
 
     const login = ids[id];
@@ -79,21 +79,19 @@ app.get('/current', function (req, res) {
     res.json(users[login]);
 });
 
-app.get('/top', function (req, res) {
-    let data = {
-        users: [
-            {name: 'John', score: '82'},
-            {name: 'Billy', score: '33'},
-            {name: 'Klark', score: '28'},
-            {name: 'Bob', score: '16'},
-            {name: 'Kerson', score: '10'}
-        ]
-    };
+app.get('/top', function(req, res) {
+    let data = {users:[
+        {name: 'John', score: '82'},
+        {name: 'Billy', score: '33'},
+        {name: 'Klark', score: '28'},
+        {name: 'Bob', score: '16'},
+        {name: 'Kerson', score: '10'}
+    ]};
     return res.json(data);
 });
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, function () {
+app.listen(port, function() {
     console.log(`Server listening port ${port}`);
 });

@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     const signUpForm = document.getElementById('signup-form');
 
@@ -7,7 +7,7 @@
     window.addNodeValidation(signUpForm.querySelector('[name=password]'), 'password');
     window.addNodeValidation(signUpForm.querySelector('[name=password-repeat]'), 'passwordMatch');
 
-    signUpForm.addEventListener('submit', function (event) {
+    signUpForm.addEventListener('submit', function(event) {
         window.removeError(signUpForm);
         window.User.signUp(
             signUpForm.querySelector('[name=login]').value,
@@ -17,7 +17,7 @@
                 window.Pages.showPage('login');
             }
         ).catch(errorPromise => errorPromise.then(error => {
-            window.addError(loginForm, error.description);
+            window.addError(signUpForm, error.description);
         }));
         event.returnValue = false;
     });
