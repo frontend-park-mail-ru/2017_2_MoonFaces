@@ -14,7 +14,6 @@
             signUpForm.querySelector('[name=email]').value,
             signUpForm.querySelector('[name=password]').value).then(
             (response) => {
-                console.log(response);
                 window.Pages.showPage('login');
             }
         ).catch((error) => {

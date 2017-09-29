@@ -21,7 +21,6 @@ loginForm.addEventListener('submit', function (event) {
                 window.Pages.showPage('profile');
             },
             error => {
-                console.log(error);
                 window.addError(loginForm, 'Произошла ошибка');
             });
     }

@@ -3,7 +3,6 @@
 export class User {
     constructor() {
         Http.Get('/current').then((response) => {
-            console.log(self);
             window.User.is_authenticated = true;
             window.User.login = response.login;
             window.User.email = response.email;
