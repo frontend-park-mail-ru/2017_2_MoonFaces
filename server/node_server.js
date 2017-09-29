@@ -30,7 +30,7 @@ const users = {
 };
 const ids = {};
 
-app.post('/signup', function (req, res) {
+app.post('/signup', function(req, res) {
     const password = req.body.password;
     const email = req.body.email;
     const login = req.body.login;
@@ -56,7 +56,7 @@ app.post('/signup', function (req, res) {
     res.status(201).json({id});
 });
 
-app.post('/signin', function (req, res) {
+app.post('/signin', function(req, res) {
     const password = req.body.password;
     const login = req.body.login;
     if (!password || !login) {
@@ -73,7 +73,7 @@ app.post('/signin', function (req, res) {
     res.status(201).json({id});
 });
 
-app.get('/current', function (req, res) {
+app.get('/current', function(req, res) {
     const id = req.cookies['sessionid'];
 
     const login = ids[id];
@@ -87,7 +87,7 @@ app.get('/current', function (req, res) {
     res.json(users[login]);
 });
 
-app.get('/top', function (req, res) {
+app.get('/top', function(req, res) {
     let data = {users:[
         {name: 'John', score: '82'},
         {name: 'Billy', score: '33'},
@@ -100,6 +100,6 @@ app.get('/top', function (req, res) {
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, function () {
+app.listen(port, function() {
     console.log(`Server listening port ${port}`);
 });

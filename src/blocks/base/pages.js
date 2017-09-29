@@ -7,7 +7,7 @@
 
         }
 
-        hideAll () {
+        hideAll() {
             for(let section of this.sections) {
                 section.style.display = 'none';
             }

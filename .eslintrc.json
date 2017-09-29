@@ -72,6 +72,10 @@
                 "after": true 
             }
         ],
+        "space-before-function-paren": [
+            "error", 
+            "never"
+        ],
 	    "no-console": "off"
     }
 }

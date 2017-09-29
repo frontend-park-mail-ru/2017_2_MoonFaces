@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
 
@@ -18,7 +18,7 @@
             xhr.open('GET', address, true);
             xhr.withCredentials = true;
 
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState !== 4) return;
                 if (+xhr.status >= 400) {
                     return callback(xhr, null);
@@ -44,7 +44,7 @@
             xhr.withCredentials = true;
             xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
 
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState !== 4) return;
                 if (+xhr.status >= 400) {
                     return callback(xhr, null);

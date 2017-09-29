@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     const topContainer = document.getElementById('top-template');
 

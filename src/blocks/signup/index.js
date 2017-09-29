@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     const signUpForm = document.getElementById('signup-form');
 
@@ -7,7 +7,7 @@
     window.addNodeValidation(signUpForm.querySelector('[name=password]'), 'password');
     window.addNodeValidation(signUpForm.querySelector('[name=password-repeat]'), 'passwordMatch');
 
-    signUpForm.addEventListener('submit', function (event) {
+    signUpForm.addEventListener('submit', function(event) {
         window.User.signUp(
             signUpForm.querySelector('[name=login]').value,
             signUpForm.querySelector('[name=email]').value,

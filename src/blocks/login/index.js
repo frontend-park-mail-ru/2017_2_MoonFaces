@@ -4,7 +4,7 @@ const logoutButton = document.getElementsByClassName('logout')[0];
 window.addNodeValidation(loginForm.querySelector('[name=login]'), 'login');
 window.addNodeValidation(loginForm.querySelector('[name=password]'), 'password');
 
-loginForm.addEventListener('submit', function (event) {
+loginForm.addEventListener('submit', function(event) {
     const errors = loginForm.getElementsByClassName('error-row');
     if(errors.length === 0) {
         window.User.signIn(
@@ -28,9 +28,9 @@ loginForm.addEventListener('submit', function (event) {
     event.returnValue = false;
 });
 
-logoutButton.addEventListener('click', function (event) {
+logoutButton.addEventListener('click', function(event) {
     window.User.logOut(
-        function () {window.Pages.showPage('login');}
+        function() {window.Pages.showPage('login');}
     );
     event.returnValue = false;
 });

@@ -2,7 +2,7 @@
 
 export class User {
     constructor() {
-        Http.Get('/current', function (error, response) {
+        Http.Get('/current', function(error, response) {
             let user = window.User;
             if(error) {
                 user.isAuthenticated = false;
@@ -20,7 +20,7 @@ export class User {
 
     signUp(login, email, password, callback) {
         Http.Post('/signup', {login, email, password},
-            function (error, response) {
+            function(error, response) {
                 callback(error, response);
             }
         );
@@ -29,14 +29,14 @@ export class User {
 
     signIn(login, password, callback) {
         Http.Post('/signin', {login, password},
-            function (error, response) {
+            function(error, response) {
                 callback(error, response);
             });
     }
 
     logOut(callback) {
         Http.Post('/logout', {},
-            function (xhr) {
+            function(xhr) {
                 window.User.isAuthenticated=false;
                 callback(xhr);
             }
