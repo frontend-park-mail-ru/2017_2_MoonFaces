@@ -22,7 +22,7 @@ window.addNodeValidation = (inputNode, validationType) => {
         removeError(node);
         if (node.value === '') {
             return addError(node, 'Поле не заполнено');
-        } else if (!/^\w+@[a-z]+\.[a-z]+$/g.test(node.value)) {
+        } else if (!/.+@.+\..+/i.test(node.value)) {
             return addError(node, 'Неверный формат email');
         }
     };
