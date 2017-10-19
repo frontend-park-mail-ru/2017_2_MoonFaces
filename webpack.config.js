@@ -1,6 +1,6 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/app.js',
@@ -73,12 +73,16 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin('style.css'),
+        new webpack.DefinePlugin({
+            "BACKEND_URL": JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
+        }),
     ],
 
     devServer: {
         contentBase: path.join(__dirname, './dist/'),
         compress: true,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     }
 };
                                  
