@@ -3,8 +3,9 @@ import './style.scss';
 import './images/background.jpg';
 import './fonts/consola.ttf';
 import Router from './modules/router';
-import BaseView from './modules/baseView';
+
 import SigninView from './views/signin-view/signin';
+import AboutView from './views/about-view/about';
 (() => {
 
     const app = document.getElementById('app');
@@ -12,7 +13,7 @@ import SigninView from './views/signin-view/signin';
     const router = new Router(app);
     router
         .addRoute('/', SigninView)
-        .addRoute('/about', BaseView);
+        .addRoute('/about', AboutView);
     router.start();
 
 })();
