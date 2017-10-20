@@ -1,18 +1,23 @@
-class BaseView{
-    constructor(){
+class BaseView {
+    constructor(appContainer) {
+        this.appContainer = appContainer;
+    }
+
+    getTemplate() {
 
     }
 
-    pause(){
-        console.log('pause');
+
+    pause() {
+
     }
 
-    resume(){
-        console.log('resume');
+    resume() {
+
     }
 
-    render(){
-        console.log('start');
+    render() {
+        this.appContainer.innerHTML = this.getTemplate();
     }
 }
 
