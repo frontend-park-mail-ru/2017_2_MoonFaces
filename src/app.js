@@ -6,6 +6,8 @@ import Router from './modules/router';
 
 import SigninView from './views/signin-view/signin';
 import AboutView from './views/about-view/about';
+import TopView from './views/top-view/top';
+
 (() => {
 
     const app = document.getElementById('app');
@@ -13,7 +15,8 @@ import AboutView from './views/about-view/about';
     const router = new Router(app);
     router
         .addRoute('/', SigninView)
-        .addRoute('/about', AboutView);
+        .addRoute('/about', AboutView)
+        .addRoute('/top', TopView);
     router.start();
 
 })();
