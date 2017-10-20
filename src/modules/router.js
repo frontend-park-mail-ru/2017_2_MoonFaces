@@ -14,11 +14,11 @@ class Router {
     }
 
     start() {
-        window.onpopstate = function (e) {
+        window.onpopstate = function(e) {
             this.go(window.location.pathname);
         }.bind(this);
 
-        this.rootElement.addEventListener('click', function (event) {
+        this.rootElement.addEventListener('click', function(event) {
             if (event.target.tagName.toLowerCase() !== 'a') {
                 return;
             }
@@ -31,7 +31,7 @@ class Router {
     }
 
     go(route) {
-        this.routes.find(function (item) {
+        this.routes.find(function(item) {
             if (route !== item.route) {
                 return false;
             }
@@ -54,7 +54,7 @@ class Router {
 
             return true;
 
-        }.bind(this))
+        }.bind(this));
     }
 }
 
