@@ -15,8 +15,6 @@ class Router {
 
     start() {
         window.onpopstate = function(e) {
-            console.log('popstate');
-            console.log(window.location.pathname);
             this.go(window.location.pathname);
         }.bind(this);
 
@@ -52,7 +50,7 @@ class Router {
             }
 
             this.currentView = item.view;
-            item.view.resume();
+            item.view.render();
 
             return true;
 
