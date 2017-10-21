@@ -1,0 +1,19 @@
+div(class="logo")
+    h1 bacter.io
+div(class="base-width centered outer-container top-players" id="top")
+    h2(class="divider-line") Top
+    table(class='scores')
+        thead
+            tr
+                th(class='user') Username
+                th(class='score') Score
+
+        tbody
+            each user in users
+                tr
+                    td(class='user') #{user.name}
+                    td(class='score') #{user.score}
+    div(class="columns")
+        div
+            a(href="/" class="button-red") Main menu
+        div
