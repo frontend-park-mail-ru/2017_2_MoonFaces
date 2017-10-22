@@ -1,6 +1,6 @@
+import './background.js';
 import './index.html';
 import './style.scss';
-import './images/background.jpg';
 import './fonts/consola.ttf';
 import Router from './modules/router';
 
