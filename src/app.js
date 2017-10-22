@@ -1,16 +1,24 @@
+import './background.js';
 import './index.html';
 import './style.scss';
-import './images/background.jpg';
 import './fonts/consola.ttf';
-import './blocks/base/validation';
-import './blocks/base/pages';
-import './blocks/top';
-import './js/http';
-import {User} from './blocks/base/user';
-import './blocks/login';
-import './blocks/signup';
-import './blocks/profile';
+import Router from './modules/router';
 
-window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
+import SigninView from './views/signin-view/signin';
+import AboutView from './views/about-view/about';
+import TopView from './views/top-view/top';
+import SignupView from './views/signup-view/signup';
 
-window.User = new User();
+(() => {
+
+    const app = document.getElementById('app');
+
+    const router = new Router(app);
+    router
+        .addRoute('/', SigninView)
+        .addRoute('/about', AboutView)
+        .addRoute('/top', TopView)
+        .addRoute('/signup', SignupView);
+    router.start();
+
+})();
