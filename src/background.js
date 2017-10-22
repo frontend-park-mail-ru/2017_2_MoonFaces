@@ -56,18 +56,18 @@ const animate = (draw, duration) => {
 const blink = (col, row) => {
     animate((timePassed) => {
         context.clearRect(col * squareSide, row * squareSide, squareSide, squareSide);
-        if (timePassed <= 2000) {
-            context.fillStyle = 'rgba(84, 90, 177,' + (timePassed / 2000) + ')';
+        if (timePassed <= 3000) {
+            context.fillStyle = 'rgba(84, 90, 177,' + (timePassed / 3000) + ')';
         } else {
-            context.fillStyle = 'rgba(84, 90, 177,' + ((4000 - timePassed) / 2000) + ')';
+            context.fillStyle = 'rgba(84, 90, 177,' + ((6000 - timePassed) / 3000) + ')';
         }
         context.fillRect(col * squareSide, row * squareSide, squareSide, squareSide);
         context.strokeRect(col * squareSide, row * squareSide, squareSide, squareSide);
-    }, 4000);
+    }, 6000);
 };
 
 setInterval(() => {
     const i = randomInt(0, vertical - 1);
     const j = randomInt(0, horizontal - 1);
     blink(j, i);
-}, 1000);
+}, 250);
