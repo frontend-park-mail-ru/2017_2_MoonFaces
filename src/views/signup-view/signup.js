@@ -1,9 +1,10 @@
 import BaseView from '../../modules/baseView';
 
+
 class Signup extends BaseView {
 
     getTemplate() {
-        const template =require('./signup.pug');
+        const template = require('./signup.pug');
 
         return template();
     }
