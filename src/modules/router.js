@@ -40,10 +40,6 @@ class Router {
                 window.history.pushState({}, '', item.route);
             }
 
-            if (this.currentView) {
-                this.currentView.pause();
-            }
-
             if (typeof item.view === 'function') {
                 item.view = new item.view(this.rootElement);
                 item.view.render();

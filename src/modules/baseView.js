@@ -7,17 +7,13 @@ class BaseView {
 
     }
 
-
-    pause() {
-
-    }
-
-    resume() {
+    postRender() {
 
     }
 
     render() {
         this.appContainer.innerHTML = this.getTemplate();
+        this.postRender();
     }
 }
 
