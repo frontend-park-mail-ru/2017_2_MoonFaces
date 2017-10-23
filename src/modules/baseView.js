@@ -1,23 +1,26 @@
 class BaseView {
     constructor(appContainer) {
         this.appContainer = appContainer;
+        this.events = [];
     }
 
     getTemplate() {
 
     }
 
-
-    pause() {
+    postRender() {
 
     }
 
-    resume() {
-
+    stop() {
+        this.events.forEach(function(unsub) {
+            unsub();
+        });
     }
 
     render() {
         this.appContainer.innerHTML = this.getTemplate();
+        this.postRender();
     }
 }
 
