@@ -1,7 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
-var BabelPlugin = require("babel-webpack-plugin");
+var BabelPlugin = require('babel-webpack-plugin');
 
 
 module.exports = {
@@ -82,7 +82,7 @@ module.exports = {
         }),
         new ExtractTextPlugin('style.css'),
         new webpack.DefinePlugin({
-            "BACKEND_URL": JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
+            'BACKEND_URL': JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
         }),
     ],
 

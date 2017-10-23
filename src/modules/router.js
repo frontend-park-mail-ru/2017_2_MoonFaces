@@ -1,8 +1,16 @@
 class Router {
-    constructor(rootElement) {
+    constructor() {
+        if (Router.__instatnce) {
+            return Router.__instatnce;
+        }
+        Router.__instance = this;
         this.currentView = null;
         this.routes = [];
-        this.rootElement = rootElement;
+        this.rootElement = null;
+    }
+
+    setRootElement(rootElelement) {
+        this.rootElement = rootElelement;
     }
 
     addRoute(route, view) {
@@ -42,9 +50,10 @@ class Router {
 
             if (typeof item.view === 'function') {
                 item.view = new item.view(this.rootElement);
-                item.view.render();
             }
-
+            if(this.currentView) {
+                this.currentView.stop();
+            }
             this.currentView = item.view;
             item.view.render();
 
@@ -54,4 +63,4 @@ class Router {
     }
 }
 
-export default Router;
+export default new Router();

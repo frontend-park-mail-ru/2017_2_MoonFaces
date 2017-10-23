@@ -8,6 +8,13 @@ class Form {
         this.addNodeValidation(this.formNode.querySelector(`[name="${fieldName}"]`), validationType);
     }
 
+    removeError(node){
+        const element = document.getElementsByClassName('error-' + node.name)[0];
+        if (element) {
+            element.parentNode.removeChild(element);
+        }
+    }
+
     addNodeValidation(inputNode, validationType) {
 
         const addError = (node, error) => {
@@ -17,19 +24,9 @@ class Form {
             node.parentNode.insertBefore(errorBlock, node);
         };
 
-        const removeError = (node) => {
-            const element = document.getElementsByClassName('error-' + node.name)[0];
-            if (element) {
-                element.parentNode.removeChild(element);
-            }
-        };
-
-        window.addError = addError;
-        window.removeError = removeError;
-
         const emailValidation = (inputNode) => {
             let node = inputNode.target;
-            removeError(node);
+            this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Поле не заполнено');
             } else if (!/.+@.+\..+/i.test(node.value)) {
@@ -39,7 +36,7 @@ class Form {
 
         const loginValidation = (inputNode) => {
             let node = inputNode.target;
-            removeError(node);
+            this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Поле не заполнено');
             } else if (node.value.length < 5) {
@@ -49,7 +46,7 @@ class Form {
 
         const passwordValidation = (inputNode) => {
             let node = inputNode.target;
-            removeError(node);
+            this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Поле не заполнено');
             } else if (node.value.length < 5) {
@@ -59,7 +56,7 @@ class Form {
 
         const passwordMatch = (inputNode) => {
             let node = inputNode.target;
-            removeError(node);
+            this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Поле не заполнено');
             } else if (node.value !== node.parentNode.querySelector('[name=password]').value) {
@@ -91,13 +88,13 @@ class Form {
         this.formNode.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            let formdata = {};
+            let formData = {};
 
             this.fields.forEach(function(field) {
-                formdata[field] = this.formNode.querySelector(`[name="${field}"]`).value;
+                formData[field] = this.formNode.querySelector(`[name="${field}"]`).value;
             }.bind(this));
 
-            callback(formdata);
+            callback(formData);
         }.bind(this));
     }
 }

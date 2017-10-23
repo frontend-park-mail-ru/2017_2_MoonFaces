@@ -1,6 +1,7 @@
 class BaseView {
     constructor(appContainer) {
         this.appContainer = appContainer;
+        this.events = [];
     }
 
     getTemplate() {
@@ -9,6 +10,12 @@ class BaseView {
 
     postRender() {
 
+    }
+
+    stop() {
+        this.events.forEach(function(unsub) {
+            unsub();
+        });
     }
 
     render() {
