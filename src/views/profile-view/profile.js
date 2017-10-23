@@ -1,5 +1,6 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
+import router from '../../modules/router';
 
 class ProfileView extends BaseView {
 
@@ -14,6 +15,14 @@ class ProfileView extends BaseView {
             }};
 
         return template(data);
+    }
+
+    postRender() {
+        const logout = document.getElementsByClassName('logout')[0];
+        logout.addEventListener('click', () => {
+            user.logOut();
+            router.go('/');
+        });
     }
 
 }
