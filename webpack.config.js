@@ -4,7 +4,7 @@ const webpack = require('webpack');
 var BabelPlugin = require('babel-webpack-plugin');
 
 
-module.exports = {
+let config = {
     entry: './src/app.js',
 
     context: __dirname,
@@ -74,12 +74,6 @@ module.exports = {
     },
 
     plugins: [
-        new BabelPlugin({
-            test: /\.js$/,
-            presets: ['es2015'],
-            sourceMaps: false,
-            compact: false
-        }),
         new ExtractTextPlugin('style.css'),
         new webpack.DefinePlugin({
             'BACKEND_URL': JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
@@ -93,4 +87,16 @@ module.exports = {
         historyApiFallback: true
     }
 };
-                                 
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+        new BabelPlugin({
+            test: /\.js$/,
+            presets: ['es2015'],
+            sourceMaps: false,
+            compact: false
+        })
+    );
+}
+
+module.exports = config;
