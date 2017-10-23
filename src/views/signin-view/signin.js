@@ -1,11 +1,12 @@
 import BaseView from '../../modules/baseView';
 import Form from '../../modules/form';
-
+import bus from '../../modules/bus';
 
 class SigninView extends BaseView {
 
     constructor(appContainer) {
         super(appContainer);
+        this.bus = bus;
     }
 
     getTemplate() {
@@ -17,9 +18,10 @@ class SigninView extends BaseView {
         this.form = new Form(document.getElementById('login-form'), ['login', 'password']);
         this.form.addFieldValidation('login', 'login');
         this.form.addFieldValidation('password', 'password');
-        this.form.onsubmit((formData) => {
-            console.log(formData);
-        });
+
+        this.form.onsubmit(function(formData) {
+            this.bus.emit('user:signin', formData);
+        }.bind(this));
     }
 
 }

@@ -1,8 +1,6 @@
 import BaseView from '../../modules/baseView';
 import Form from '../../modules/form';
 import bus from '../../modules/bus';
-import user from '../../services/user-service';
-import router from '../../modules/router';
 
 class Signup extends BaseView {
 

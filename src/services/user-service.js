@@ -14,13 +14,28 @@ class User {
     }
 
     bindBus() {
+        this.bus.on('user:signin', function(formData) {
+            let data = formData.payload;
+            this.signIn(
+                data['login'],
+                data['password']
+            ).then((response) => {
+                this.login = response.login;
+                this.email = response.email;
+                this.score = response.score;
+                router.go('/profile');
+            }).catch(errorPromise => errorPromise.then(function(error) {
+                alert(error.description);
+            }));
+        }.bind(this));
+
         this.bus.on('user:signup', function(formData) {
             let data = formData.payload;
             this.signUp(
                 data['login'],
                 data['email'],
                 data['password']
-            ).then((response) => {
+            ).then(function(response) {
                 router.go('/');
             }).catch(errorPromise => errorPromise.then(function(error) {
                 alert(error.description);
@@ -47,7 +62,7 @@ class User {
             this.login = response.login;
             this.email = response.email;
             this.score = response.score;
-            window.Pages.showPage('profile');
+            router.go('/profile');
         }, () => {
             this.authorized = false;
         });
