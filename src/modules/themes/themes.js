@@ -1,3 +1,5 @@
+import Background from '../../background';
+
 class Themes {
     constructor() {
         const template = require('./themes.pug');
@@ -9,6 +11,24 @@ class Themes {
         body.appendChild(this.node);
         this.cssDefault = 'style.css';
         this.cssDark = 'dark.css';
+        this.background = null;
+        this.bgColorsDefault = {
+            grid: '#4da6ff',
+            squares: {
+                r: 83,
+                g: 90,
+                b: 177,
+            }
+        };
+        this.bgColorsDark = {
+            grid: '#000',
+            squares: {
+                r: 0,
+                g: 0,
+                b: 0,
+            }
+        };
+        this.bgTheme = null;
         this.current = this.getCurrent();
     }
 
@@ -17,11 +37,16 @@ class Themes {
         this.node.addEventListener('click', () => {
             if(this.current === this.cssDefault) {
                 this.current =  this.cssDark;
+                this.bgTheme = this.bgColorsDark;
             }else{
                 this.current =  this.cssDefault;
+                this.bgTheme = this.bgColorsDefault;
             }
             this.setCurrent();
+            this.background.loadTheme(this.bgTheme);
         });
+        this.background = new Background(this.bgTheme);
+        this.background.start();
     }
 
     setCurrent() {
@@ -32,8 +57,14 @@ class Themes {
     getCurrent() {
         let theme = localStorage.getItem('theme');
         if(theme) {
+            if(theme === this.cssDark) {
+                this.bgTheme = this.bgColorsDark;
+            }else{
+                this.bgTheme = this.bgColorsDefault;
+            }
             return theme;
         }
+        this.bgTheme = this.bgColorsDefault;
         return this.cssDefault;
     }
 

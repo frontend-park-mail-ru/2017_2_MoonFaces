@@ -1,4 +1,3 @@
-import './background.js';
 import './index.html';
 import './style.scss';
 import './dark.scss';
