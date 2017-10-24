@@ -34,7 +34,7 @@ class Themes {
         if(theme) {
             return theme;
         }
-        return 'style.css';
+        return this.cssDefault;
     }
 
     addTheme() {
