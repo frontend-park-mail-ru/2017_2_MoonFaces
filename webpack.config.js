@@ -1,7 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
-var BabelPlugin = require('babel-webpack-plugin');
+const BabelPlugin = require('babel-webpack-plugin');
 
 const extracktDefault = new ExtractTextPlugin('style.css');
 const extracktDark = new ExtractTextPlugin('dark.css');
