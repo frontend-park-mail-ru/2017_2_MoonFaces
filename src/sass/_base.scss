@@ -13,7 +13,7 @@ input{
     font-family: Consolas, serif;
 }
 
-.base-width{
+.base-width {
     min-width: 200px;
     max-width: 500px;
     margin: auto;
@@ -21,18 +21,26 @@ input{
     box-sizing: border-box;
 }
 
-.divider-center{
+.half-width {
+    min-width: 100px;
+    max-width: 250px;
+    margin: auto;
+    display: block;
+    box-sizing: border-box;
+}
+
+.divider-center {
     font-size: 36px;
     margin: 10px;
     text-align: center;
 }
 
-.divider-line{
+.divider-line {
     border-bottom: solid 2px #fff;
     margin: 40px 40px;
 }
 
-.right-corner{
+.right-corner {
     input, a{
         margin-left: 10px;
         display: inline-block;
@@ -43,13 +51,13 @@ input{
     bottom: 0;
 }
 
-.outer-container{
+.outer-container {
     border-radius: 10px;
-    padding: 15px;
+    padding: 15px 0px;
     background: $secondary_bg;
     display: block;
 }
 
-.divider-center{
+.divider-center {
     color: #fff;
 }
