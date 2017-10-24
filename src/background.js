@@ -122,7 +122,7 @@ class Background {
     }
 
     loadTheme(theme) {
-        const a = {
+        ({
             grid: this.strokeColor,
             squares:
                 {
@@ -130,7 +130,7 @@ class Background {
                     g: this.squareColor.g,
                     b: this.squareColor.b,
                 }
-        } = theme;
+        } = theme);
         this.drawGrid();
     }
 
