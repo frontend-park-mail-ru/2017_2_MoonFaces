@@ -1,6 +1,6 @@
 'use strict';
 
-const strokeColor = '#4da6ff';
+const strokeColor = 'rgb(203, 220, 250)';
 
 const canvas = document.getElementsByClassName('background')[0];
 
@@ -36,7 +36,7 @@ let horizontal = 0;
 let vertical = 0;
 
 if(innerWidth >= innerHeight) {
-    vertical = 11;
+    vertical = 10;
     squareSide = window.innerHeight / vertical;
     horizontal = Math.floor(innerWidth / squareSide) + 3;
 } else {
@@ -71,17 +71,16 @@ const animate = (draw, duration) => {
 const blink = (col, row) => {
     animate((timePassed) => {
         context.clearRect(col * squareSide, row * squareSide, squareSide, squareSide);
-        if (timePassed <= 3000) {
-            context.fillStyle = 'rgba(84, 90, 177,' + (timePassed / 3000) + ')';
-        } else {
-            context.fillStyle = 'rgba(84, 90, 177,' + ((6000 - timePassed) / 3000) + ')';
-        }
+
+        const timePassedPercent = timePassed / 3000 * 100;
+        context.fillStyle = `hsl(${250 - timePassedPercent}, 60%, ${Math.max(timePassedPercent, 60)}%)`;
         context.fillRect(col * squareSide, row * squareSide, squareSide, squareSide);
         context.strokeRect(col * squareSide, row * squareSide, squareSide, squareSide);
-        if(timePassed > 5990) {
+
+        if(timePassed > 3000) {
             cells[row][col] = 0;
         }
-    }, 6000);
+    }, 4000);
 };
 
 
@@ -99,7 +98,7 @@ function generateRandomField() {
 
         const i = randomInt(0, vertical);
         const j = randomInt(0, horizontal);
-        if (cells[i][j] !== 1) {
+        if (cells[i][j] !== 1 && randomInt(0, 10) < 3) {
             cells[i][j] = 1;
             blink(j, i);
         }
