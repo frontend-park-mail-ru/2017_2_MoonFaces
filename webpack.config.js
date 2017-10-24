@@ -3,6 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 var BabelPlugin = require('babel-webpack-plugin');
 
+const extracktDefault = new ExtractTextPlugin('style.css');
+const extracktDark = new ExtractTextPlugin('dark.css');
 
 let config = {
     entry: './src/app.js',
@@ -22,8 +24,25 @@ let config = {
         ],
         rules: [
             {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
+                test: /style\.scss$/,
+                use: extracktDefault.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                url: false,
+                                importLoaders: 1,
+                                minimize: true,
+                            },
+                        },
+                        'sass-loader',
+                    ]
+                }),
+            },
+            {
+                test: /dark\.scss$/,
+                use: extracktDark.extract({
                     fallback: 'style-loader',
                     use: [
                         {
@@ -74,7 +93,8 @@ let config = {
     },
 
     plugins: [
-        new ExtractTextPlugin('style.css'),
+        extracktDefault,
+        extracktDark,
         new webpack.DefinePlugin({
             'BACKEND_URL': JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
         }),

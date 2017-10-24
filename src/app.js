@@ -1,7 +1,13 @@
 import './background.js';
 import './index.html';
 import './style.scss';
+import './dark.scss';
 import './fonts/consola.ttf';
+import './images/moon.png';
+import './images/sun.png';
+
+import Themes from './modules/themes/themes';
+
 import router from './modules/router';
 
 import user from './services/user-service';
@@ -13,7 +19,8 @@ import SignupView from './views/signup-view/signup';
 import ProfileView from './views/profile-view/profile';
 
 (() => {
-
+    const themes = new Themes();
+    themes.run();
     const app = document.getElementById('app');
 
     router.setRootElement(app);

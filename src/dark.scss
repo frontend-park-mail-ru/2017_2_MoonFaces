@@ -1,10 +1,10 @@
-$secondary_bg: rgba(#545ab1, 0.9);
+$secondary_bg: rgba(#000, 0.9);
 $logo_background_color: $secondary_bg;//rgba(lighten(#000, 50%), .8);
 $logo_text_color: #fff;
-$color_green: green;
-$color_orange: #ff5700;
-$switch_theme_icon: url('./images/moon.png');
-$switch_theme_hover_color: #000;
+$color_green: #397522;
+$color_orange: #ad3d00;
+$switch_theme_icon: url('./images/sun.png');
+$switch_theme_hover_color: rgba(#545ab1, 0.9);
 
 @import "sass/base";
 @import "sass/logo";
