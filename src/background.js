@@ -30,11 +30,11 @@ class Background {
 
         if(innerWidth >= innerHeight) {
             this.vertical = 11;
-            this.squareSide = window.innerHeight / this.vertical;
+            this.squareSide = Math.ceil(window.innerHeight / this.vertical);
             this.horizontal = Math.floor(innerWidth / this.squareSide) + 3;
         } else {
             this.horizontal = 8;
-            this.squareSide = window.innerWidth / this.horizontal;
+            this.squareSide = Math.ceil(window.innerWidth / this.horizontal);
             this.vertical = Math.floor(innerHeight / this.squareSide) + 3;
         }
 
