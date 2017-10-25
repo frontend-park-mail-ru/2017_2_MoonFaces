@@ -5,6 +5,8 @@ $color_green: #397522;
 $color_orange: #ad3d00;
 $switch_theme_icon: url('./images/sun.png');
 $switch_theme_hover_color: rgba(#545ab1, 0.9);
+$theme_color: lighten(#000, 30%);
+
 
 @import "sass/base";
 @import "sass/logo";

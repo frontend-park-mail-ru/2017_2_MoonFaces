@@ -96,7 +96,6 @@ class Background {
             const h = hsl[0];
             const s = hsl[1];
             const l = hsl[2];
-            console.log(h, s, l)
             this.context.fillStyle = `hsla(
                 ${h - timePassedPercent * 10},
                 ${s}%,
