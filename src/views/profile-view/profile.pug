@@ -1,6 +1,5 @@
 div(class="logo")
-    h1 bacter.io
-
+    h1(class="logo_header") bacter.io
 div(class="base-width centered outer-container")
     div(class="columns")
         div
@@ -11,10 +10,10 @@ div(class="base-width centered outer-container")
 
 br
 div(class="base-width centered outer-container profile" id="profile")
-    div(class="profile-template")
-        h1(class='username') #{user.name}
+    div(class="profile_template")
+        h1(class='profile_template-username') #{user.name}
 
-        table(class='scores')
+        table
             tbody
                 tr
                     td(class='user') Score:

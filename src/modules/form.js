@@ -20,7 +20,7 @@ class Form {
         const addError = (node, error) => {
             const errorBlock = document.createElement('div');
             errorBlock.innerHTML = error;
-            errorBlock.className = 'error-row error-' + node.name;
+            errorBlock.className = 'form_error-row error-' + node.name;
             node.parentNode.insertBefore(errorBlock, node);
         };
 

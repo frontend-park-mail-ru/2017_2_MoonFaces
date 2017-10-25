@@ -1,11 +1,11 @@
-.about-div{
+.about{
     color: #fff;
-    h2{
+    &_subheader{
         display: block;
         text-align: center;
         font-size: 30px;
     }
-    .text{
-        padding: 0 10px;
+    &_text{
+        padding: 0 30px;
     }
 }
