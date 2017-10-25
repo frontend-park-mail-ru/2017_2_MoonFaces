@@ -1,11 +1,9 @@
+
 class Background {
     constructor(theme) {
-        this.strokeColor = '#4da6ff';
-        this.squareColor = {
-            r: 83,
-            g: 90,
-            b: 177,
-        };
+        this.strokeColor = '#4gda6ff';
+        this.backgroundColor = '#ff0000';
+        this.squareColor = {};
 
         this.loadTheme(theme);
 
@@ -60,23 +58,51 @@ class Background {
         return array;
     }
 
+    rgbToHsl(red, green, blue) {
+        const r = red / 255;
+        const g = green / 255;
+        const b = blue / 255;
+
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h = (max + min) / 2;
+        let s = (max + min) / 2;
+        let l = (max + min) / 2;
+
+        if (max == min) {
+            h = s = 0;
+        } else {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+            switch (max) {
+                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                case g: h = (b - r) / d + 2; break;
+                case b: h = (r - g) / d + 4; break;
+            }
+            h /= 6;
+        }
+        return [Math.floor(h * 255), Math.floor(s * 100), Math.floor(l * 100)];
+    }
+
     blink(col, row) {
         this.animate((timePassed) => {
             this.context.strokeStyle = this.strokeColor;
             this.context.clearRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
-            if (timePassed <= 3000) {
-                this.context.fillStyle = 'rgba(' +
-                    this.squareColor.r + ', ' +
-                    this.squareColor.g + ', ' +
-                    this.squareColor.b + ', ' +
-                    (timePassed / 3000) + ')';
-            } else {
-                this.context.fillStyle = 'rgba(' +
-                    this.squareColor.r + ', ' +
-                    this.squareColor.g + ', ' +
-                    this.squareColor.b + ', ' +
-                    ((6000 - timePassed) / 3000) + ')';
-            }
+            this.context.fillStyle = this.backgroundColor;
+            this.context.fillRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
+            const timePassedPercent = (-1 * Math.abs(timePassed - 3000) + 3000) / 300
+            const hsl = this.rgbToHsl(this.squareColor.r, this.squareColor.g, this.squareColor.b);
+            const h = hsl[0];
+            const s = hsl[1];
+            const l = hsl[2];
+            console.log(h, s, l)
+            this.context.fillStyle = `hsla(
+                ${h - timePassedPercent * 10},
+                ${s}%,
+                ${l}%,
+                ${((-1 * Math.abs(timePassed - 3000) + 3000) / 3000)}
+                )`;
             this.context.fillRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
             this.context.strokeRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
             if(timePassed > 5990) {
@@ -123,6 +149,7 @@ class Background {
 
     loadTheme(theme) {
         ({
+            background: this.backgroundColor,
             grid: this.strokeColor,
             squares:
                 {
@@ -137,6 +164,8 @@ class Background {
     drawGrid() {
         for (let i = 0; i <= this.horizontal; i++) {
             for (let j = 0; j <= this.vertical; j++) {
+                this.context.fillStyle = this.backgroundColor;
+                this.context.fillRect(i * this.squareSide, j * this.squareSide, this.squareSide, this.squareSide);
                 this.context.strokeStyle = this.strokeColor;
                 this.context.strokeRect(i * (this.squareSide), j * (this.squareSide), this.squareSide, this.squareSide);
             }
