@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Consolas, serif;
+    background-color: $theme_color;
 }
 
 input{
@@ -14,7 +15,8 @@ input{
 }
 
 .background{
-    filter: blur(1px);
+    filter: blur(2px);
+    opacity: 0.4;
 }
 
 .base-width {
