@@ -3,8 +3,8 @@
         color: #fff;
         text-align: center;
     }
-    #profile-template{
-        .username{
+    &_template{
+        &-username{
             text-align: center;
             font-size: 30px;
         }

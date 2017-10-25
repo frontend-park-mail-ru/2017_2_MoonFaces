@@ -1,16 +1,51 @@
 import './index.html';
 import './style.scss';
-import './images/background.jpg';
+import './dark.scss';
 import './fonts/consola.ttf';
-import './blocks/base/validation';
-import './blocks/base/pages';
-import './blocks/top';
-import './js/http';
-import {User} from './blocks/base/user';
-import './blocks/login';
-import './blocks/signup';
-import './blocks/profile';
+import './images/moon.png';
+import './images/sun.png';
 
-window.remoteBackendUrl = 'https://bacterio-back.herokuapp.com/restapi';
+import Themes from './modules/themes/themes';
 
-window.User = new User();
+import router from './modules/router';
+
+import user from './services/user-service';
+
+import SigninView from './views/signin-view/signin';
+import AboutView from './views/about-view/about';
+import TopView from './views/top-view/top';
+import SignupView from './views/signup-view/signup';
+import ProfileView from './views/profile-view/profile';
+import GameView from "./views/game-view/game";
+
+(() => {
+    const themes = new Themes();
+    themes.run();
+    const app = document.getElementById('app');
+
+    router.setRootElement(app);
+
+    const privateRoutes = [
+        '/profile',
+    ];
+    router
+        .addRoute('/', SigninView)
+        .addRoute('/about', AboutView)
+        .addRoute('/top', TopView)
+        .addRoute('/signup', SignupView)
+        .addRoute('/profile', ProfileView)
+        .addRoute('/game', GameView)
+        .start();
+
+
+    if(user.isAuthenticated()) {
+        if(window.location.pathname === '/') {
+            router.go('/profile');
+        }
+    } else {
+        if(privateRoutes.includes(window.location.pathname)) {
+            router.go('/');
+        }
+    }
+
+})();

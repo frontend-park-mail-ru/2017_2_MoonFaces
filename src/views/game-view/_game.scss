@@ -1,0 +1,26 @@
+.game{
+    &_player-name {
+        color: #fff;
+        text-align: center;
+        margin: 5px;
+    }
+
+    &_player-score {
+        margin: auto;
+        max-width: 100px;
+        h2 {
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    &_timebar {
+        // $time: 100;
+        background: hsl(150, 50%, 50%);
+        width: 100%;
+        height: 25px;
+    }
+}

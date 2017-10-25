@@ -1,0 +1,28 @@
+div(class="logo")
+    h1(class="logo_header") bacter.io
+div(class="base-width centered outer-container top-players" id="top")
+    h2(class="top-players_header") Top
+    div(class="divider-line")
+    table(class='top-players_scores')
+        thead
+            tr
+                th(class='user') Username
+                th(class='score') Score
+
+        tbody
+            each user in users
+                tr
+                    td(class='user') #{user.name}
+                    td(class='score') #{user.score}
+
+br
+
+div(class="columns base-width")
+    div(class="half-width centered outer-container")
+        if authorized
+            a(href="/profile" class="button-green") Profile
+        else
+            a(href="/" class="button-green") Back
+
+br
+br

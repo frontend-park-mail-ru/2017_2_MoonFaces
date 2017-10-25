@@ -1,8 +1,12 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const BabelPlugin = require('babel-webpack-plugin');
 
+const extracktDefault = new ExtractTextPlugin('style.css');
+const extracktDark = new ExtractTextPlugin('dark.css');
 
-module.exports = {
+let config = {
     entry: './src/app.js',
 
     context: __dirname,
@@ -20,8 +24,25 @@ module.exports = {
         ],
         rules: [
             {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
+                test: /style\.scss$/,
+                use: extracktDefault.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            query: {
+                                url: false,
+                                importLoaders: 1,
+                                minimize: true,
+                            },
+                        },
+                        'sass-loader',
+                    ]
+                }),
+            },
+            {
+                test: /dark\.scss$/,
+                use: extracktDark.extract({
                     fallback: 'style-loader',
                     use: [
                         {
@@ -72,13 +93,30 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin('style.css'),
+        extracktDefault,
+        extracktDark,
+        new webpack.DefinePlugin({
+            'BACKEND_URL': JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
+        }),
     ],
 
     devServer: {
         contentBase: path.join(__dirname, './dist/'),
         compress: true,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     }
 };
-                                 
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+        new BabelPlugin({
+            test: /\.js$/,
+            presets: ['es2015'],
+            sourceMaps: false,
+            compact: false
+        })
+    );
+}
+
+module.exports = config;
