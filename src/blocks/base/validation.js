@@ -21,9 +21,9 @@ window.addNodeValidation = (inputNode, validationType) => {
         let node = inputNode.target;
         removeError(node);
         if (node.value === '') {
-            return addError(node, 'Поле не заполнено');
+            return addError(node, 'Field is empty');
         } else if (!/.+@.+\..+/i.test(node.value)) {
-            return addError(node, 'Неверный формат email');
+            return addError(node, 'Incorrect email format');
         }
     };
 
@@ -31,9 +31,9 @@ window.addNodeValidation = (inputNode, validationType) => {
         let node = inputNode.target;
         removeError(node);
         if (node.value === '') {
-            return addError(node, 'Поле не заполнено');
+            return addError(node, 'Field is empty');
         } else if (node.value.length < 5) {
-            return addError(node, 'Имя пользователя должно быть больше 4-х символов');
+            return addError(node, 'Login must contain at least 5 symbols');
         }
     };
 
@@ -41,9 +41,9 @@ window.addNodeValidation = (inputNode, validationType) => {
         let node = inputNode.target;
         removeError(node);
         if (node.value === '') {
-            return addError(node, 'Поле не заполнено');
+            return addError(node, 'Field is empty');
         } else if (node.value.length < 5) {
-            return addError(node, 'Пароль должен быть больше 4-х символов');
+            return addError(node, 'Password must contain at least 5 symbols');
         }
     };
 
@@ -51,9 +51,9 @@ window.addNodeValidation = (inputNode, validationType) => {
         let node = inputNode.target;
         removeError(node);
         if (node.value === '') {
-            return addError(node, 'Поле не заполнено');
+            return addError(node, 'Field is empty');
         } else if (node.value !== node.parentNode.querySelector('[name=password]').value) {
-            return addError(node, 'Пароли не совпадают');
+            return addError(node, 'Passwords does not match');
         }
     };
 
