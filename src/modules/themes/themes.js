@@ -16,18 +16,18 @@ class Themes {
             background: '#fff',
             grid: '#3c78c0',
             squares: {
-                h: 250,
-                s: 30,
-                l: 20,
+                r: 83,
+                g: 90,
+                b: 177,
             }
         };
         this.bgColorsDark = {
             background: '#232032',
             grid: '#000',
             squares: {
-                h: 50,
-                s: 30,
-                l: 50,
+                r: 250,
+                g: 200,
+                b: 150,
             }
         };
         this.bgTheme = null;
