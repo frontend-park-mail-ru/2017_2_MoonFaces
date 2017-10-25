@@ -19,6 +19,9 @@ br
 
 div(class="columns base-width")
     div(class="half-width centered outer-container")
+        if authorized
+            a(href="/profile" class="button-green") Profile
+        else
             a(href="/" class="button-green") Back
 
 br
