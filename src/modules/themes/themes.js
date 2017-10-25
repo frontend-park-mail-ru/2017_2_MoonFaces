@@ -13,19 +13,21 @@ class Themes {
         this.cssDark = 'dark.css';
         this.background = null;
         this.bgColorsDefault = {
+            background: '#fff',
             grid: '#3c78c0',
             squares: {
-                r: 83,
-                g: 90,
-                b: 177,
+                h: 250,
+                s: 30,
+                l: 20,
             }
         };
         this.bgColorsDark = {
+            background: '#232032',
             grid: '#000',
             squares: {
-                r: 0,
-                g: 0,
-                b: 0,
+                h: 50,
+                s: 30,
+                l: 50,
             }
         };
         this.bgTheme = null;

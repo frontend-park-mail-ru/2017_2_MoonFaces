@@ -1,11 +1,11 @@
 class Background {
     constructor(theme) {
-        this.strokeColor = '#4da6ff';
-        this.squareColor = {
-            r: 83,
-            g: 90,
-            b: 177,
-        };
+        this.strokeColor = '#4gda6ff';
+        this.backgroundColor = '#ff0000';
+        this.squareColor = {};
+            // r: 83,
+            // g: 90,
+            // b: 177,
 
         this.loadTheme(theme);
 
@@ -64,19 +64,15 @@ class Background {
         this.animate((timePassed) => {
             this.context.strokeStyle = this.strokeColor;
             this.context.clearRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
-            if (timePassed <= 3000) {
-                this.context.fillStyle = 'rgba(' +
-                    this.squareColor.r + ', ' +
-                    this.squareColor.g + ', ' +
-                    this.squareColor.b + ', ' +
-                    (timePassed / 3000) + ')';
-            } else {
-                this.context.fillStyle = 'rgba(' +
-                    this.squareColor.r + ', ' +
-                    this.squareColor.g + ', ' +
-                    this.squareColor.b + ', ' +
-                    ((6000 - timePassed) / 3000) + ')';
-            }
+            this.context.fillStyle = this.backgroundColor;
+            this.context.fillRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
+            const timePassedPercent = (-1 * Math.abs(timePassed - 3000) + 3000) / 300
+            this.context.fillStyle = `hsla(
+                ${this.squareColor.h - timePassedPercent * 10},
+                ${this.squareColor.s}%,
+                ${this.squareColor.l}%,
+                ${((-1 * Math.abs(timePassed - 3000) + 3000) / 3000)}
+                )`;
             this.context.fillRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
             this.context.strokeRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
             if(timePassed > 5990) {
@@ -123,12 +119,13 @@ class Background {
 
     loadTheme(theme) {
         ({
+            background: this.backgroundColor,
             grid: this.strokeColor,
             squares:
                 {
-                    r: this.squareColor.r,
-                    g: this.squareColor.g,
-                    b: this.squareColor.b,
+                    h: this.squareColor.h,
+                    s: this.squareColor.s,
+                    l: this.squareColor.l,
                 }
         } = theme);
         this.drawGrid();
@@ -137,6 +134,8 @@ class Background {
     drawGrid() {
         for (let i = 0; i <= this.horizontal; i++) {
             for (let j = 0; j <= this.vertical; j++) {
+                this.context.fillStyle = this.backgroundColor;
+                this.context.fillRect(i * this.squareSide, j * this.squareSide, this.squareSide, this.squareSide);
                 this.context.strokeStyle = this.strokeColor;
                 this.context.strokeRect(i * (this.squareSide), j * (this.squareSide), this.squareSide, this.squareSide);
             }
