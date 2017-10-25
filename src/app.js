@@ -16,6 +16,7 @@ import AboutView from './views/about-view/about';
 import TopView from './views/top-view/top';
 import SignupView from './views/signup-view/signup';
 import ProfileView from './views/profile-view/profile';
+import GameView from "./views/game-view/game";
 
 (() => {
     const themes = new Themes();
@@ -33,6 +34,7 @@ import ProfileView from './views/profile-view/profile';
         .addRoute('/top', TopView)
         .addRoute('/signup', SignupView)
         .addRoute('/profile', ProfileView)
+        .addRoute('/game', GameView)
         .start();
 
 
