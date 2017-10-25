@@ -1,21 +1,29 @@
 div(class="logo")
     h1 bacter.io
+
+div(class="base-width centered outer-container")
+    div(class="columns")
+        div
+            a(href="/game" class="button-green") Tutorial
+            br
+            a(href="/game" class="button-green") Vs computer
+        a(href="/game" class="button-red") Vs player
+
+br
 div(class="base-width centered outer-container profile" id="profile")
     div(class="profile-template")
         h1(class='username') #{user.name}
-        div(class='divider-line')
+
         table(class='scores')
             tbody
                 tr
-                    td(class='user') Email:
-                    td(class='score') #{user.email}
-                tr
                     td(class='user') Score:
                     td(class='score') #{user.score}
-    a(href="/game" class="button-red") Play!!
-    div(class="divider-line")
+
+br
+div(class="base-width centered outer-container")
     div(class="columns")
         div
-            a(href="/top" class="button-green") Top players
+            a(href="#" class="button-gray logout") Logout
         div
-            a(href="#" class="button-red logout") Logout
+            a(href="/top" class="button-green") Top players
