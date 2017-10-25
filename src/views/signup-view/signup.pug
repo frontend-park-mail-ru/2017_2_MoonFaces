@@ -3,13 +3,10 @@ div(class="logo")
 div(class="base-width centered outer-container" id="signup")
     div(class="form")
         form(action="" id="signup-form")
-            input(type="text" name="login" placeholder="Your Login")
-            input(type="email" name="email" placeholder="Your Email")
-            input(type="password" name="password" placeholder="Your Password")
-            input(type="password" name="password-repeat" placeholder="Repeat Password")
-            input(type="submit" class="button-green signin-button" value="Sign up")
-    div(class="divider-line")
-    div(class="columns")
-        div
-        div
-            a(href="/" class="button-green") Main menu
+            input(type="text" name="login" placeholder="Login")
+            input(type="email" name="email" placeholder="Email")
+            input(type="password" name="password" placeholder="Password")
+            input(type="password" name="password-repeat" placeholder="Password again")
+            div(class="columns")
+                a(href="/" class="button-gray") Back
+                input(type="submit" class="button-red signin-button" value="Sign up")

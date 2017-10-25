@@ -1,15 +1,15 @@
-@mixin button($border_color, $bg_color, $text_color, $hover_color) {
+@mixin button($bg_color, $text_color, $hover_color) {
     -webkit-appearance: none;
     display: block;
     text-align: center;
     text-decoration: none;
-    border: solid 2px $border_color;
+    border: solid 0px;
     background: $bg_color;
-    padding: 5px;
+    padding: 5px 0px;
     font-size: 23px;
     color: $text_color;
-    border-radius: 10px;
-    outline: none;
+//    border-radius: 10px;
+    // outline: none;
     box-sizing: border-box;
     &:hover {
         background: $hover_color;
@@ -19,7 +19,7 @@
 
 .button {
     @include button(
-                    #000,
+                    // #000,
                     #fff,
                     #000,
                     #f0f0f0
@@ -28,16 +28,16 @@
 
 .button-green {
     @include button(
-                    rgba(darken($color_green, 5%), 1),
-                    rgba(lighten($color_green, 10%), .9),
+                    // rgba(darken($color_green, 10%), .7),
+                    rgba($color_green, .7),
                     rgba(#fff, 1),
-                    rgba(darken($color_green, 5%), .9)
+                    rgba(darken($color_green, 10%), .7)
     );
 }
 
 .button-red {
     @include button(
-                    rgba(darken($color_orange, 5%), 1),
+                    // rgba(darken($color_orange, 5%), 1),
                     rgba(lighten($color_orange, 10%), .9),
                     rgba(#fff, 1),
                     rgba(lighten($color_orange, 5%), .9)
@@ -46,9 +46,9 @@
 
 .button-gray {
     @include button(
-                    rgba(lighten(#000, 45%), 1),
-                    rgba(lighten(#000, 65%), .9),
+                    // rgba(lighten(#000, 45%), 1),
+                    rgba(darken(#555599, 10%), .7),
                     rgba(#fff, 1),
-                    rgba(lighten(#000, 45%), .9)
+                    rgba(darken(#555599, 30%), .7)
     );
 }

@@ -1,7 +1,8 @@
 div(class="logo")
     h1 bacter.io
 div(class="base-width centered outer-container top-players" id="top")
-    h2(class="divider-line") Top
+    h2 Top
+    div(class="divider-line")
     table(class='scores')
         thead
             tr
@@ -13,7 +14,12 @@ div(class="base-width centered outer-container top-players" id="top")
                 tr
                     td(class='user') #{user.name}
                     td(class='score') #{user.score}
-    div(class="columns")
-        div
-            a(href="/" class="button-red") Main menu
-        div
+
+br
+
+div(class="columns base-width")
+    div(class="half-width centered outer-container")
+            a(href="/" class="button-green") Back
+
+br
+br
