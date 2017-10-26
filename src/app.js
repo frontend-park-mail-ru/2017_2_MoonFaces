@@ -16,7 +16,7 @@ import AboutView from './views/about-view/about';
 import TopView from './views/top-view/top';
 import SignupView from './views/signup-view/signup';
 import ProfileView from './views/profile-view/profile';
-import GameView from "./views/game-view/game";
+import GameView from './views/game-view/game';
 
 (() => {
     const themes = new Themes();
@@ -42,7 +42,7 @@ import GameView from "./views/game-view/game";
 
 
     user.isAuthenticated().then(() => {
-        if(user.authorized){
+        if(user.authorized) {
             if(onlyUnauth.includes(window.location.pathname))
                 router.start('/profile');
             router.start();
