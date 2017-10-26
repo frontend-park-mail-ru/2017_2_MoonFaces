@@ -24,6 +24,7 @@ class User {
                 this.login = response.login;
                 this.email = response.email;
                 this.score = response.score;
+                this.authorized = true;
                 router.go('/profile');
             }).catch(errorPromise => errorPromise.then(function(error) {
                 alert(error.description);
@@ -54,6 +55,7 @@ class User {
     }
 
     logOut() {
+        this.authorized = false;
         return Http.Post('/logout', {});
     }
 
