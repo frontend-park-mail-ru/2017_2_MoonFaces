@@ -23,7 +23,7 @@
     );
 }
 
-.button-green {
+.button_color_green {
     @include button(
                     rgba($color_green, .7),
                     rgba(#fff, 1),
@@ -31,7 +31,7 @@
     );
 }
 
-.button-red {
+.button_color_red {
     @include button(
                     rgba(lighten($color_orange, 10%), .9),
                     rgba(#fff, 1),
@@ -39,7 +39,7 @@
     );
 }
 
-.button-gray {
+.button_color_gray {
     @include button(
                     rgba(darken(#555599, 10%), .7),
                     rgba(#fff, 1),

@@ -5,9 +5,7 @@
         margin: 10px 0;
         outline: none;
     }
-    input[type=text],
-    input[type=password],
-    input[type=email]{
+    .input-field {
         &:focus{
             border-color: lighten(#000, 25%);
         }
@@ -15,7 +13,7 @@
         text-align: center;
         font-size: 23px;
     }
-    &_error-row{
+    &_error-row {
         text-align: center;
         font-size: 23px;
         padding: 3px;
