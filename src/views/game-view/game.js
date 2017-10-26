@@ -93,7 +93,8 @@ class GameView extends BaseView {
             });
         }.bind(this));
 
-        this.endTurn.addEventListener('clicl', function() {
+        this.endTurn.addEventListener('click', function(event) {
+            event.preventDefault();
             this.clearMatrix(this.resultMatrix);
             this.contextStroke.clearRect(0, 0, this.canvasStroke.width, this.canvasStroke.height);
             this.contextStroke.strokeRect(this.canvasInnerMargin + this.jMin * (this.squareSide),
