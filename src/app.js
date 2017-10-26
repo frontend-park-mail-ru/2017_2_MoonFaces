@@ -38,14 +38,17 @@ import GameView from "./views/game-view/game";
         .start();
 
 
-    if(user.isAuthenticated()) {
-        if(window.location.pathname === '/') {
-            router.go('/profile');
-        }
-    } else {
-        if(privateRoutes.includes(window.location.pathname)) {
-            router.go('/');
-        }
-    }
+    user.isAuthenticated().then(() => {
+        console.log('user checked');  // todo: auth check and router start
+    });
+    // if(user.isAuthenticated()) {
+    //     if(window.location.pathname === '/') {
+    //         router.go('/profile');
+    //     }
+    // } else {
+    //     if(privateRoutes.includes(window.location.pathname)) {
+    //         router.go('/');
+    //     }
+    // }
 
 })();

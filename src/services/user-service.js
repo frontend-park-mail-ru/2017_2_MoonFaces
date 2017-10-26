@@ -57,16 +57,14 @@ class User {
     }
 
     isAuthenticated() {
-        Http.Get('/current').then((response) => {
+        return Http.Get('/current').then((response) => {
             this.authorized = true;
             this.login = response.login;
             this.email = response.email;
             this.score = response.score;
-            router.go('/profile');
         }, () => {
             this.authorized = false;
         });
-        return this.authorized;
     }
 }
 

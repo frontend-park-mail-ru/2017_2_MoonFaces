@@ -1,37 +1,6 @@
 'use strict';
 
-const neutralColor = '#ffffff';
-const playerColor = 'rgba(0,179,0, 1)';
-const opponentColor = 'rgba(255,121,51, 1)';
 
-const fieldSize = 8;
-const outerBorderWidth = 3;
-const innerBorderWidth = 2;
-
-const canvas = document.getElementsByClassName('background')[0];
-const canvasStroke = document.getElementsByClassName('stroke')[0];
-const marginTop = innerHeight / 20;
-const canvasInnerMargin = 2;
-
-canvas.style.marginTop = (marginTop - 8).toString() + "px";
-canvas.style.marginBottom = canvas.style.marginTop;
-canvas.height = innerHeight * 0.90;
-canvas.width = innerHeight * 0.90;
-canvas.style.position = 'fixed';
-canvas.style.zIndex = -2;
-
-canvasStroke.style.marginTop = (marginTop - 8).toString() + "px";
-canvasStroke.style.marginBottom = canvas.style.marginTop;
-canvasStroke.height = innerHeight * 0.90;
-canvasStroke.width = innerHeight * 0.90;
-canvasStroke.style.position = 'fixed';
-canvasStroke.style.zIndex = -1;
-
-const marginLeft = (innerWidth - canvas.width) / 2;
-const context = canvas.getContext( '2d' );
-const contextStroke = canvasStroke.getContext( '2d' );
-context.strokeStyle = neutralColor;
-context.lineWidth = outerBorderWidth;
 
 const randomInt = (min, max) => {
     let rand = min + Math.random() * (max + 1 - min);
@@ -39,9 +8,9 @@ const randomInt = (min, max) => {
     return rand;
 };
 
-const saveArea = (i_min, i_current, j_min, j_current, matrix) => {
-    for (let i = i_min; i <= i_current; i++) {
-        for (let j = j_min; j <= j_current; j++) {
+const saveArea = (iMin, iCurrent, jMin, jCurrent, matrix) => {
+    for (let i = iMin; i <= iCurrent; i++) {
+        for (let j = jMin; j <= jCurrent; j++) {
             matrix[i][j] = 1;
         }
     }
@@ -80,17 +49,7 @@ const resultMatrix = createMatrix(8, 8);
 const currentField = createMatrix(8, 8);
 const nextMatrix = createMatrix(8, 8);
 
-let squareSide = 0;
-let horizontal = fieldSize;
-let vertical = fieldSize;
 
-if(innerWidth >= innerHeight) {
-    squareSide = (canvas.height - 2 * canvasInnerMargin) / vertical;
-} else {
-    squareSide = (canvas.width - 2 * canvasInnerMargin) / horizontal;
-}
-
-const smallSquareSide = squareSide / 3;
 
 const drawCell = (row, col, empty) => {
     // Draw outer square
@@ -227,78 +186,78 @@ generateMatrix();
 evalNextMatrix();
 drawMatrix();
 
-canvasStroke.addEventListener("mousedown", () => {
-    i_min = undefined;
-    j_min = undefined;
+canvasStroke.addEventListener('mousedown', () => {
+    iMin = undefined;
+    jMin = undefined;
     let loop;
 
     const startLoop = event => {
         loop = animation(event);
     };
-    canvasStroke.addEventListener("mousemove", startLoop);
-    canvasStroke.addEventListener("mouseup", () => {
+    canvasStroke.addEventListener('mousemove', startLoop);
+    canvasStroke.addEventListener('mouseup', () => {
 
         cancelAnimationFrame(loop);
         loop = undefined;
-        canvasStroke.removeEventListener("mousemove", startLoop);
+        canvasStroke.removeEventListener('mousemove', startLoop);
     });
 });
 
-let i_min;
-let j_min;
-let i_current;
-let j_current;
+let iMin;
+let jMin;
+let iCurrent;
+let jCurrent;
 
 function animation(event) {
     const x1 = event.clientX - Math.floor(marginLeft);
     const y1 = event.clientY - Math.floor(marginTop);
 
-    i_current = Math.floor(y1 / (context.lineWidth / 3 + squareSide));
-    j_current = Math.floor(x1 / (context.lineWidth / 3 + squareSide));
+    iCurrent = Math.floor(y1 / (context.lineWidth / 3 + squareSide));
+    jCurrent = Math.floor(x1 / (context.lineWidth / 3 + squareSide));
 
-    if(i_min === undefined) {
-        i_min = i_current;
-        j_min = j_current;
+    if(iMin === undefined) {
+        iMin = iCurrent;
+        jMin = jCurrent;
     }
 
     contextStroke.clearRect(0, 0, canvasStroke.width, canvasStroke.height);
 
-    if (i_current >= i_min && j_current >= j_min) {
+    if (iCurrent >= iMin && jCurrent >= jMin) {
         contextStroke.strokeStyle = '#000000';
         contextStroke.lineWidth = 4;
-        contextStroke.strokeRect(canvasInnerMargin + j_min * (squareSide),
-            canvasInnerMargin + i_min * (squareSide),
-            (j_current - j_min + 1) * squareSide,
-            (i_current - i_min + 1) * squareSide);
+        contextStroke.strokeRect(canvasInnerMargin + jMin * (squareSide),
+            canvasInnerMargin + iMin * (squareSide),
+            (jCurrent - jMin + 1) * squareSide,
+            (iCurrent - iMin + 1) * squareSide);
     }
 }
 
-const playerInfo = document.getElementsByClassName("player")[0];
-playerInfo.style.width = ((innerWidth - canvas.width) / 2).toString() + "px";
-playerInfo.style.height = canvas.height.toString() + "px";
-playerInfo.style.float = "left";
-playerInfo.style.display = "flex";
+const playerInfo = document.getElementsByClassName('player')[0];
+playerInfo.style.width = ((innerWidth - canvas.width) / 2).toString() + 'px';
+playerInfo.style.height = canvas.height.toString() + 'px';
+playerInfo.style.float = 'left';
+playerInfo.style.display = 'flex';
 playerInfo.style.marginTop = canvas.style.marginTop;
 playerInfo.style.marginLeft = '-8px';
 playerInfo.zIndex = 0;
 
-playerInfo.style.flexDirection = "column";
-playerInfo.style.alignItems = "center";
-playerInfo.style.justifyContent = "space-around";
+playerInfo.style.flexDirection = 'column';
+playerInfo.style.alignItems = 'center';
+playerInfo.style.justifyContent = 'space-around';
 
 
-const opponentInfo = document.getElementsByClassName("opponent")[0];
-opponentInfo.style.width = ((innerWidth - canvas.width) / 2).toString() + "px";
-opponentInfo.style.height = (canvas.height * 2 / 3).toString() + "px";
-opponentInfo.style.float = "right";
-opponentInfo.style.display = "flex";
+const opponentInfo = document.getElementsByClassName('opponent')[0];
+opponentInfo.style.width = ((innerWidth - canvas.width) / 2).toString() + 'px';
+opponentInfo.style.height = (canvas.height * 2 / 3).toString() + 'px';
+opponentInfo.style.float = 'right';
+opponentInfo.style.display = 'flex';
 opponentInfo.style.marginTop = canvas.style.marginTop;
 opponentInfo.style.marginLeft = '-8px';
 opponentInfo.zIndex = 0;
 
-opponentInfo.style.flexDirection = "column";
-opponentInfo.style.alignItems = "center";
-opponentInfo.style.justifyContent = "space-around";
+opponentInfo.style.flexDirection = 'column';
+opponentInfo.style.alignItems = 'center';
+opponentInfo.style.justifyContent = 'space-around';
 
 const countScore = (element, isPlayer) => {
     let score = 0;
@@ -319,48 +278,48 @@ const countScore = (element, isPlayer) => {
 };
 
 const playerName = document.createElement('h1');
-playerName.textContent = "Player";
+playerName.textContent = 'Player';
 playerInfo.appendChild(playerName);
 
 const playerScore = document.createElement('h2');
 countScore(playerScore, true);
 
 const button = document.createElement('input');
-button.type = "button";
-button.value = "End turn";
+button.type = 'button';
+button.value = 'End turn';
 playerInfo.appendChild(playerScore);
 playerInfo.appendChild(button);
 
 const opponentName = document.createElement('h1');
-opponentName.textContent = "Bot (easy)";
+opponentName.textContent = 'Bot (easy)';
 opponentInfo.appendChild(opponentName);
 
 const opponentScore = document.createElement('h2');
 countScore(opponentScore, false);
 opponentInfo.appendChild(opponentScore);
 
-button.addEventListener("click", () => {
+button.addEventListener('click', () => {
     clearMatrix(resultMatrix);
     contextStroke.clearRect(0, 0, canvasStroke.width, canvasStroke.height);
-    contextStroke.strokeRect(canvasInnerMargin + j_min * (squareSide),
-        canvasInnerMargin + i_min * (squareSide),
-        (j_current - j_min + 1) * squareSide,
-        (i_current - i_min + 1) * squareSide);
-    saveArea(i_min, i_current, j_min, j_current, playerMatrix);
+    contextStroke.strokeRect(canvasInnerMargin + jMin * (squareSide),
+        canvasInnerMargin + iMin * (squareSide),
+        (jCurrent - jMin + 1) * squareSide,
+        (iCurrent - iMin + 1) * squareSide);
+    saveArea(iMin, iCurrent, jMin, jCurrent, playerMatrix);
 
-    const op_min_i = randomInt(0, 7);
-    const op_min_j = randomInt(0, 7);
+    const opMinI = randomInt(0, 7);
+    const opMinJ = randomInt(0, 7);
 
-    const offset_i = randomInt(0, 7 - op_min_i);
-    const offset_j = randomInt(0, 7 - op_min_j);
+    const iOffset = randomInt(0, 7 - opMinI);
+    const jOffset = randomInt(0, 7 - opMinJ);
 
     contextStroke.lineWidth = 4;
-    contextStroke.strokeRect(canvasInnerMargin + op_min_j * (squareSide),
-        canvasInnerMargin + op_min_i * (squareSide),
-        (offset_j + 1) * squareSide,
-        (offset_i + 1) * squareSide);
+    contextStroke.strokeRect(canvasInnerMargin + opMinJ * (squareSide),
+        canvasInnerMargin + opMinI * (squareSide),
+        (jOffset + 1) * squareSide,
+        (iOffset + 1) * squareSide);
 
-    saveArea(op_min_i, op_min_i + offset_i, op_min_j, op_min_j + offset_j, opponentMatrix);
+    saveArea(opMinI, opMinI + iOffset, opMinJ, opMinJ + jOffset, opponentMatrix);
 
     evalResult(playerMatrix, opponentMatrix, resultMatrix);
 

@@ -5,22 +5,24 @@ div(class="game columns")
         div(class="columns")
             div
             div
-                h1(class='game_player-name') Player 1
+                h1(class='game_player-name') #{username}
                 div(class="half_width game_player-score left outer-container")
-                    h2 5
+                    h2(class='game_player-score') 0
     div
         div(class="base-width centered outer-container")
-            div(class="game_timebar")
+            a(href="#" class="button-red game_end-turn") End Turn
+            //div(class="game_timebar")
         br
         div(class="base-width centered outer-container")
-            canvas(class="game-field")
-            canvas(class="stroke")
+            div(class="game_field")
+                canvas(class="game_field-grid")
+                canvas(class="game_field-field")
     div
         div(class="columns")
             div
                 h1(class='game_player-name') Player 2
                 div(class="half_width game_player-score outer-container")
-                    h2 12
+                    h2(class='game_opponent-score') 0
             div
 
 br
