@@ -16,6 +16,7 @@ class GameView extends BaseView {
         this.playerScore = document.getElementsByClassName('game_player-score')[0];
         this.opponentScore = document.getElementsByClassName('game_opponent-score')[0];
 
+        this.endTurn = document.getElementsByClassName('game_end-turn')[0];
 
         this.neutralColor = '#ffffff';
         this.playerColor = 'rgba(0,179,0, 1)';
@@ -91,8 +92,57 @@ class GameView extends BaseView {
                 this.canvasStroke.removeEventListener('mousemove', startLoop);
             });
         }.bind(this));
+
+        this.endTurn.addEventListener('clicl', function() {
+            this.clearMatrix(this.resultMatrix);
+            this.contextStroke.clearRect(0, 0, this.canvasStroke.width, this.canvasStroke.height);
+            this.contextStroke.strokeRect(this.canvasInnerMargin + this.jMin * (this.squareSide),
+                this.canvasInnerMargin + this.iMin * (this.squareSide),
+                (this.jCurrent - this.jMin + 1) * this.squareSide,
+                (this.iCurrent - this.iMin + 1) * this.squareSide);
+            this.saveArea(this.iMin, this.iCurrent, this.jMin, this.jCurrent, this.playerMatrix);
+
+            const opMinI = this.randomInt(0, 7);
+            const opMinJ = this.randomInt(0, 7);
+
+            const iOffset = this.randomInt(0, 7 - opMinI);
+            const jOffset = this.randomInt(0, 7 - opMinJ);
+
+            this.contextStroke.lineWidth = 4;
+            this.contextStroke.strokeRect(this.canvasInnerMargin + opMinJ * (this.squareSide),
+                this.canvasInnerMargin + opMinI * (this.squareSide),
+                (jOffset + 1) * this.squareSide,
+                (iOffset + 1) * this.squareSide);
+
+            this.saveArea(opMinI, opMinI + iOffset, opMinJ, opMinJ + jOffset, this.opponentMatrix);
+
+            this.evalResult(this.playerMatrix, this.opponentMatrix, this.resultMatrix);
+
+            for (let i = 0; i < this.fieldSize; i++) {
+                for (let j = 0; j < this.fieldSize; j++) {
+                    if (this.resultMatrix[i][j]) {
+                        this.currentField[i][j] = this.nextMatrix[i][j];
+                    }
+                }
+            }
+
+            this.evalNextMatrix();
+            this.drawMatrix();
+            this.clearMatrix(this.playerMatrix);
+            this.clearMatrix(this.opponentMatrix);
+
+            this.countScore(this.playerScore, true);
+            this.countScore(this.opponentScore, false);
+        }.bind(this));
+
         this.countScore(this.playerScore, true);
         this.countScore(this.opponentScore, false);
+    }
+
+    randomInt(min, max) {
+        let rand = min + Math.random() * (max + 1 - min);
+        rand = Math.floor(rand);
+        return rand;
     }
 
     generateMatrix() {
@@ -101,6 +151,14 @@ class GameView extends BaseView {
                 if (Math.random() <= 0.3) {
                     this.currentField[i][j] = 1;
                 }
+            }
+        }
+    }
+
+    evalResult(field1, field2, result) {
+        for(let i = 0; i < 8; i++) {
+            for(let j = 0; j < 8; j++) {
+                result[i][j] = field1[i][j] ^ field2[i][j];
             }
         }
     }
@@ -120,6 +178,22 @@ class GameView extends BaseView {
         for (let i = 0; i < this.fieldSize; i++) {
             for (let j = 0; j < this.fieldSize; j++) {
                 this.countNeighboors(i, j);
+            }
+        }
+    }
+
+    clearMatrix(array) {
+        for(let i = 0; i < 8; i++) {
+            for(let j = 0; j < 8; j++) {
+                array[i][j] = 0;
+            }
+        }
+    }
+
+    saveArea(iMin, iCurrent, jMin, jCurrent, matrix) {
+        for (let i = iMin; i <= iCurrent; i++) {
+            for (let j = jMin; j <= jCurrent; j++) {
+                matrix[i][j] = 1;
             }
         }
     }
@@ -161,7 +235,6 @@ class GameView extends BaseView {
 
 
     drawMatrix() {
-        console.log('draw matrix');
         for (let i = 0; i < this.fieldSize; i++) {
             for (let j = 0; j < this.fieldSize; j++) {
                 if (this.currentField[i][j] === 1) {
@@ -180,7 +253,6 @@ class GameView extends BaseView {
     }
 
     drawNextGenerationCell(row, col, empty) {
-        console.log('draw gen cell');
         // Draw outer square
         this.context.fillStyle = this.neutralColor;
 
@@ -208,7 +280,6 @@ class GameView extends BaseView {
     }
 
     drawCell(row, col, empty) {
-        console.log('draw cell');
         // Draw outer square
         this.context.fillStyle = this.neutralColor;
         this.context.fillRect(col * (this.squareSide), row * (this.squareSide), this.squareSide, this.squareSide);
@@ -267,7 +338,6 @@ class GameView extends BaseView {
     }
 
     countScore(element, isPlayer) {
-        console.log('countScore');
         let score = 0;
         if (isPlayer) {
             for (let i = 0; i < this.fieldSize; i++) {

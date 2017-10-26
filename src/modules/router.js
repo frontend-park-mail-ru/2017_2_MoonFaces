@@ -21,7 +21,7 @@ class Router {
         return this;
     }
 
-    start() {
+    start(path=null) {
         window.onpopstate = function(e) {
             this.go(window.location.pathname);
         }.bind(this);
@@ -34,7 +34,9 @@ class Router {
             const pathname = event.target.pathname;
             this.go(pathname);
         }.bind(this));
-
+        if(path) {
+            this.go(path);
+        }
         this.go(window.location.pathname);
     }
 

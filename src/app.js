@@ -27,6 +27,10 @@ import GameView from "./views/game-view/game";
 
     const privateRoutes = [
         '/profile',
+        '/game'
+    ];
+    const onlyUnauth = [
+        '/',
     ];
     router
         .addRoute('/', SigninView)
@@ -34,21 +38,19 @@ import GameView from "./views/game-view/game";
         .addRoute('/top', TopView)
         .addRoute('/signup', SignupView)
         .addRoute('/profile', ProfileView)
-        .addRoute('/game', GameView)
-        .start();
+        .addRoute('/game', GameView);
 
 
     user.isAuthenticated().then(() => {
-        console.log('user checked');  // todo: auth check and router start
+        if(user.authorized){
+            if(onlyUnauth.includes(window.location.pathname))
+                router.start('/profile');
+            router.start();
+        }else{
+            if(privateRoutes.includes(window.location.pathname))
+                router.start('/');
+            router.start();
+        }
     });
-    // if(user.isAuthenticated()) {
-    //     if(window.location.pathname === '/') {
-    //         router.go('/profile');
-    //     }
-    // } else {
-    //     if(privateRoutes.includes(window.location.pathname)) {
-    //         router.go('/');
-    //     }
-    // }
 
 })();

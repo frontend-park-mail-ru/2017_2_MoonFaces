@@ -10,6 +10,7 @@ class User {
         this.listeners = {};
         User.__instance = this;
         this.bus = bus;
+        this.authorized = null;
         this.bindBus();
     }
 

@@ -1,11 +1,11 @@
 .game{
     &_player-name {
-        color: #fff;
+        color: $secondary_bg;
         text-align: center;
         margin: 5px;
     }
 
-    &_player-score {
+    &_score {
         margin: auto;
         max-width: 100px;
         h2 {
@@ -27,7 +27,7 @@
     &_field{
         &-grid, &-field{
             margin: 0;
-            border: solid #ff0000 1px;
+            padding: 0;
         }
         width: 400px;
         height: 400px;
