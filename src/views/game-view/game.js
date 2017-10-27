@@ -19,13 +19,12 @@ class GameView extends BaseView {
         this.endTurn = document.getElementsByClassName('game_end-turn')[0];
 
         this.neutralColor = '#fff';
-        // this.playerColor = 'rgb(0,179,0)';
-        // this.opponentColor = 'rgb(255,121,51)';
         this.playerColor = 'hsl(120, 50%, 50%)';
-        this.opponentColor = 'hsl(255,50%,50%)';
+        this.opponentColor = 'hsl(255, 50%,50%)';
         this.frameColor = '#f84'
 
         this.fieldSize = 8;
+
         this.outerBorderWidth = 3;
         this.innerBorderWidth = 2;
 
@@ -50,12 +49,11 @@ class GameView extends BaseView {
         this.context.strokeStyle = this.neutralColor;
         this.context.lineWidth = this.outerBorderWidth;
 
-        this.playerMatrix = this.createMatrix(8, 8);
-        this.opponentMatrix = this.createMatrix(8, 8);
-        this.resultMatrix = this.createMatrix(8, 8);
-        this.currentField = this.createMatrix(8, 8);
-        this.nextMatrix = this.createMatrix(8, 8);
-
+        this.playerMatrix = this.createMatrix(this.fieldSize, this.fieldSize);
+        this.opponentMatrix = this.createMatrix(this.fieldSize, this.fieldSize);
+        this.resultMatrix = this.createMatrix(this.fieldSize, this.fieldSize);
+        this.currentField = this.createMatrix(this.fieldSize, this.fieldSize);
+        this.nextMatrix = this.createMatrix(this.fieldSize, this.fieldSize);
 
         this.squareSide = 0;
         this.horizontal = this.fieldSize;
@@ -161,8 +159,8 @@ class GameView extends BaseView {
     }
 
     evalResult(field1, field2, result) {
-        for(let i = 0; i < 8; i++) {
-            for(let j = 0; j < 8; j++) {
+        for(let i = 0; i < this.fieldSize; i++) {
+            for(let j = 0; j < this.fieldSize; j++) {
                 result[i][j] = field1[i][j] ^ field2[i][j];
             }
         }
@@ -183,8 +181,8 @@ class GameView extends BaseView {
     }
 
     clearMatrix(array) {
-        for(let i = 0; i < 8; i++) {
-            for(let j = 0; j < 8; j++) {
+        for(let i = 0; i < this.fieldSize; i++) {
+            for(let j = 0; j < this.fieldSize; j++) {
                 array[i][j] = 0;
             }
         }
