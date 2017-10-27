@@ -49,10 +49,14 @@ class Router {
         const originalRoute = route;
 
         this.routes.find((item) => {
+            route = originalRoute;
             if (route !== item.route) {
                 if(item.multiplePages) {
                     page = route.substr(route.lastIndexOf('/') + 1);
                     route = route.replace( new RegExp(route.substr(route.lastIndexOf('/'))), '' );
+                    if(route !== item.route) {
+                        return false;
+                    }
                 }else{
                     return false;
                 }
