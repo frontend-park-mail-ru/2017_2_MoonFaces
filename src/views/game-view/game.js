@@ -18,9 +18,12 @@ class GameView extends BaseView {
 
         this.endTurn = document.getElementsByClassName('game_end-turn')[0];
 
-        this.neutralColor = '#ffffff';
-        this.playerColor = 'rgba(0,179,0, 1)';
-        this.opponentColor = 'rgba(255,121,51, 1)';
+        this.neutralColor = '#fff';
+        // this.playerColor = 'rgb(0,179,0)';
+        // this.opponentColor = 'rgb(255,121,51)';
+        this.playerColor = 'hsl(120, 50%, 50%)';
+        this.opponentColor = 'hsl(255,50%,50%)';
+        this.frameColor = '#f84'
 
         this.fieldSize = 8;
         this.outerBorderWidth = 3;
@@ -148,9 +151,10 @@ class GameView extends BaseView {
 
     generateMatrix() {
         for (let i = 0; i < this.fieldSize; i++) {
-            for (let j = 0; j < this.fieldSize; j++) {
-                if (Math.random() <= 0.3) {
+            for (let j = 0; j < this.fieldSize / 2; j++) {
+                if (Math.random() <= 0.5) {
                     this.currentField[i][j] = 1;
+                    this.currentField[i][this.fieldSize - 1 - j] = 1;
                 }
             }
         }
@@ -198,34 +202,25 @@ class GameView extends BaseView {
         let count = 0;
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-                let neighboorRow = row + i;
-                let neighboorCol = col + j;
-
-                if (neighboorRow === -1) {
-                    neighboorRow = this.fieldSize - 1;
+                const trimCell = (cell) => {
+                    if (cell === -1) cell = this.fieldSize - 1;
+                    if (cell === this.fieldSize) cell = 0;
+                    return cell;
                 }
-
-                if (neighboorCol === -1) {
-                    neighboorCol = this.fieldSize - 1;
-                }
-
-                if (neighboorRow === this.fieldSize) {
-                    neighboorRow = 0;
-                }
-
-                if (neighboorCol === this.fieldSize) {
-                    neighboorCol = 0;
-                }
+                const neighboorRow = trimCell(row + i);
+                const neighboorCol = trimCell(col + j);
 
                 if (!(i === 0 && j === 0) && this.currentField[neighboorRow][neighboorCol] === 1) {
                     count++;
                 }
             }
         }
-        if (count >= 2 && count <= 3) {
+        if (count === 3) {  // Dead cell to live
+            this.nextMatrix[row][col] = 1;
+        } else if (count === 2 && this.nextMatrix[row][col] === 1) {  // Live cell stay live
             this.nextMatrix[row][col] = 1;
         } else {
-            this.nextMatrix[row][col] = 0;
+            this.nextMatrix[row][col] = 0;  // Live(or not) cell to die
         }
     }
 
@@ -248,12 +243,13 @@ class GameView extends BaseView {
         }
     }
 
-    drawNextGenerationCell(row, col, empty) {
+
+    drawNextGenerationCell(row, col, isEmpty) {
         // Draw outer square
         this.context.fillStyle = this.neutralColor;
 
         this.context.lineWidth = this.innerBorderWidth;
-        if (empty === true) {
+        if (isEmpty === true) {
             this.context.fillStyle = this.neutralColor;
         } else {
 
@@ -268,14 +264,10 @@ class GameView extends BaseView {
             this.smallSquareSide + this.canvasInnerMargin + row * (this.squareSide) + this.outerBorderWidth,
             this.smallSquareSide - 2 * this.outerBorderWidth,
             this.smallSquareSide - 2 * this.outerBorderWidth);
-
-        // Return default settings
-        this.context.lineWidth = this.outerBorderWidth;
-        this.context.strokeStyle = this.neutralColor;
-        this.context.fillStyle = this.neutralColor;
     }
 
-    drawCell(row, col, empty) {
+
+    drawCell(row, col, isEmpty) {
         // Draw outer square
         this.context.fillStyle = this.neutralColor;
         this.context.fillRect(col * (this.squareSide), row * (this.squareSide), this.squareSide, this.squareSide);
@@ -290,7 +282,7 @@ class GameView extends BaseView {
         }
 
         this.context.lineWidth = this.innerBorderWidth;
-        if (empty === true) {
+        if (isEmpty === true) {
             this.context.strokeRect(this.canvasInnerMargin + col * (this.squareSide) + this.outerBorderWidth,
                 this.canvasInnerMargin + row * (this.squareSide) + this.outerBorderWidth,
                 this.squareSide - 2 * this.outerBorderWidth,
@@ -301,10 +293,6 @@ class GameView extends BaseView {
                 this.squareSide - 2 * this.outerBorderWidth,
                 this.squareSide - 2 * this.outerBorderWidth);
         }
-        // Return default settings
-        this.context.lineWidth = this.outerBorderWidth;
-        this.context.strokeStyle = this.neutralColor;
-        this.context.fillStyle = this.neutralColor;
     }
 
     animation(event) {
@@ -313,8 +301,9 @@ class GameView extends BaseView {
         const x1 = event.clientX - elementParams.left;
         const y1 = event.clientY - elementParams.top;
 
-        this.iCurrent = Math.floor(y1 / (this.context.lineWidth / 3 + this.squareSide));
-        this.jCurrent = Math.floor(x1 / (this.context.lineWidth / 3 + this.squareSide));
+        const coordinateToCellNumber = (c) => Math.floor(c / (this.context.lineWidth / 3 + this.squareSide));
+        this.iCurrent = coordinateToCellNumber(y1);
+        this.jCurrent = coordinateToCellNumber(x1);
 
         if (this.iMin === undefined) {
             this.iMin = this.iCurrent;
@@ -324,7 +313,7 @@ class GameView extends BaseView {
         this.contextStroke.clearRect(0, 0, this.canvasStroke.width, this.canvasStroke.height);
 
         if (this.iCurrent >= this.iMin && this.jCurrent >= this.jMin) {
-            this.contextStroke.strokeStyle = '#000000';
+            this.contextStroke.strokeStyle = this.frameColor;
             this.contextStroke.lineWidth = 4;
             this.contextStroke.strokeRect(this.canvasInnerMargin + this.jMin * (this.squareSide),
                 this.canvasInnerMargin + this.iMin * (this.squareSide),
