@@ -8,7 +8,7 @@ class Form {
         this.addNodeValidation(this.formNode.querySelector(`[name="${fieldName}"]`), validationType);
     }
 
-    removeError(node){
+    removeError(node) {
         const element = document.getElementsByClassName('error-' + node.name)[0];
         if (element) {
             element.parentNode.removeChild(element);
@@ -25,7 +25,7 @@ class Form {
         };
 
         const emailValidation = (inputNode) => {
-            let node = inputNode.target;
+            const node = inputNode.target;
             this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Field is empty');
@@ -35,7 +35,7 @@ class Form {
         };
 
         const loginValidation = (inputNode) => {
-            let node = inputNode.target;
+            const node = inputNode.target;
             this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Field is empty');
@@ -45,7 +45,7 @@ class Form {
         };
 
         const passwordValidation = (inputNode) => {
-            let node = inputNode.target;
+            const node = inputNode.target;
             this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Field is empty');
@@ -55,7 +55,7 @@ class Form {
         };
 
         const passwordMatch = (inputNode) => {
-            let node = inputNode.target;
+            const node = inputNode.target;
             this.removeError(node);
             if (node.value === '') {
                 return addError(node, 'Field is empty');
@@ -85,17 +85,17 @@ class Form {
     }
 
     onsubmit(callback) {
-        this.formNode.addEventListener('submit', function(event) {
+        this.formNode.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            let formData = {};
+            const formData = {};
 
-            this.fields.forEach(function(field) {
+            this.fields.forEach((field) => {
                 formData[field] = this.formNode.querySelector(`[name="${field}"]`).value;
-            }.bind(this));
+            });
 
             callback(formData);
-        }.bind(this));
+        });
     }
 }
 

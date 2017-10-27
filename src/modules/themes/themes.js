@@ -57,7 +57,7 @@ class Themes {
     }
 
     getCurrent() {
-        let theme = localStorage.getItem('theme');
+        const theme = localStorage.getItem('theme');
         if(theme) {
             if(theme === this.cssDark) {
                 this.bgTheme = this.bgColorsDark;

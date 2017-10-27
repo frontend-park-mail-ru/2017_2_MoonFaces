@@ -18,7 +18,7 @@ class Bus {
 
     off(event, listener) {
         if (Array.isArray(this.listeners[event])) {
-            this.listeners[event] = this.listeners[event].filter(function(element) {
+            this.listeners[event] = this.listeners[event].filter((element) => {
                 return element !== listener;
             });
         }
@@ -26,7 +26,7 @@ class Bus {
 
     emit(event, payload) {
         if (Array.isArray(this.listeners[event])) {
-            this.listeners[event].forEach(function(listener) {
+            this.listeners[event].forEach((listener) => {
                 listener({
                     event: event,
                     payload: payload,

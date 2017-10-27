@@ -6,7 +6,7 @@ const BabelPlugin = require('babel-webpack-plugin');
 const extracktDefault = new ExtractTextPlugin('style.css');
 const extracktDark = new ExtractTextPlugin('dark.css');
 
-let config = {
+const config = {
     entry: './src/app.js',
 
     context: __dirname,

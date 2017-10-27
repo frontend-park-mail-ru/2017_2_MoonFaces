@@ -13,7 +13,7 @@ class Http {
             method: 'get',
             mode: 'cors',
             credentials: 'include'
-        }).then(function(response) {
+        }).then((response) => {
             if (response.status >= 400) {
                 throw response;
             }
@@ -28,23 +28,25 @@ class Http {
      */
     static Post(address, body) {
         address = BACKEND_URL + address;
-        return new Promise((resolve, reject) => fetch(address, {
-            method: 'post',
-            mode: 'cors',
-            credentials: 'include',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            }
-        }).then(response => {
-            if (response.status >= 400) {
-                reject(response.json());
-            } else {
-                resolve(response.json());
-            }
-        }).catch(error => {
-            console.log(error);
-        })
+        return new Promise((resolve, reject) => {
+            return fetch(address, {
+                method: 'post',
+                mode: 'cors',
+                credentials: 'include',
+                body: JSON.stringify(body),
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            }).then(response => {
+                if (response.status >= 400) {
+                    reject(response.json());
+                } else {
+                    resolve(response.json());
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
         );
     }
 }

@@ -21,7 +21,7 @@ class GameView extends BaseView {
         this.neutralColor = '#fff';
         this.playerColor = 'hsl(120, 50%, 50%)';
         this.opponentColor = 'hsl(255, 50%,50%)';
-        this.frameColor = '#f84'
+        this.frameColor = '#f84';
 
         this.fieldSize = 8;
 
@@ -77,7 +77,7 @@ class GameView extends BaseView {
         this.iCurrent = undefined;
         this.jCurrent = undefined;
 
-        this.canvasStroke.addEventListener('mousedown', function() {
+        this.canvasStroke.addEventListener('mousedown', () => {
             this.iMin = undefined;
             this.jMin = undefined;
             this.loop = undefined;
@@ -92,9 +92,9 @@ class GameView extends BaseView {
                 this.loop = undefined;
                 this.canvasStroke.removeEventListener('mousemove', startLoop);
             });
-        }.bind(this));
+        });
 
-        this.endTurn.addEventListener('click', function(event) {
+        this.endTurn.addEventListener('click', (event) => {
             event.preventDefault();
             this.clearMatrix(this.resultMatrix);
             this.contextStroke.clearRect(0, 0, this.canvasStroke.width, this.canvasStroke.height);
@@ -135,7 +135,7 @@ class GameView extends BaseView {
 
             this.countScore(this.playerScore, true);
             this.countScore(this.opponentScore, false);
-        }.bind(this));
+        });
 
         this.countScore(this.playerScore, true);
         this.countScore(this.opponentScore, false);
@@ -201,10 +201,10 @@ class GameView extends BaseView {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const trimCell = (cell) => {
-                    if (cell === -1) cell = this.fieldSize - 1;
-                    if (cell === this.fieldSize) cell = 0;
+                    if (cell === -1) {cell = this.fieldSize - 1;}
+                    if (cell === this.fieldSize) {cell = 0;}
                     return cell;
-                }
+                };
                 const neighboorRow = trimCell(row + i);
                 const neighboorCol = trimCell(col + j);
 
@@ -299,7 +299,7 @@ class GameView extends BaseView {
         const x1 = event.clientX - elementParams.left;
         const y1 = event.clientY - elementParams.top;
 
-        const coordinateToCellNumber = (c) => Math.floor(c / (this.context.lineWidth / 3 + this.squareSide));
+        const coordinateToCellNumber = (c) => {return Math.floor(c / (this.context.lineWidth / 3 + this.squareSide));};
         this.iCurrent = coordinateToCellNumber(y1);
         this.jCurrent = coordinateToCellNumber(x1);
 

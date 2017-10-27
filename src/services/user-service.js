@@ -39,7 +39,7 @@ class User {
                 data['login'],
                 data['email'],
                 data['password']
-            ).then((response) => {
+            ).then(() => {
                 router.go('/');
             }).catch(errorPromise => {
                 return errorPromise.then((error) => {

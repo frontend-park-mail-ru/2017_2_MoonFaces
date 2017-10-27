@@ -22,18 +22,18 @@ class Router {
     }
 
     start(path=null) {
-        window.onpopstate = function(e) {
+        window.onpopstate = function() {
             this.go(window.location.pathname);
         }.bind(this);
 
-        this.rootElement.addEventListener('click', function(event) {
+        this.rootElement.addEventListener('click', (event) => {
             if (event.target.tagName.toLowerCase() !== 'a') {
                 return;
             }
             event.preventDefault();
             const pathname = event.target.pathname;
             this.go(pathname);
-        }.bind(this));
+        });
         if(path) {
             this.go(path);
         }
@@ -41,7 +41,7 @@ class Router {
     }
 
     go(route) {
-        this.routes.find(function(item) {
+        this.routes.find((item) => {
             if (route !== item.route) {
                 return false;
             }
@@ -61,7 +61,7 @@ class Router {
 
             return true;
 
-        }.bind(this));
+        });
     }
 }
 

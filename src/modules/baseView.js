@@ -13,7 +13,7 @@ class BaseView {
     }
 
     stop() {
-        this.events.forEach(function(unsub) {
+        this.events.forEach((unsub) => {
             unsub();
         });
     }
