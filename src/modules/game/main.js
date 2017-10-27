@@ -55,12 +55,12 @@ class Game {
 
         this.iMin = undefined;
         this.jMin = undefined;
-        this.iCurrent = undefined;
-        this.jCurrent = undefined;
+        this.iMax = undefined;
+        this.jMax = undefined;
 
         this.canvasStroke.addEventListener('mousedown', () => {
-            this.iMin = undefined;
-            this.jMin = undefined;
+            this.iStart = undefined;
+            this.jStart = undefined;
             this.loop = undefined;
 
             const startLoop = event => {
@@ -81,9 +81,9 @@ class Game {
             this.contextStroke.clearRect(0, 0, this.canvasStroke.width, this.canvasStroke.height);
             this.contextStroke.strokeRect(this.canvasInnerMargin + this.jMin * (this.squareSide),
                 this.canvasInnerMargin + this.iMin * (this.squareSide),
-                (this.jCurrent - this.jMin + 1) * this.squareSide,
-                (this.iCurrent - this.iMin + 1) * this.squareSide);
-            this.saveArea(this.iMin, this.iCurrent, this.jMin, this.jCurrent, this.playerMatrix);
+                (this.jMax - this.jMin + 1) * this.squareSide,
+                (this.iMax - this.iMin + 1) * this.squareSide);
+            this.saveArea(this.iMin, this.iMax, this.jMin, this.jMax, this.playerMatrix);
 
             const opMinI = this.randomInt(0, 7);
             const opMinJ = this.randomInt(0, 7);
@@ -284,21 +284,24 @@ class Game {
         this.iCurrent = coordinateToCellNumber(y1);
         this.jCurrent = coordinateToCellNumber(x1);
 
-        if (this.iMin === undefined) {
-            this.iMin = this.iCurrent;
-            this.jMin = this.jCurrent;
+        if (this.iStart === undefined) {
+            this.iStart = this.iCurrent;
+            this.jStart = this.jCurrent;
         }
+
+        this.iMin = Math.min(this.iStart, this.iCurrent);
+        this.jMin = Math.min(this.jStart, this.jCurrent);
+        this.iMax = Math.max(this.iStart, this.iCurrent);
+        this.jMax = Math.max(this.jStart, this.jCurrent);
 
         this.contextStroke.clearRect(0, 0, this.canvasStroke.width, this.canvasStroke.height);
 
-        if (this.iCurrent >= this.iMin && this.jCurrent >= this.jMin) {
-            this.contextStroke.strokeStyle = this.frameColor;
-            this.contextStroke.lineWidth = 4;
-            this.contextStroke.strokeRect(this.canvasInnerMargin + this.jMin * (this.squareSide),
-                this.canvasInnerMargin + this.iMin * (this.squareSide),
-                (this.jCurrent - this.jMin + 1) * this.squareSide,
-                (this.iCurrent - this.iMin + 1) * this.squareSide);
-        }
+        this.contextStroke.strokeStyle = this.frameColor;
+        this.contextStroke.lineWidth = 4;
+        this.contextStroke.strokeRect(this.canvasInnerMargin + this.jMin * (this.squareSide),
+            this.canvasInnerMargin + this.iMin * (this.squareSide),
+            (this.jMax - this.jMin + 1) * this.squareSide,
+            (this.iMax - this.iMin + 1) * this.squareSide);
     }
 
     countScore(element, isPlayer) {

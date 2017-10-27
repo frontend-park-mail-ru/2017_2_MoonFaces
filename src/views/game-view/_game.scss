@@ -26,13 +26,14 @@
 
     &_field{
         &-grid, &-field{
-            margin: 0;
-            padding: 0;
+            margin:  auto;
+            padding: auto;
             position: absolute;
             z-index: 2;
         }
         width: 400px;
         height: 400px;
         padding: 0 10px;
+        margin: auto;
     }
 }

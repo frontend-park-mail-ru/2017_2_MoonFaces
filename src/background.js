@@ -12,8 +12,6 @@ class Background {
         this.canvas.width = innerWidth * 1.1;
         this.canvas.height = innerHeight * 1.1;
 
-        console.log(innerWidth, innerHeight);
-
         this.context = this.canvas.getContext( '2d' );
         this.context.lineWidth = 3;
 
