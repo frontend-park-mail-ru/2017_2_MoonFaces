@@ -20,6 +20,7 @@ class TopView extends BaseView {
                     users: response.users,
                     next: (( response.pages > this.topPage) ? parseInt(this.topPage) + 1 : false),
                     prev: ((this.topPage > 0) ? parseInt(this.topPage) -1 : false),
+                    authorized: user.authorized,
                 };
                 this.appContainer.innerHTML = template(data);
             }
