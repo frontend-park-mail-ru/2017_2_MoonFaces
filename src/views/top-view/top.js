@@ -4,7 +4,7 @@ class TopView extends BaseView {
 
     getTemplate() {
         const template = require('./top.pug');
-        let data = {
+        const data = {
             users: [
                 {name: 'John', score: '82'},
                 {name: 'Billy', score: '33'},

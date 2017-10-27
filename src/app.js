@@ -43,12 +43,10 @@ import GameView from './views/game-view/game';
 
     user.isAuthenticated().then(() => {
         if(user.authorized) {
-            if(onlyUnauth.includes(window.location.pathname))
-                router.start('/profile');
+            if(onlyUnauth.includes(window.location.pathname)) {router.start('/profile');}
             router.start();
         }else{
-            if(privateRoutes.includes(window.location.pathname))
-                router.start('/');
+            if(privateRoutes.includes(window.location.pathname)) {router.start('/');}
             router.start();
         }
     });

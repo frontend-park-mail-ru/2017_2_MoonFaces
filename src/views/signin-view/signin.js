@@ -19,9 +19,9 @@ class SigninView extends BaseView {
         this.form.addFieldValidation('login', 'login');
         this.form.addFieldValidation('password', 'password');
 
-        this.form.onsubmit(function(formData) {
+        this.form.onsubmit((formData) => {
             this.bus.emit('user:signin', formData);
-        }.bind(this));
+        });
     }
 
 }

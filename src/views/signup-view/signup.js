@@ -18,9 +18,9 @@ class Signup extends BaseView {
         this.form.addFieldValidation('password-repeat', 'passwordMatch');
 
 
-        this.form.onsubmit(function(formData) {
+        this.form.onsubmit((formData) => {
             this.bus.emit('user:signup', formData);
-        }.bind(this));
+        });
         console.log(this.events);
     }
 

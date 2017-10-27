@@ -48,7 +48,7 @@ class Background {
     }
 
     createMatrix(rows, cols) {
-        let array = [];
+        const array = [];
         for(let i = 0; i < rows; i++) {
             array[i] = [];
             for(let j = 0; j < cols; j++) {
@@ -67,7 +67,7 @@ class Background {
         const min = Math.min(r, g, b);
         let h = (max + min) / 2;
         let s = (max + min) / 2;
-        let l = (max + min) / 2;
+        const l = (max + min) / 2;
 
         if (max == min) {
             h = s = 0;
@@ -76,9 +76,9 @@ class Background {
             s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
             switch (max) {
-                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                case g: h = (b - r) / d + 2; break;
-                case b: h = (r - g) / d + 4; break;
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
             }
             h /= 6;
         }
@@ -91,7 +91,7 @@ class Background {
             this.context.clearRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
             this.context.fillStyle = this.backgroundColor;
             this.context.fillRect(col * this.squareSide, row * this.squareSide, this.squareSide, this.squareSide);
-            const timePassedPercent = (-1 * Math.abs(timePassed - 3000) + 3000) / 300
+            const timePassedPercent = (-1 * Math.abs(timePassed - 3000) + 3000) / 300;
             const hsl = this.rgbToHsl(this.squareColor.r, this.squareColor.g, this.squareColor.b);
             const h = hsl[0];
             const s = hsl[1];
@@ -111,7 +111,7 @@ class Background {
     }
 
     animate(draw, duration) {
-        let start = performance.now();
+        const start = performance.now();
         requestAnimationFrame(function animate(time) {
             let timePassed = time - start;
             if (timePassed > duration) {
@@ -127,8 +127,8 @@ class Background {
 
     generateRandomField() {
         requestAnimationFrame(this.generateRandomField.bind(this));
-        let now = performance.now();
-        let delta = now - this.then;
+        const now = performance.now();
+        const delta = now - this.then;
 
         if (delta > this.interval) {
             this.then = now - (delta % this.interval);

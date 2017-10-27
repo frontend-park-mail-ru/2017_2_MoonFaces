@@ -7,7 +7,7 @@ class ProfileView extends BaseView {
     getTemplate() {
         const template = require('./profile.pug');
 
-        let data = {user:
+        const data = {user:
             {
                 name: user.login,
                 email: user.email,

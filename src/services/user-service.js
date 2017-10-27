@@ -15,8 +15,8 @@ class User {
     }
 
     bindBus() {
-        this.bus.on('user:signin', function(formData) {
-            let data = formData.payload;
+        this.bus.on('user:signin', (formData) => {
+            const data = formData.payload;
             this.signIn(
                 data['login'],
                 data['password']
@@ -26,23 +26,27 @@ class User {
                 this.score = response.score;
                 this.authorized = true;
                 router.go('/profile');
-            }).catch(errorPromise => errorPromise.then(function(error) {
-                alert(error.description);
-            }));
-        }.bind(this));
+            }).catch(errorPromise => {
+                return errorPromise.then((error) => {
+                    alert(error.description);
+                });
+            });
+        });
 
-        this.bus.on('user:signup', function(formData) {
-            let data = formData.payload;
+        this.bus.on('user:signup', (formData) => {
+            const data = formData.payload;
             this.signUp(
                 data['login'],
                 data['email'],
                 data['password']
-            ).then(function(response) {
+            ).then((response) => {
                 router.go('/');
-            }).catch(errorPromise => errorPromise.then(function(error) {
-                alert(error.description);
-            }));
-        }.bind(this));
+            }).catch(errorPromise => {
+                return errorPromise.then((error) => {
+                    alert(error.description);
+                });
+            });
+        });
     }
 
     signUp(login, email, password) {
