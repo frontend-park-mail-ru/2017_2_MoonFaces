@@ -1,4 +1,4 @@
-.about{
+.about {
     color: #fff;
     &_subheader{
         display: block;
@@ -8,4 +8,7 @@
     &_text{
         padding: 0 30px;
     }
+}
+.about_text {
+    white-space: pre;
 }
