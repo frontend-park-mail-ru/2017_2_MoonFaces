@@ -30,6 +30,9 @@ class Router {
             if (event.target.tagName.toLowerCase() !== 'a') {
                 return;
             }
+            if (event.target.data('link') === 'external'){
+                return;
+            }
             event.preventDefault();
             const pathname = event.target.pathname;
             this.go(pathname);
