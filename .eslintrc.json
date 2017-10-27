@@ -10,7 +10,8 @@
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion":8
     },
     "rules": {
         "indent": [
@@ -76,6 +77,12 @@
             "error", 
             "never"
         ],
-	    "no-console": "off"
+	    "no-console": "off",
+        "prefer-arrow-callback": "error",
+        "no-undef": "error",
+        "prefer-const": "error",
+        "eol-last": ["error", "always"],
+        "arrow-body-style": ["error", "always"],
+        "curly": "error"
     }
 }
