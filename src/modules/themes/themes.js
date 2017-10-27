@@ -9,8 +9,8 @@ class Themes {
         this.node.setAttribute('class', 'themes');
         this.node.innerHTML = template();
         body.appendChild(this.node);
-        this.cssDefault = 'style.css';
-        this.cssDark = 'dark.css';
+        this.cssDefault = '/style.css';
+        this.cssDark = '/dark.css';
         this.background = null;
         this.bgColorsDefault = {
             background: '#fff',
