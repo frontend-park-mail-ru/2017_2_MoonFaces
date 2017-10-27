@@ -17,6 +17,9 @@ input{
 .background{
     filter: blur(2px);
     opacity: 0.4;
+    margin: -31px;
+    position: fixed;
+    z-index: -1;
 }
 
 .base-width {

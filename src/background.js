@@ -9,11 +9,10 @@ class Background {
 
         this.canvas = document.getElementsByClassName('background')[0];
 
-        this.canvas.style.margin = '-31px 0';
-        this.canvas.style.position = 'fixed';
-        this.canvas.style.zIndex = -1;
         this.canvas.width = innerWidth * 1.1;
         this.canvas.height = innerHeight * 1.1;
+
+        console.log(innerWidth, innerHeight);
 
         this.context = this.canvas.getContext( '2d' );
         this.context.lineWidth = 3;
