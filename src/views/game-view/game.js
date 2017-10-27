@@ -165,14 +165,9 @@ class GameView extends BaseView {
     }
 
     createMatrix(rows, cols) {
-        let array = [];
-        for (let i = 0; i < rows; i++) {
-            array[i] = [];
-            for (let j = 0; j < cols; j++) {
-                array[i][j] = 0;
-            }
-        }
-        return array;
+        return new Array(rows).fill(0).map(() => {
+            return new Array(cols).fill(0);
+        });
     }
 
     evalNextMatrix() {
