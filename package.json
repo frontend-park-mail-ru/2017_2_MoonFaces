@@ -11,7 +11,7 @@
     "watch": "webpack --watch",
     "node_server": "node server/node_server.js",
     "compile-pug": "pug -c --extension 'pug.js' --name-after-file src/blocks/",
-    "eslint": "eslint . --fix"
+    "eslint": "eslint './**/*.js' --fix"
   },
   "repository": {
     "type": "git",
