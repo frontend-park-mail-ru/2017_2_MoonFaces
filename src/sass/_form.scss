@@ -7,10 +7,12 @@
     }
     input[type=text],
     input[type=password],
-    input[type=email]{
+    input[type=email],
+    input:-webkit-autofill {
         &:focus{
             border-color: lighten(#000, 25%);
         }
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
         padding: 5px;
         text-align: center;
         font-size: 23px;
