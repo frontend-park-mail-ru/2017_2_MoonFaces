@@ -30,7 +30,7 @@ class Router {
             if (event.target.tagName.toLowerCase() !== 'a') {
                 return;
             }
-            if (event.target.data('link') === 'external'){
+            if (event.target.dataset['link'] === 'external'){
                 return;
             }
             event.preventDefault();
