@@ -13,10 +13,11 @@ class Router {
         this.rootElement = rootElelement;
     }
 
-    addRoute(route, view) {
+    addRoute(route, view, multiplePages=false) {
         this.routes.push({
             route: route,
             view: view,
+            multiplePages: multiplePages,
         });
         return this;
     }
@@ -30,7 +31,7 @@ class Router {
             if (event.target.tagName.toLowerCase() !== 'a') {
                 return;
             }
-            if (event.target.dataset['link'] === 'external'){
+            if (event.target.dataset['link'] === 'external') {
                 return;
             }
             event.preventDefault();
@@ -44,14 +45,20 @@ class Router {
     }
 
     go(route) {
+        let page = 0;
+        const originalRoute = route;
+
         this.routes.find((item) => {
             if (route !== item.route) {
-                return false;
+                if(item.multiplePages) {
+                    page = route.substr(route.lastIndexOf('/') + 1);
+                    route = route.replace( new RegExp(route.substr(route.lastIndexOf('/'))), '' );
+                }else{
+                    return false;
+                }
             }
 
-            if (window.location.pathname !== item.route) {
-                window.history.pushState({}, '', item.route);
-            }
+            window.history.pushState({}, '', originalRoute);
 
             if (typeof item.view === 'function') {
                 item.view = new item.view(this.rootElement);
@@ -60,6 +67,9 @@ class Router {
                 this.currentView.stop();
             }
             this.currentView = item.view;
+            if(item.multiplePages) {
+                item.view.setPage(((page) ? page : 1));
+            }
             item.view.render();
 
             return true;

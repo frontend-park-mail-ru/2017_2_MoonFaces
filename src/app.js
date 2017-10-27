@@ -35,7 +35,7 @@ import GameView from './views/game-view/game';
     router
         .addRoute('/', SigninView)
         .addRoute('/about', AboutView)
-        .addRoute('/top', TopView)
+        .addRoute('/top', TopView, true)
         .addRoute('/signup', SignupView)
         .addRoute('/profile', ProfileView)
         .addRoute('/game', GameView);

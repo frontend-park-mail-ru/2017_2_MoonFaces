@@ -9,11 +9,20 @@ div(class="base-width centered outer-container top-players" id="top")
                 th(class='user') Username
                 th(class='score') Score
 
-        tbody
+        tbody(class='top-players_body')
             each user in users
                 tr
-                    td(class='user') #{user.name}
+                    td(class='user') #{user.login}
                     td(class='score') #{user.score}
+
+    div(class='columns')
+        div
+            if prev
+                a(href='/top/' + prev class='button-red') prev
+        div
+            if next
+                a(href='/top/' + next class='button-green') next
+
 
 br
 

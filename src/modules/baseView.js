@@ -18,6 +18,10 @@ class BaseView {
         });
     }
 
+    setPage(){
+
+    }
+
     render() {
         this.appContainer.innerHTML = this.getTemplate();
         this.postRender();

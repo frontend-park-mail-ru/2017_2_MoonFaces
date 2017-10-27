@@ -73,6 +73,11 @@ class User {
             this.authorized = false;
         });
     }
+
+    getTopUsers(topPage) {
+        if(topPage < 0) {topPage = 0;}
+        return Http.Get(`/scoreboard?page=${topPage}`);
+    }
 }
 
 export default new User();
