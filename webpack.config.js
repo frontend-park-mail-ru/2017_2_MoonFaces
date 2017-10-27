@@ -112,7 +112,7 @@ if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
         new BabelPlugin({
             test: /\.js$/,
-            presets: ['es2015'],
+            presets: ['env'],
             sourceMaps: false,
             compact: false
         })
