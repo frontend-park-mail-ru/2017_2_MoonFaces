@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const fallback = require('express-history-api-fallback');
 const body = require('body-parser');
 const cookie = require('cookie-parser');
 const morgan = require('morgan');
@@ -17,6 +18,7 @@ app.use(express.static('dist', {
     }
 }
 ));
+app.use(fallback('index.html', { root: 'dist' }));
 
 
 const users = {};

@@ -12,8 +12,6 @@ class Background {
         this.canvas.width = innerWidth * 1.1;
         this.canvas.height = innerHeight * 1.1;
 
-        console.log(innerWidth, innerHeight);
-
         this.context = this.canvas.getContext( '2d' );
         this.context.lineWidth = 3;
 
@@ -25,19 +23,30 @@ class Background {
         this.then = performance.now();
         this.interval = 1000/this.fps;
 
-        if(innerWidth >= innerHeight) {
-            this.vertical = 11;
-            this.squareSide = Math.ceil(window.innerHeight / this.vertical);
-            this.horizontal = Math.floor(innerWidth / this.squareSide) + 3;
-        } else {
-            this.horizontal = 8;
-            this.squareSide = Math.ceil(window.innerWidth / this.horizontal);
-            this.vertical = Math.floor(innerHeight / this.squareSide) + 3;
-        }
+        this.resizeFps = 30;
+        this.resizeThen = performance.now();
+        this.resizeInterval = 1000/this.resizeFps;
 
-        this.drawGrid();
+        this.refreshCanvas()
 
         this.cells = this.createMatrix(this.vertical + 1, this.horizontal + 1);
+
+        window.addEventListener('resize', this.resizeWindow());
+    }
+
+
+    resizeWindow() {
+        requestAnimationFrame(this.resizeWindow.bind(this));
+        const now = performance.now();
+        const delta = now - this.resizeThen;
+
+        if (delta > this.resizeInterval) {
+            this.resizeThen = now - (delta % this.resizeInterval);
+
+            this.canvas.width = innerWidth * 1.1;
+            this.canvas.height = innerHeight * 1.1;
+            this.refreshCanvas();
+        }
     }
 
     randomInt(min, max) {
@@ -168,6 +177,20 @@ class Background {
                 this.context.strokeRect(i * (this.squareSide), j * (this.squareSide), this.squareSide, this.squareSide);
             }
         }
+    }
+
+    refreshCanvas() {
+        if(innerWidth >= innerHeight) {
+            this.vertical = 11;
+            this.squareSide = Math.ceil(window.innerHeight / this.vertical);
+            this.horizontal = Math.floor(innerWidth / this.squareSide) + 3;
+        } else {
+            this.horizontal = 8;
+            this.squareSide = Math.ceil(window.innerWidth / this.horizontal);
+            this.vertical = Math.floor(innerHeight / this.squareSide) + 3;
+        }
+
+        this.drawGrid();
     }
 }
 

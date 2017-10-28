@@ -1,6 +1,7 @@
 import Http from '../modules/http';
 import bus from '../modules/bus';
 import router from '../modules/router';
+import Error from '../modules/error-popup/error';
 
 class User {
     constructor() {
@@ -28,7 +29,7 @@ class User {
                 router.go('/profile');
             }).catch(errorPromise => {
                 return errorPromise.then((error) => {
-                    alert(error.description);
+                    new Error(error.description);
                 });
             });
         });
@@ -43,7 +44,7 @@ class User {
                 router.go('/');
             }).catch(errorPromise => {
                 return errorPromise.then((error) => {
-                    alert(error.description);
+                    new Error(error.description);
                 });
             });
         });
@@ -72,6 +73,11 @@ class User {
         }, () => {
             this.authorized = false;
         });
+    }
+
+    getTopUsers(topPage) {
+        if(topPage < 0) {topPage = 0;}
+        return Http.Get(`/scoreboard?page=${topPage}`);
     }
 }
 
