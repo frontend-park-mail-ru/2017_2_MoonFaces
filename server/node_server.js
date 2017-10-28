@@ -12,11 +12,12 @@ const app = express();
 app.use(morgan('dev'));
 app.use(body.json());
 app.use(cookie());
-app.use((req, resp, next) => {
-    if(req.connection.encrypted) {
-        return next();
-    } else {
-        return resp.redirect(301, 'https://' + req.headers.host + '/');
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+        res.redirect(`https://${req.header('host')}${req.url}`);
+    }
+    else {
+        next();
     }
 });
 app.use(express.static('dist', {
