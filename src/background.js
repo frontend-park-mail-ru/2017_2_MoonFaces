@@ -9,8 +9,8 @@ class Background {
 
         this.canvas = document.getElementsByClassName('background')[0];
 
-        this.canvas.width = innerWidth * 1.1;
-        this.canvas.height = innerHeight * 1.1;
+        //this.canvas.width = innerWidth * 1.1;
+        //this.canvas.height = innerHeight * 1.1;
 
         this.context = this.canvas.getContext( '2d' );
         this.context.lineWidth = 3;
@@ -27,7 +27,7 @@ class Background {
         this.resizeThen = performance.now();
         this.resizeInterval = 1000/this.resizeFps;
 
-        this.refreshCanvas()
+        this.refreshCanvas();
 
         this.cells = this.createMatrix(this.vertical + 1, this.horizontal + 1);
 
@@ -43,8 +43,8 @@ class Background {
         if (delta > this.resizeInterval) {
             this.resizeThen = now - (delta % this.resizeInterval);
 
-            this.canvas.width = innerWidth * 1.1;
-            this.canvas.height = innerHeight * 1.1;
+            //this.canvas.width = innerWidth * 1.1;
+            //this.canvas.height = innerHeight * 1.1;
             this.refreshCanvas();
         }
     }
@@ -180,14 +180,14 @@ class Background {
     }
 
     refreshCanvas() {
-        if(innerWidth >= innerHeight) {
+        if(this.canvas.width >= this.canvas.height) {
             this.vertical = 11;
-            this.squareSide = Math.ceil(window.innerHeight / this.vertical);
-            this.horizontal = Math.floor(innerWidth / this.squareSide) + 3;
+            this.squareSide = Math.ceil(this.canvas.height / this.vertical);
+            this.horizontal = Math.floor(this.canvas.width / this.squareSide) + 3;
         } else {
             this.horizontal = 8;
-            this.squareSide = Math.ceil(window.innerWidth / this.horizontal);
-            this.vertical = Math.floor(innerHeight / this.squareSide) + 3;
+            this.squareSide = Math.ceil(this.canvas.width / this.horizontal);
+            this.vertical = Math.floor(this.canvas.height / this.squareSide) + 3;
         }
 
         this.drawGrid();

@@ -1,6 +1,7 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
 import router from '../../modules/router';
+import Transport from '../../transport';
 
 class ProfileView extends BaseView {
 
@@ -22,6 +23,18 @@ class ProfileView extends BaseView {
         logout.addEventListener('click', () => {
             user.logOut();
             router.go('/');
+        });
+
+        const multiplayer = document.getElementsByClassName('multiplayer')[0];
+        multiplayer.addEventListener('click', () => {
+            const transport = new Transport();
+
+            const type = 'test';
+            const content = {
+                login: 'qwerty1',
+                id: 123
+            };
+            transport.send(type, content);
         });
     }
 

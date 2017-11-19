@@ -14,7 +14,7 @@ app.use(body.json());
 app.use(cookie());
 app.use(express.static('dist', {
     setHeaders: (res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/', 'http://bacterio-back.herokuapp.com/');
+        res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/', 'http://bacterio-back.herokuapp.com/', 'http://127.0.0.1:8080/');
     }
 }
 ));
