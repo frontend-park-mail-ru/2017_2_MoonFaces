@@ -28,13 +28,6 @@ class ProfileView extends BaseView {
         const multiplayer = document.getElementsByClassName('multiplayer')[0];
         multiplayer.addEventListener('click', () => {
             const transport = new Transport();
-
-            const type = 'test';
-            const content = {
-                login: 'qwerty1',
-                id: 123
-            };
-            transport.send(type, content);
         });
     }
 

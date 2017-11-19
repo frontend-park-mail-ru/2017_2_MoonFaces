@@ -1,9 +1,14 @@
-const WebSocket = require('ws');
+import EventEmitter from './eventEmitter';
+
+const ee = new EventEmitter();
 
 export default class Transport {
     constructor() {
-        const address = 'ws://127.0.0.1:8080/game';
-        //const address = 'wss://bacterio-back.herokuapp.com/game';
+        if (Transport.instance) {
+            return Transport.instance;
+        }
+        const address = 'ws://127.0.0.1:8080/multi';
+        //const address = 'ws://bacterio-back.herokuapp.com/multi';
 
         this.ws = new WebSocket(address);
         this.ws.onopen = () => {
@@ -14,20 +19,29 @@ export default class Transport {
         };
         this.ws.onmessage = (event) => { this.handleMessage(event); };
 
+        Transport.instance = this;
+    }
+
+    handleMessage(event) {
+        const messageText = event.data;
+        const message = JSON.parse(messageText);
+        // if (message.type === 'com.aerohockey.mechanics.base.ServerSnap') {
+        ee.emit(message.type, message);
+        // }
+        // else {
+        //   //console.log(message);
+        //   ee.emit('print', messageText);
+        // }
     }
 
     send(type, content) {
-        if (this.ws.readyState === this.ws.CONNECTING) {
-            setTimeout(() => {
-                this.ws.send(JSON.stringify({ type, content }));
-            }, 1000);
-            return;
-        }
-        this.ws.send(JSON.stringify({type, content}));
+        //console.log(JSON.stringify({ type, content }));
+        this.ws.send(JSON.stringify({ type, content }));
+        // this.ws.send(JSON.stringify({
+        // type: 'com.aerohockey.mechanics.requests.JoinGame$Request',
+        // content: '{}',
+        // }));
     }
 
-    closeSocket() {
-        this.ws.close();
-    }
 
 }
