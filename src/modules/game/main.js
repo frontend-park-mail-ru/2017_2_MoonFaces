@@ -239,7 +239,8 @@ class Game {
             }
         }
 
-        this.context.fillRect(this.smallSquareSide + this.canvasInnerMargin + col * (this.squareSide) + this.outerBorderWidth,
+        this.context.fillRect(
+            this.smallSquareSide + this.canvasInnerMargin + col * (this.squareSide) + this.outerBorderWidth,
             this.smallSquareSide + this.canvasInnerMargin + row * (this.squareSide) + this.outerBorderWidth,
             this.smallSquareSide - 2 * this.outerBorderWidth,
             this.smallSquareSide - 2 * this.outerBorderWidth);
