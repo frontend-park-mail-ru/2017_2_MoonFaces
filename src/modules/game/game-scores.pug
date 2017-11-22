@@ -1,0 +1,27 @@
+if win
+    - var className = "game_scores-win"
+else
+    - var className = "game_scores-loose"
+
+div(class="game_scores")
+
+    div(class=className)
+
+
+        div(class="game_scores-header") #{gameOverText}
+
+        div(class="game_scores-table")
+            div(class="game_scores-winner")
+                div(class="game_scores-winner-name") #{winnerName}
+                div(class="game_scores-winner-score") #{winnerScore}
+
+            div(class="game_scores-looser")
+                div(class="game_scores-looser-name") #{looserName}
+                div(class="game_scores-looser-score") #{looserScore}
+
+div(class="base-width centered outer-container")
+    div(class="columns")
+        div
+            a(href="/profile" class="button-gray logout") Profile
+        div
+            a(href="/top" class="button-green") Top players

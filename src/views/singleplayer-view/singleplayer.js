@@ -23,6 +23,7 @@ class SingleplayerView extends BaseView {
             document.getElementsByClassName('game_end-turn')[0],
             document.getElementsByClassName('game_user-name')[0],
             document.getElementsByClassName('game_opponent-name')[0],
+            this.appContainer,
         );
         this.game.start();
     }

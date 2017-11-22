@@ -1,10 +1,17 @@
 import GameField from './game-field';
+import GameScores from './game-scores';
 
 export default class SinglePlayer {
-    constructor(grid, field, playerScore, opponentScore, endTurn, userName, opponentName) {
+    constructor(grid, field, playerScore, opponentScore, endTurn, playerName, opponentName, appContainer) {
         this.gameField = new GameField(grid, field);
+        this.appContainer = appContainer;
+
         this.playerScore = playerScore;
         this.opponentScore = opponentScore;
+
+        this.playerName = playerName;
+        this.opponentName = opponentName;
+
         this.endTurn = endTurn;
         this.field = this.gameField.getField();
     }
@@ -58,8 +65,29 @@ export default class SinglePlayer {
 
     iteration() {
         this.gameField.renderField();
-        this.playerScore.innerHTML = this.gameField.getPlayerScore();
-        this.opponentScore.innerHTML = this.gameField.getOpponentScore();
+        const playerScore = this.gameField.getPlayerScore();
+        const opponentScore = this.gameField.getOpponentScore();
+        this.playerScore.innerHTML = playerScore;
+        this.opponentScore.innerHTML = opponentScore;
+        if(this.gameIsOver(playerScore, opponentScore)) {
+            let win = false;
+            if(playerScore > opponentScore) {
+                win = true;
+            }
+            const scores = new GameScores(
+                this.playerName.innerHTML,
+                this.opponentName.innerHTML,
+                playerScore,
+                opponentScore,
+                win,
+                this.appContainer
+            );
+            scores.show();
+        }
+    }
+
+    gameIsOver(score1, score2) {
+        return score1 / 2 > score2 || score2 / 2 > score1;
     }
 
     randomInt(min, max) {
