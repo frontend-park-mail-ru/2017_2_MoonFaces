@@ -169,6 +169,25 @@ export default class GameField {
     }
 
     bindActions() {
+        this.cField.addEventListener('touchstart', (event) => {
+            event.preventDefault();
+            this.iStart = undefined;
+            this.jStart = undefined;
+            this.loop = undefined;
+
+            const startLoop = event => {
+                this.loop = this.animation(event);
+            };
+            this.cField.addEventListener('touchmove', startLoop);
+            this.cField.addEventListener('touchend', (e) => {
+
+                startLoop(e);
+                cancelAnimationFrame(this.loop);
+                this.loop = undefined;
+                this.cField.removeEventListener('touchmove', startLoop);
+            });
+        });
+
         this.cField.addEventListener('mousedown', () => {
             this.iStart = undefined;
             this.jStart = undefined;
@@ -190,8 +209,11 @@ export default class GameField {
     animation(event) {
         const elementParams = this.cField.getBoundingClientRect();
 
-        const x1 = event.clientX - elementParams.left;
-        const y1 = event.clientY - elementParams.top;
+        const clientX = (event.clientX) ? event.clientX : event.touches[0].pageX;
+        const clientY = (event.clientY) ? event.clientY : event.touches[0].pageY;
+
+        const x1 = clientX - elementParams.left;
+        const y1 = clientY - elementParams.top;
 
         const coordinateToCellNumber = (c) => {
             return Math.floor(c / (this.ctxField.lineWidth / 3 + this.squareSide + 2 * this.cellBorder));
