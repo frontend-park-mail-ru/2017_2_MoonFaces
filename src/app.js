@@ -4,6 +4,9 @@ import './dark.scss';
 import './fonts/consola.ttf';
 import './images/moon.png';
 import './images/sun.png';
+import 'file-loader?name=site.js!./site.js';
+import 'file-loader?name=serviceWorker.js!./serviceWorker.js';
+import './pixel.png';
 
 import Themes from './modules/themes/themes';
 
