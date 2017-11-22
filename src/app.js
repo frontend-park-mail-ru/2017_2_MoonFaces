@@ -28,7 +28,8 @@ import SingleplayerView from './views/singleplayer-view/singleplayer';
 
     const privateRoutes = [
         '/profile',
-        '/game'
+        '/game/singleplayer',
+        '/game/multiplayer',
     ];
     const onlyUnauth = [
         '/',

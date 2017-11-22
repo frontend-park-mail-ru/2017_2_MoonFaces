@@ -89,7 +89,7 @@ export default class GameField {
         if(this.userSelection) {
             this.renderPlayerSelection(this.userSelection);
         }
-        if(this.opponentSelection){
+        if(this.opponentSelection) {
             this.renderPlayerSelection(this.opponentSelection, true);
         }
     }
@@ -158,12 +158,13 @@ export default class GameField {
                 }
             }
         }
-        if (count === 3) {  // Dead cell to live
+
+        if (count === 3 && this.field[row][col].alive === false) {
             this.field[row][col].change = true;
-        } else if (count === 2 && this.field[row][col].alive === true) {  // Live cell stay live
+        }else if(this.field[row][col].alive === true && (count > 3 || count < 2) ) {
             this.field[row][col].change = true;
-        } else {
-            this.field[row][col].change = false;  // Live(or not) cell to die
+        } else{
+            this.field[row][col].change = false;
         }
     }
 
@@ -216,15 +217,6 @@ export default class GameField {
 
     saveUserSelection(jMin, iMin, jMax, iMax) {
         this.userSelection = {
-            xMin: jMin,
-            yMin: iMin,
-            xMax: jMax,
-            yMax: iMax
-        };
-    }
-
-    saveOpponentSelection(jMin, iMin, jMax, iMax) {
-        this.opponentSelection = {
             xMin: jMin,
             yMin: iMin,
             xMax: jMax,
