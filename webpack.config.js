@@ -96,8 +96,7 @@ const config = {
         extracktDefault,
         extracktDark,
         new webpack.DefinePlugin({
-            // 'BACKEND_URL': JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
-            'BACKEND_URL': JSON.stringify('http://192.168.1.74:8080/restapi')
+            'BACKEND_URL': JSON.stringify('https://bacterio-back.herokuapp.com/restapi')
         }),
     ],
 
