@@ -1,0 +1,28 @@
+.game_scores{
+    width: 100%;
+    text-align: center;
+    padding: 20px 20px;
+    &-loose{
+        color: #f00;
+    }
+
+    &-win{
+        color: #03c306;
+    }
+
+    &-header{
+        font-size: 45px;
+    }
+
+    &-table{
+        margin: auto;
+        width: 400px;
+        display: flex;
+    }
+    &-winner{
+        width: 50%;
+    }
+    &-looser{
+        width: 50%;
+    }
+}

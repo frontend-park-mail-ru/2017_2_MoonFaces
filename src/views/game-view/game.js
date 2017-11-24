@@ -1,16 +1,16 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
 import Game from '../../modules/game/main';
+import gameTmpl from './game.pug';
 
 class GameView extends BaseView {
 
     getTemplate() {
-        const template = require('./game.pug');
         const data = {
             username: user.login,
         };
 
-        return template(data);
+        return gameTmpl(data);
     }
 
     postRender() {

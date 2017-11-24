@@ -1,6 +1,7 @@
 import BaseView from '../../modules/baseView';
 import Form from '../../modules/form';
 import bus from '../../modules/bus';
+import signInTmpl from './signin.pug';
 
 class SigninView extends BaseView {
 
@@ -10,8 +11,7 @@ class SigninView extends BaseView {
     }
 
     getTemplate() {
-        const template =require('./signin.pug');
-        return template();
+        return signInTmpl();
     }
 
     postRender() {

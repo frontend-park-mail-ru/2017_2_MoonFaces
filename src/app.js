@@ -4,6 +4,9 @@ import './dark.scss';
 import './fonts/consola.ttf';
 import './images/moon.png';
 import './images/sun.png';
+import 'file-loader?name=site.js!./site.js';
+import 'file-loader?name=serviceWorker.js!./serviceWorker.js';
+import './pixel.png';
 
 import Themes from './modules/themes/themes';
 
@@ -17,6 +20,7 @@ import TopView from './views/top-view/top';
 import SignupView from './views/signup-view/signup';
 import ProfileView from './views/profile-view/profile';
 import GameView from './views/game-view/game';
+import SingleplayerView from './views/singleplayer-view/singleplayer';
 
 (() => {
     const themes = new Themes();
@@ -27,7 +31,8 @@ import GameView from './views/game-view/game';
 
     const privateRoutes = [
         '/profile',
-        '/game'
+        '/game/singleplayer',
+        '/game/multiplayer',
     ];
     const onlyUnauth = [
         '/',
@@ -38,7 +43,8 @@ import GameView from './views/game-view/game';
         .addRoute('/top', TopView, true)
         .addRoute('/signup', SignupView)
         .addRoute('/profile', ProfileView)
-        .addRoute('/game', GameView);
+        .addRoute('/game/singleplayer', SingleplayerView)
+        .addRoute('/game/multiplayer', GameView);
 
 
     user.isAuthenticated().then(() => {

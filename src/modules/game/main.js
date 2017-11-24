@@ -196,7 +196,7 @@ class Game {
         }
         if (count === 3) {  // Dead cell to live
             this.nextMatrix[row][col] = 1;
-        } else if (count === 2 && this.nextMatrix[row][col] === 1) {  // Live cell stay live
+        } else if (count === 2 && this.currentField[row][col] === 1) {  // Live cell stay live
             this.nextMatrix[row][col] = 1;
         } else {
             this.nextMatrix[row][col] = 0;  // Live(or not) cell to die
@@ -239,7 +239,8 @@ class Game {
             }
         }
 
-        this.context.fillRect(this.smallSquareSide + this.canvasInnerMargin + col * (this.squareSide) + this.outerBorderWidth,
+        this.context.fillRect(
+            this.smallSquareSide + this.canvasInnerMargin + col * (this.squareSide) + this.outerBorderWidth,
             this.smallSquareSide + this.canvasInnerMargin + row * (this.squareSide) + this.outerBorderWidth,
             this.smallSquareSide - 2 * this.outerBorderWidth,
             this.smallSquareSide - 2 * this.outerBorderWidth);

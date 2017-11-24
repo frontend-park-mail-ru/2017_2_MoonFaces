@@ -1,5 +1,6 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
+import topTmpl from './top.pug';
 
 class TopView extends BaseView {
     constructor(appContainer) {
@@ -7,12 +8,11 @@ class TopView extends BaseView {
         this.topPage = 0;
     }
 
-    setPage(page){
+    setPage(page) {
         this.topPage = parseInt(page);
     }
 
     render() {
-        const template = require('./top.pug');
 
         user.getTopUsers(parseInt(this.topPage - 1)).then(
             (response) => {
@@ -22,7 +22,7 @@ class TopView extends BaseView {
                     prev: ((this.topPage > 0) ? parseInt(this.topPage) -1 : false),
                     authorized: user.authorized,
                 };
-                this.appContainer.innerHTML = template(data);
+                this.appContainer.innerHTML = topTmpl(data);
             }
         );
 

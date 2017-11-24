@@ -1,10 +1,10 @@
 import BaseView from '../../modules/baseView';
+import aboutTmpl from './about.pug';
 
 class AboutView extends BaseView {
 
     getTemplate() {
-        const template = require('./about.pug');
-        return template();
+        return aboutTmpl();
     }
 
 }

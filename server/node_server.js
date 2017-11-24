@@ -12,6 +12,14 @@ const app = express();
 app.use(morgan('dev'));
 app.use(body.json());
 app.use(cookie());
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+        res.redirect(`https://${req.header('host')}${req.url}`);
+    }
+    else {
+        next();
+    }
+});
 app.use(express.static('dist', {
     setHeaders: (res) => {
         res.setHeader('Access-Control-Allow-Origin', 'https://bacterio-back.herokuapp.com/', 'http://bacterio-back.herokuapp.com/');
