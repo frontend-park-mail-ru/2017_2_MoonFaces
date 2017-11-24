@@ -5,7 +5,11 @@ const urlsToCache = [
     '/style.css',
     '/dark.css',
     '/images/sun.png',
-    '/images/moon.png'
+    '/images/moon.png',
+    '/top',
+    '/profile',
+    '/game/singleplayer',
+    '/game/multiplayer',
 ];
 
 self.addEventListener('install', (event) => {

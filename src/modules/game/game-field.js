@@ -169,41 +169,36 @@ export default class GameField {
     }
 
     bindActions() {
+        const startLoop = event => {
+            this.animation(event);
+        };
         this.cField.addEventListener('touchstart', (event) => {
             event.preventDefault();
             this.iStart = undefined;
             this.jStart = undefined;
-            this.loop = undefined;
 
-            const startLoop = event => {
-                this.loop = this.animation(event);
-            };
             this.cField.addEventListener('touchmove', startLoop);
             this.cField.addEventListener('touchend', (e) => {
-
-                startLoop(e);
-                cancelAnimationFrame(this.loop);
-                this.loop = undefined;
-                this.cField.removeEventListener('touchmove', startLoop);
+                this.stopAnimation(startLoop, e);
             });
         });
 
         this.cField.addEventListener('mousedown', () => {
             this.iStart = undefined;
             this.jStart = undefined;
-            this.loop = undefined;
 
-            const startLoop = event => {
-                this.loop = this.animation(event);
-            };
             this.cField.addEventListener('mousemove', startLoop);
             this.cField.addEventListener('mouseup', (e) => {
-                startLoop(e);
-                cancelAnimationFrame(this.loop);
-                this.loop = undefined;
-                this.cField.removeEventListener('mousemove', startLoop);
+                this.stopAnimation(startLoop, e);
             });
         });
+    }
+
+    stopAnimation(startLoop, event) {
+        this.animation(event);
+        cancelAnimationFrame(this.animation(event));
+        this.cField.removeEventListener('mousemove', startLoop);
+        this.cField.removeEventListener('touchmove', startLoop);
     }
 
     animation(event) {

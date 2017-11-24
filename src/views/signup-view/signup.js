@@ -1,6 +1,7 @@
 import BaseView from '../../modules/baseView';
 import Form from '../../modules/form';
 import bus from '../../modules/bus';
+import signUpTmpl from './signup.pug';
 
 class Signup extends BaseView {
 
@@ -25,9 +26,7 @@ class Signup extends BaseView {
     }
 
     getTemplate() {
-        const template = require('./signup.pug');
-
-        return template();
+        return signUpTmpl();
     }
 
 }

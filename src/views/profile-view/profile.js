@@ -1,12 +1,11 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
 import router from '../../modules/router';
+import profileTmpl from './profile.pug';
 
 class ProfileView extends BaseView {
 
     getTemplate() {
-        const template = require('./profile.pug');
-
         const data = {user:
             {
                 name: user.login,
@@ -14,7 +13,7 @@ class ProfileView extends BaseView {
                 score: user.score
             }};
 
-        return template(data);
+        return profileTmpl(data);
     }
 
     postRender() {

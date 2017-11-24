@@ -1,17 +1,17 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
 import Singleplayer from '../../modules/game/single';
+import singleplayerTmpl from './singleplayer.pug';
 
 
 class SingleplayerView extends BaseView {
 
     getTemplate() {
-        const template = require('./singleplayer.pug');
         const data = {
             username: user.login,
         };
 
-        return template(data);
+        return singleplayerTmpl(data);
     }
 
     postRender() {
