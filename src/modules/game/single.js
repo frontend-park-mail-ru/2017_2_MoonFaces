@@ -69,9 +69,9 @@ export default class SinglePlayer {
         const opponentScore = this.gameField.getOpponentScore();
         this.playerScore.innerHTML = playerScore;
         this.opponentScore.innerHTML = opponentScore;
-        if(this.gameIsOver(playerScore, opponentScore)) {
+        if (this.gameIsOver(playerScore, opponentScore)) {
             let win = false;
-            if(playerScore > opponentScore) {
+            if (playerScore > opponentScore) {
                 win = true;
             }
             const scores = new GameScores(
@@ -99,7 +99,7 @@ export default class SinglePlayer {
     getAreaMatrix(selection) {
         const result = this.getEmptyMatrix(this.gameField.fieldSize, this.gameField.fieldSize);
 
-        if(!selection) {
+        if (!selection) {
             return result;
         }
 
@@ -121,8 +121,9 @@ export default class SinglePlayer {
         for (let i = 0; i < this.gameField.fieldSize; i++) {
             for (let j = 0; j < this.gameField.fieldSize; j++) {
                 if (resultMatrix[i][j]) {
-                    if(this.field[i][j].change) {
+                    if (this.field[i][j].change) {
                         this.field[i][j].alive = !this.field[i][j].alive;
+                        this.field[i][j].animationTime = this.gameField.animationTime;  // MAKE SOMETHING WITH IT PLEASE!!!
                     }
                 }
             }

@@ -27,9 +27,13 @@ export default class GameField {
         this.cellBorder = 2;
         this.squareSide = (this.cField.width) / this.fieldSize - this.cellPadding;
         this.smallSquareSide = this.squareSide / 3;
-        this.clearField();
         this.renderField();
         this.bindActions();
+
+        this.lastRenderTime = new Date().getTime();
+        this.animationTime = 500;
+
+        setInterval(() => this.renderField(), 1000 / 20);
     }
 
     getField() {
@@ -73,45 +77,90 @@ export default class GameField {
             return new Array(cols).fill(0).map(() => {
                 return {
                     alive: false,
-                    change: false
+                    change: false,
+                    animationTime: 0
                 };
             });
         });
     }
 
     renderField() {
+        this.clearField();
+
+        const currentTime = new Date().getTime();
+        const delta = currentTime - this.lastRenderTime;
+        this.lastRenderTime = currentTime;
+
         for (let i = 0; i < this.fieldSize; i++) {
             for (let j = 0; j < this.fieldSize; j++) {
                 this.countNeighbors(i, j);
-                this.renderCell(i, j);
+                this.renderCell(i, j, delta);
             }
         }
-        if(this.userSelection) {
+
+        if (this.userSelection) {
             this.renderPlayerSelection(this.userSelection);
         }
-        if(this.opponentSelection) {
+        if (this.opponentSelection) {
             this.renderPlayerSelection(this.opponentSelection, true);
         }
     }
 
-    renderCell(row, col) {
+    renderCell(row, col, delta) {
         const currentCell = this.field[row][col];
-        let aliveColor = this.playerColor;
-        if (this.fieldSize/2 <= col) {aliveColor = this.opponentColor;}
+        const aliveColor = this.fieldSize/2 > col ? this.playerColor : this.opponentColor;
+
+        if (currentCell.animationTime >= 0) {
+            currentCell.animationTime -= delta;
+        }
+
+        // Number from 0 to 1, representing animation status.
+        let animationStep = (currentCell.animationTime > 0) ? (this.animationTime - currentCell.animationTime) / this.animationTime : 1;
+        animationStep = Math.pow(animationStep, 2);
+
+        const animationOffsetAlive = (this.squareSide - this.smallSquareSide)/2 * (1 - animationStep);
+        const animationOffsetDead = (this.squareSide - this.smallSquareSide)/2 * animationStep;
 
         if (currentCell.alive) {
             this.ctxField.strokeStyle = aliveColor;
             this.ctxField.fillStyle = aliveColor;
+            this.ctxField.fillRect(
+                col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2 + animationOffsetAlive,
+                row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2 + animationOffsetAlive,
+                this.smallSquareSide + (this.squareSide - this.smallSquareSide) * animationStep,
+                this.smallSquareSide + (this.squareSide - this.smallSquareSide) * animationStep
+            );
         } else {
             this.ctxField.strokeStyle = this.neutralColor;
             this.ctxField.fillStyle = this.neutralColor;
+            this.ctxField.fillRect(
+                col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
+                row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
+                this.squareSide,
+                this.squareSide
+            );
+
+            if (animationStep < 1) {
+                this.ctxField.strokeStyle = aliveColor;
+                this.ctxField.fillStyle = aliveColor;
+                this.ctxField.fillRect(
+                    col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2 + animationOffsetDead,
+                    row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2 + animationOffsetDead,
+                    this.smallSquareSide + (this.squareSide - this.smallSquareSide) * Math.abs(animationStep - 1),
+                    this.smallSquareSide + (this.squareSide - this.smallSquareSide) * Math.abs(animationStep - 1)
+                );
+
+                // Please, make something with it shitcode.
+                this.ctxField.strokeStyle = this.neutralColor;
+                this.ctxField.fillStyle = this.neutralColor;
+                this.ctxField.fillRect(
+                    this.smallSquareSide + col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
+                    this.smallSquareSide + row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
+                    this.smallSquareSide,
+                    this.smallSquareSide
+                );
+            }
         }
-        this.ctxField.fillRect(
-            col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
-            row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
-            this.squareSide,
-            this.squareSide
-        );
 
         if (currentCell.change) {
             if (currentCell.alive) {
@@ -159,11 +208,11 @@ export default class GameField {
             }
         }
 
-        if (count === 3 && this.field[row][col].alive === false) {
+        if (count === 3 && !this.field[row][col].alive) {
             this.field[row][col].change = true;
-        }else if(this.field[row][col].alive === true && (count > 3 || count < 2) ) {
+        } else if (this.field[row][col].alive && (count > 3 || count < 2) ) {
             this.field[row][col].change = true;
-        } else{
+        } else {
             this.field[row][col].change = false;
         }
     }
@@ -228,7 +277,6 @@ export default class GameField {
 
 
         this.saveUserSelection(this.jMin, this.iMin, this.jMax, this.iMax);
-        this.clearField();
         this.renderField();
     }
 
@@ -242,15 +290,11 @@ export default class GameField {
     }
 
     renderPlayerSelection(selection, opponent = false) {
-        if(!selection) {
+        if (!selection) {
             return;
         }
 
-        if(opponent) {
-            this.ctxField.strokeStyle = this.frameOpponentColor;
-        }else{
-            this.ctxField.strokeStyle = this.frameUserColor;
-        }
+        this.ctxField.strokeStyle = opponent ? this.frameOpponentColor : this.frameUserColor;
         this.ctxField.lineWidth = 4;
 
         const getDiff = (min, max) => {
