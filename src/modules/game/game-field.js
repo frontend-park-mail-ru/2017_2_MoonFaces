@@ -62,8 +62,14 @@ export default class GameField {
         return this.getScore(this.fieldSize/2, this.fieldSize);
     }
 
+    toggleCell(row, col) {
+        this.field[row][col].alive = !this.field[row][col].alive;
+        this.field[row][col].animationTime = this.animationTime;
+    }
+
+
     clearField() {
-        this.ctxField.fillStyle = this.neutralColor;
+        this.changeColor(this.neutralColor);
         this.ctxField.fillRect(
             0,
             0,
@@ -98,96 +104,56 @@ export default class GameField {
             }
         }
 
-        if (this.userSelection) {
-            this.renderPlayerSelection(this.userSelection);
-        }
-        if (this.opponentSelection) {
-            this.renderPlayerSelection(this.opponentSelection, true);
-        }
+        if (this.userSelection) this.renderPlayerSelection(this.userSelection);
+        if (this.opponentSelection) this.renderPlayerSelection(this.opponentSelection, true);
+    }
+
+    changeColor(color) {
+        this.ctxField.strokeStyle = color;
+        this.ctxField.fillStyle = color;
+    }
+
+    drawSquare(color, row, col, size, fill=true) {
+        this.changeColor(color);
+        const drawFunction = fill ? this.ctxField.fillRect : this.ctxField.strokeRect;
+        drawFunction.call(this.ctxField,
+            col * this.squareSide + col * this.cellPadding + this.cellPadding/2 + this.squareSide/2 - size/2,
+            row * this.squareSide + row * this.cellPadding + this.cellPadding/2 + this.squareSide/2 - size/2,
+            size,
+            size
+            );
     }
 
     renderCell(row, col, delta) {
         const currentCell = this.field[row][col];
         const aliveColor = this.fieldSize/2 > col ? this.playerColor : this.opponentColor;
+        const squaresDifference = this.squareSide - this.smallSquareSide;
 
-        if (currentCell.animationTime >= 0) {
-            currentCell.animationTime -= delta;
-        }
+        if (currentCell.animationTime >= 0) currentCell.animationTime -= delta;
+        const remainingAnimationTime = this.animationTime - currentCell.animationTime;
 
         // Number from 0 to 1, representing animation status.
-        let animationStep = (currentCell.animationTime > 0) ? (this.animationTime - currentCell.animationTime) / this.animationTime : 1;
-        animationStep = Math.pow(animationStep, 2);
-
-        const animationOffsetAlive = (this.squareSide - this.smallSquareSide)/2 * (1 - animationStep);
-        const animationOffsetDead = (this.squareSide - this.smallSquareSide)/2 * animationStep;
+        let animationStep = (currentCell.animationTime > 0) ? remainingAnimationTime / this.animationTime : 1;
+        animationStep = Math.pow(animationStep, 2);  // Because tweening is cool.
 
         if (currentCell.alive) {
-            this.ctxField.strokeStyle = aliveColor;
-            this.ctxField.fillStyle = aliveColor;
-            this.ctxField.fillRect(
-                col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2 + animationOffsetAlive,
-                row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2 + animationOffsetAlive,
-                this.smallSquareSide + (this.squareSide - this.smallSquareSide) * animationStep,
-                this.smallSquareSide + (this.squareSide - this.smallSquareSide) * animationStep
-            );
+            this.drawSquare(aliveColor, row, col, this.smallSquareSide + squaresDifference * animationStep);
         } else {
-            this.ctxField.strokeStyle = this.neutralColor;
-            this.ctxField.fillStyle = this.neutralColor;
-            this.ctxField.fillRect(
-                col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
-                row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
-                this.squareSide,
-                this.squareSide
-            );
+            this.drawSquare(this.neutralColor, row, col, this.squareSide);
 
             if (animationStep < 1) {
-                this.ctxField.strokeStyle = aliveColor;
-                this.ctxField.fillStyle = aliveColor;
-                this.ctxField.fillRect(
-                    col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2 + animationOffsetDead,
-                    row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2 + animationOffsetDead,
-                    this.smallSquareSide + (this.squareSide - this.smallSquareSide) * Math.abs(animationStep - 1),
-                    this.smallSquareSide + (this.squareSide - this.smallSquareSide) * Math.abs(animationStep - 1)
-                );
-
-                // Please, make something with it shitcode.
-                this.ctxField.strokeStyle = this.neutralColor;
-                this.ctxField.fillStyle = this.neutralColor;
-                this.ctxField.fillRect(
-                    this.smallSquareSide + col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
-                    this.smallSquareSide + row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
-                    this.smallSquareSide,
-                    this.smallSquareSide
-                );
+                this.drawSquare(aliveColor, row, col, this.smallSquareSide + squaresDifference * (1 - animationStep));
+                this.drawSquare(this.neutralColor, row, col, this.smallSquareSide * 0.9);
             }
         }
 
         if (currentCell.change) {
-            if (currentCell.alive) {
-                this.ctxField.strokeStyle = this.neutralColor;
-                this.ctxField.fillStyle = this.neutralColor;
-            } else {
-                this.ctxField.strokeStyle = aliveColor;
-                this.ctxField.fillStyle = aliveColor;
-            }
-
-            this.ctxField.fillRect(
-                this.smallSquareSide + col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
-                this.smallSquareSide + row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
-                this.smallSquareSide,
-                this.smallSquareSide
-            );
+            const inversedColor = currentCell.alive ? this.neutralColor : aliveColor;
+            this.drawSquare(inversedColor, row, col, this.smallSquareSide);
         }
 
-        this.ctxField.strokeStyle = aliveColor;
         this.ctxField.lineWidth = this.cellBorder;
-
-        this.ctxField.strokeRect(
-            col * (this.squareSide) + col * this.cellPadding + this.cellPadding/2,
-            row * (this.squareSide) + row * this.cellPadding + this.cellPadding/2,
-            this.squareSide,
-            this.squareSide
-        );
+        this.drawSquare(aliveColor, row, col, this.squareSide, false);
     }
 
     countNeighbors(row, col) {
@@ -290,9 +256,7 @@ export default class GameField {
     }
 
     renderPlayerSelection(selection, opponent = false) {
-        if (!selection) {
-            return;
-        }
+        if (!selection) return;
 
         this.ctxField.strokeStyle = opponent ? this.frameOpponentColor : this.frameUserColor;
         this.ctxField.lineWidth = 4;

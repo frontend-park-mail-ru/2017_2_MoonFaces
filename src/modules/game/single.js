@@ -122,8 +122,7 @@ export default class SinglePlayer {
             for (let j = 0; j < this.gameField.fieldSize; j++) {
                 if (resultMatrix[i][j]) {
                     if (this.field[i][j].change) {
-                        this.field[i][j].alive = !this.field[i][j].alive;
-                        this.field[i][j].animationTime = this.gameField.animationTime;  // MAKE SOMETHING WITH IT PLEASE!!!
+                        this.gameField.toggleCell(i, j);
                     }
                 }
             }
