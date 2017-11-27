@@ -33,7 +33,7 @@ export default class GameField {
         this.bindActions();
 
         this.lastRenderTime = new Date().getTime();
-        this.animationTime = 500;
+        this.cellAnimationTime = 500;
 
         setInterval(() => this.renderField(), 1000 / 20);
     }
@@ -66,7 +66,7 @@ export default class GameField {
 
     toggleCell(row, col) {
         this.field[row][col].alive = !this.field[row][col].alive;
-        this.field[row][col].animationTime = this.animationTime;
+        this.field[row][col].animationTime = this.cellAnimationTime;
     }
 
 
@@ -82,13 +82,11 @@ export default class GameField {
 
     createField(rows, cols) {
         return new Array(rows).fill(0).map(() => {
-            return new Array(cols).fill(0).map(() => {
-                return {
-                    alive: false,
-                    change: false,
-                    animationTime: 0
-                };
-            });
+            return new Array(cols).fill(0).map(() => ({
+                alive: false,
+                change: false,
+                animationTime: 0
+            }));
         });
     }
 
@@ -129,10 +127,10 @@ export default class GameField {
         const squaresDifference = this.squareSide - this.smallSquareSide;
 
         if (currentCell.animationTime >= 0) currentCell.animationTime -= delta;
-        const remainingAnimationTime = this.animationTime - currentCell.animationTime;
+        const remainingAnimationTime = this.cellAnimationTime - currentCell.animationTime;
 
         // Number from 0 to 1, representing animation status.
-        let animationStep = (currentCell.animationTime > 0) ? remainingAnimationTime / this.animationTime : 1;
+        let animationStep = (currentCell.animationTime > 0) ? remainingAnimationTime / this.cellAnimationTime : 1;
         animationStep = Math.pow(animationStep, 2);  // Because tweening is cool.
 
         if (currentCell.alive) {
@@ -159,15 +157,15 @@ export default class GameField {
         let count = 0;
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-                const trimCell = (cell) => {
-                    if (cell === -1) {cell = this.fieldSize - 1;}
-                    if (cell === this.fieldSize) {cell = 0;}
-                    return cell;
+                const trimCell = (coordinate) => {
+                    if (coordinate === -1) coordinate = this.fieldSize - 1;
+                    if (coordinate === this.fieldSize) coordinate = 0;
+                    return coordinate;
                 };
                 const neighborRow = trimCell(row + i);
                 const neighborCol = trimCell(col + j);
 
-                if (!(i === 0 && j === 0) && this.field[neighborRow][neighborCol].alive === true) {
+                if (!(i === 0 && j === 0) && this.field[neighborRow][neighborCol].alive) {
                     count++;
                 }
             }
@@ -178,6 +176,7 @@ export default class GameField {
 
     setNextCellState(row, col) {
         const count = this.countNeighbors(row, col);
+
         if (count === 3 && !this.field[row][col].alive) {
             this.field[row][col].change = true;
         } else if (this.field[row][col].alive && (count > 3 || count < 2) ) {
