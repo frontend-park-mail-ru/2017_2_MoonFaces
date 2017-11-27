@@ -50,7 +50,7 @@ export default class GameField {
         let score = 0;
         for (let i = 0; i < this.fieldSize; i++) {
             for (let j = offset; j < limit; j++) {
-                if (this.field[i][j].alive) {score += 1;}
+                if (this.field[i][j].alive) score += 1;
             }
         }
         return score;
@@ -99,12 +99,10 @@ export default class GameField {
         const delta = currentTime - this.lastRenderTime;
         this.lastRenderTime = currentTime;
 
-        for (let i = 0; i < this.fieldSize; i++) {
-            for (let j = 0; j < this.fieldSize; j++) {
-                this.countNeighbors(i, j);
-                this.renderCell(i, j, delta);
-            }
-        }
+        this.forEachCell((row, col) => {
+            this.setNextCellState(row, col);
+            this.renderCell(row, col, delta);
+        });
 
         this.renderSelections(this.userSelection, this.opponentSelection);
     }
@@ -175,6 +173,11 @@ export default class GameField {
             }
         }
 
+        return count;
+    }
+
+    setNextCellState(row, col) {
+        const count = this.countNeighbors(row, col);
         if (count === 3 && !this.field[row][col].alive) {
             this.field[row][col].change = true;
         } else if (this.field[row][col].alive && (count > 3 || count < 2) ) {
@@ -255,22 +258,24 @@ export default class GameField {
         };
     }
 
+    forEachCell(f) {
+        this.field.forEach((row, y) => row.forEach((col, x) => f(y, x)));
+    }
+
     renderSelections(playerSelection, opponentSelection) {
         const cellInSelection = (row, col, selection) => {
             if (!selection) return false;
-            const rowInSelection = (selection.xMin <= row) && (row <= selection.xMax);
-            const colInSelection = (selection.yMin <= col) && (col <= selection.yMax);
+            const colInSelection = (selection.xMin <= col) && (col <= selection.xMax);
+            const rowInSelection = (selection.yMin <= row) && (row <= selection.yMax);
             return (rowInSelection && colInSelection);
         }
 
-        for (let i = 0; i < this.fieldSize; i++) {
-            for (let j = 0; j < this.fieldSize; j++) {
-                const cellInPlayerSelection = cellInSelection(j, i, playerSelection);
-                const cellInOpponentSelection = cellInSelection(j, i, opponentSelection);
-                if (cellInPlayerSelection ^ cellInOpponentSelection)
-                    this.drawSquare(this.frameNeutralColor, i, j, this.squareSide + this.cellPadding);
-            }
-        }
+        this.forEachCell((row, col) => {
+            const cellInPlayerSelection = cellInSelection(row, col, playerSelection);
+            const cellInOpponentSelection = cellInSelection(row, col, opponentSelection);
+            if (cellInPlayerSelection ^ cellInOpponentSelection)
+                this.drawSquare(this.frameNeutralColor, row, col, this.squareSide + this.cellPadding);
+        });
 
         const drawSelectionFrame = (color, selection) => {
             this.ctxField.strokeStyle = color;
