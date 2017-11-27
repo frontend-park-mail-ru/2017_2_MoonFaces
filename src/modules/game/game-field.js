@@ -1,11 +1,12 @@
 export default class GameField {
     constructor(grid, field) {
+        this.fieldSize = 8;
         this.neutralColor = '#fff';
         this.playerColor = 'hsl(120, 50%, 50%)';
-        this.opponentColor = 'hsl(255, 50%,50%)';
-        this.fieldSize = 8;
-        this.frameOpponentColor = '#f22';
-        this.frameUserColor = '#f84';
+        this.opponentColor = 'hsl(255, 50%, 50%)';
+        this.frameUserColor = 'hsl(130, 70%, 30%)';
+        this.frameOpponentColor = 'hsl(265, 70%, 30%)';
+        this.frameNeutralColor = 'hsla(130, 100%, 100%, 0.4)';
 
         this.userSelection = null;
         this.opponentSelection = null;
@@ -27,6 +28,7 @@ export default class GameField {
         this.cellBorder = 2;
         this.squareSide = (this.cField.width) / this.fieldSize - this.cellPadding;
         this.smallSquareSide = this.squareSide / 3;
+        this.selectionBorderThickness = 5;
         this.renderField();
         this.bindActions();
 
@@ -104,8 +106,7 @@ export default class GameField {
             }
         }
 
-        if (this.userSelection) this.renderPlayerSelection(this.userSelection);
-        if (this.opponentSelection) this.renderPlayerSelection(this.opponentSelection, true);
+        this.renderSelections(this.userSelection, this.opponentSelection);
     }
 
     changeColor(color) {
@@ -241,7 +242,6 @@ export default class GameField {
         this.iMax = Math.max(this.iStart, this.iCurrent);
         this.jMax = Math.max(this.jStart, this.jCurrent);
 
-
         this.saveUserSelection(this.jMin, this.iMin, this.jMax, this.iMax);
         this.renderField();
     }
@@ -255,22 +255,37 @@ export default class GameField {
         };
     }
 
-    renderPlayerSelection(selection, opponent = false) {
-        if (!selection) return;
+    renderSelections(playerSelection, opponentSelection) {
+        const cellInSelection = (row, col, selection) => {
+            if (!selection) return false;
+            const rowInSelection = (selection.xMin <= row) && (row <= selection.xMax);
+            const colInSelection = (selection.yMin <= col) && (col <= selection.yMax);
+            return (rowInSelection && colInSelection);
+        }
 
-        this.ctxField.strokeStyle = opponent ? this.frameOpponentColor : this.frameUserColor;
-        this.ctxField.lineWidth = 4;
+        for (let i = 0; i < this.fieldSize; i++) {
+            for (let j = 0; j < this.fieldSize; j++) {
+                const cellInPlayerSelection = cellInSelection(j, i, playerSelection);
+                const cellInOpponentSelection = cellInSelection(j, i, opponentSelection);
+                if (cellInPlayerSelection ^ cellInOpponentSelection)
+                    this.drawSquare(this.frameNeutralColor, i, j, this.squareSide + this.cellPadding);
+            }
+        }
 
-        const getDiff = (min, max) => {
-            return max - min + 1;
-        };
+        const drawSelectionFrame = (color, selection) => {
+            this.ctxField.strokeStyle = color;
+            this.ctxField.lineWidth = this.selectionBorderThickness;
 
-        this.ctxField.strokeRect(
-            selection.xMin * (this.squareSide) + selection.xMin * this.cellPadding,
-            selection.yMin * (this.squareSide) + selection.yMin * this.cellPadding,
-            getDiff(selection.xMin, selection.xMax) * this.squareSide + getDiff(selection.xMin, selection.xMax) * this.cellPadding,
-            getDiff(selection.yMin, selection.yMax) * this.squareSide + getDiff(selection.yMin, selection.yMax) * this.cellPadding
-        );
+            const getDiff = (min, max) => max - min + 1;
+            this.ctxField.strokeRect(
+                selection.xMin * (this.squareSide) + selection.xMin * this.cellPadding,
+                selection.yMin * (this.squareSide) + selection.yMin * this.cellPadding,
+                getDiff(selection.xMin, selection.xMax) * this.squareSide + getDiff(selection.xMin, selection.xMax) * this.cellPadding,
+                getDiff(selection.yMin, selection.yMax) * this.squareSide + getDiff(selection.yMin, selection.yMax) * this.cellPadding
+                );   
+        }
 
+        if (playerSelection) drawSelectionFrame(this.frameUserColor, playerSelection);
+        if (opponentSelection) drawSelectionFrame(this.frameOpponentColor, opponentSelection);
     }
 }
