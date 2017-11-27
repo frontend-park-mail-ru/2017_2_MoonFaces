@@ -28,7 +28,7 @@ export default class SinglePlayer {
             this.gameField.opponentSelection.xMax = this.gameField.opponentSelection.xMin + this.randomInt(0, 7 - this.gameField.opponentSelection.xMin);
             this.gameField.opponentSelection.yMax = this.gameField.opponentSelection.yMin + this.randomInt(0, 7 - this.gameField.opponentSelection.yMin);
 
-            this.gameField.renderPlayerSelection(this.gameField.opponentSelection, true);
+            // this.gameField.renderPlayerSelection(this.gameField.opponentSelection, true);
 
             const userMatrix = this.getAreaMatrix(this.gameField.userSelection);
             const opponentMatrix = this.getAreaMatrix(this.gameField.opponentSelection);
