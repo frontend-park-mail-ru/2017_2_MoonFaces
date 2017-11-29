@@ -23,15 +23,6 @@ class GameList {
     addGame(username) {
         this.games[username] = new GameSession();
         this.games[username].addPlayer(clientsList.getUser(username));
-
-        this.games[username + '1'] = new GameSession();
-        this.games[username + '1'].addPlayer(clientsList.getUser(username));
-
-        this.games[username + '2'] = new GameSession();
-        this.games[username + '2'].addPlayer(clientsList.getUser(username));
-        this.games[username + '2'].addPlayer(clientsList.getUser(username));
-
-        console.log(this.games);
     }
 }
 

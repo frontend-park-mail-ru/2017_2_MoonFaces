@@ -1,4 +1,5 @@
 import gameList from './GameList';
+import clientsList from './clientsList';
 
 export default class WsHandler {
     constructor(ws, username) {
@@ -10,18 +11,22 @@ export default class WsHandler {
     start() {
         this.addEvent('CREATE_GAME', () => {
             gameList.addGame(this.username);
+            this.notifyNewGames();
         });
         this.ws.on('message', (message) => {
             message = JSON.parse(message);
             this.callEvent(message.type, message.payload);
         });
+        this.ws.on('close', () => {
+
+        });
     }
 
-    addEvent(event, callback){
+    addEvent(event, callback) {
         this.events[event] = callback;
     }
 
-    deleteEvent(event){
+    deleteEvent(event) {
         delete this.events[event];
     }
 
@@ -29,5 +34,25 @@ export default class WsHandler {
         if(event in this.events) {
             this.events[event](payload);
         }
+    }
+
+    notifyNewGames() {
+        const listUsers = this.getWsNoGameUsers();
+        for(const key in listUsers) {
+            listUsers[key].send(JSON.stringify({
+                type: 'UPDATE_LIST',
+                payload: gameList.getOpenSessions()
+            }));
+        }
+    }
+
+    getWsNoGameUsers() {
+        const users = [];
+        let current;
+        for (const key in clientsList.users) {
+            current = clientsList.users[key];
+            users.push(current.socket);
+        }
+        return users;
     }
 }
