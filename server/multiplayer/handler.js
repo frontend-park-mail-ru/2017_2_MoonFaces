@@ -18,7 +18,7 @@ export default class WsHandler {
             this.callEvent(message.type, message.payload);
         });
         this.ws.on('close', () => {
-
+            this.clearUserData();
         });
     }
 
@@ -54,5 +54,9 @@ export default class WsHandler {
             users.push(current.socket);
         }
         return users;
+    }
+
+    clearUserData() {
+        // todo: remove user created sessions + send opponent error message
     }
 }
