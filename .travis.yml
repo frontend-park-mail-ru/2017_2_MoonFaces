@@ -2,4 +2,12 @@ language: node_js
 node_js:
 - '8'
 script:
+- eval "$(ssh-agent -s)"
+- ssh-keyscan -H 185.188.183.115 >> ~/.ssh/known_hosts
+- chmod 600 $HOME/.ssh/tpfront
+- ssh-add $HOME/.ssh/tpfront
 - npm run build
+- scp -r ./dist travis@185.188.183.115:/var/www/front
+before_install:
+- openssl aes-256-cbc -K $encrypted_5be7cd8cda3d_key -iv $encrypted_5be7cd8cda3d_iv
+  -in tpfront.enc -out ~\/.ssh/tpfront -d
