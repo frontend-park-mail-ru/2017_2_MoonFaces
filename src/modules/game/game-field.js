@@ -50,9 +50,7 @@ export default class GameField {
         let score = 0;
         for (let i = 0; i < this.fieldSize; i++) {
             for (let j = offset; j < limit; j++) {
-                if (this.field[i][j].alive) {
-                    score += 1;
-                }
+                if (this.field[i][j].alive) { score += 1; }
             }
         }
         return score;
