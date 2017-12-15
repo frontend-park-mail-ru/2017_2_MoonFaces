@@ -35,7 +35,7 @@ export default class GameField {
         this.lastRenderTime = new Date().getTime();
         this.cellAnimationTime = 500;
 
-        setInterval(() => {return this.renderField();}, 1000 / 20);
+        setInterval(() => this.renderField(), 1000 / 20);
     }
 
     getField() {
@@ -298,7 +298,11 @@ export default class GameField {
             );   
         };
 
-        if (playerSelection) {drawSelectionFrame(this.frameUserColor, playerSelection);}
-        if (opponentSelection) {drawSelectionFrame(this.frameOpponentColor, opponentSelection);}
+        if (playerSelection) {
+            drawSelectionFrame(this.frameUserColor, playerSelection);
+        }
+        if (opponentSelection) {
+            drawSelectionFrame(this.frameOpponentColor, opponentSelection);
+        }
     }
 }
