@@ -35,7 +35,7 @@ export default class GameField {
         this.lastRenderTime = new Date().getTime();
         this.cellAnimationTime = 500;
 
-        setInterval(() => this.renderField(), 1000 / 20);
+        setInterval(() => {return this.renderField();}, 1000 / 20);
     }
 
     getField() {
@@ -50,7 +50,9 @@ export default class GameField {
         let score = 0;
         for (let i = 0; i < this.fieldSize; i++) {
             for (let j = offset; j < limit; j++) {
-                if (this.field[i][j].alive) score += 1;
+                if (this.field[i][j].alive) {
+                    score += 1;
+                }
             }
         }
         return score;
@@ -82,11 +84,13 @@ export default class GameField {
 
     createField(rows, cols) {
         return new Array(rows).fill(0).map(() => {
-            return new Array(cols).fill(0).map(() => ({
-                alive: false,
-                change: false,
-                animationTime: 0
-            }));
+            return new Array(cols).fill(0).map(() => {
+                return {
+                    alive: false,
+                    change: false,
+                    animationTime: 0
+                };
+            });
         });
     }
 
@@ -118,7 +122,7 @@ export default class GameField {
             row * this.squareSide + row * this.cellPadding + this.cellPadding/2 + this.squareSide/2 - size/2,
             size,
             size
-            );
+        );
     }
 
     renderCell(row, col, delta) {
@@ -126,7 +130,9 @@ export default class GameField {
         const aliveColor = this.fieldSize/2 > col ? this.playerColor : this.opponentColor;
         const squaresDifference = this.squareSide - this.smallSquareSide;
 
-        if (currentCell.animationTime >= 0) currentCell.animationTime -= delta;
+        if (currentCell.animationTime >= 0) {
+            currentCell.animationTime -= delta;
+        }
         const remainingAnimationTime = this.cellAnimationTime - currentCell.animationTime;
 
         // Number from 0 to 1, representing animation status.
@@ -158,8 +164,12 @@ export default class GameField {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const trimCell = (coordinate) => {
-                    if (coordinate === -1) coordinate = this.fieldSize - 1;
-                    if (coordinate === this.fieldSize) coordinate = 0;
+                    if (coordinate === -1) {
+                        coordinate = this.fieldSize - 1;
+                    }
+                    if (coordinate === this.fieldSize) {
+                        coordinate = 0;
+                    }
                     return coordinate;
                 };
                 const neighborRow = trimCell(row + i);
@@ -258,38 +268,37 @@ export default class GameField {
     }
 
     forEachCell(f) {
-        this.field.forEach((row, y) => row.forEach((col, x) => f(y, x)));
+        this.field.forEach((row, y) => {return row.forEach((col, x) => {return f(y, x);});});
     }
 
     renderSelections(playerSelection, opponentSelection) {
         const cellInSelection = (row, col, selection) => {
-            if (!selection) return false;
+            if (!selection) {return false;}
             const colInSelection = (selection.xMin <= col) && (col <= selection.xMax);
             const rowInSelection = (selection.yMin <= row) && (row <= selection.yMax);
             return (rowInSelection && colInSelection);
-        }
+        };
 
         this.forEachCell((row, col) => {
             const cellInPlayerSelection = cellInSelection(row, col, playerSelection);
             const cellInOpponentSelection = cellInSelection(row, col, opponentSelection);
-            if (cellInPlayerSelection ^ cellInOpponentSelection)
-                this.drawSquare(this.frameNeutralColor, row, col, this.squareSide + this.cellPadding);
+            if (cellInPlayerSelection ^ cellInOpponentSelection) {this.drawSquare(this.frameNeutralColor, row, col, this.squareSide + this.cellPadding);}
         });
 
         const drawSelectionFrame = (color, selection) => {
             this.ctxField.strokeStyle = color;
             this.ctxField.lineWidth = this.selectionBorderThickness;
 
-            const getDiff = (min, max) => max - min + 1;
+            const getDiff = (min, max) => {return max - min + 1;};
             this.ctxField.strokeRect(
                 selection.xMin * (this.squareSide) + selection.xMin * this.cellPadding,
                 selection.yMin * (this.squareSide) + selection.yMin * this.cellPadding,
                 getDiff(selection.xMin, selection.xMax) * this.squareSide + getDiff(selection.xMin, selection.xMax) * this.cellPadding,
                 getDiff(selection.yMin, selection.yMax) * this.squareSide + getDiff(selection.yMin, selection.yMax) * this.cellPadding
-                );   
-        }
+            );   
+        };
 
-        if (playerSelection) drawSelectionFrame(this.frameUserColor, playerSelection);
-        if (opponentSelection) drawSelectionFrame(this.frameOpponentColor, opponentSelection);
+        if (playerSelection) {drawSelectionFrame(this.frameUserColor, playerSelection);}
+        if (opponentSelection) {drawSelectionFrame(this.frameOpponentColor, opponentSelection);}
     }
 }

@@ -18,7 +18,7 @@ class BaseView {
         });
     }
 
-    setPage(){
+    setPage() {
 
     }
 

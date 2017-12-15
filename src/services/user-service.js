@@ -76,7 +76,9 @@ class User {
     }
 
     getTopUsers(topPage) {
-        if(topPage < 0) {topPage = 0;}
+        if(topPage < 0) {
+            topPage = 0;
+        }
         return Http.Get(`/scoreboard?page=${topPage}`);
     }
 }
