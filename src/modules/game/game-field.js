@@ -11,24 +11,16 @@ export default class GameField {
         this.userSelection = null;
         this.opponentSelection = null;
 
-        this.cGrid = grid;
         this.cField = field;
 
         this.ctxField = this.cField.getContext('2d');
 
         this.field = this.createField(this.fieldSize, this.fieldSize);
 
-        this.cGrid.height = 400;
-        this.cGrid.width = 400;
+        this.maxCanvasSize = 400;
+        this.setCanvasSize(window.innerWidth - 20);
+        window.addEventListener('resize', () => this.setCanvasSize(window.innerWidth - 20));
 
-        this.cField.height = 400;
-        this.cField.width = 400;
-
-        this.cellPadding = 4;
-        this.cellBorder = 2;
-        this.squareSide = (this.cField.width) / this.fieldSize - this.cellPadding;
-        this.smallSquareSide = this.squareSide / 3;
-        this.selectionBorderThickness = 5;
         this.renderField();
         this.bindActions();
 
@@ -36,6 +28,17 @@ export default class GameField {
         this.cellAnimationTime = 500;
 
         setInterval(() => this.renderField(), 1000 / 20);
+    }
+
+    setCanvasSize(size) {
+        size = Math.min(size, this.maxCanvasSize)
+        this.cField.height = size;
+        this.cField.width = size;
+        this.cellPadding = 4;
+        this.cellBorder = 2;
+        this.squareSide = (this.cField.width) / this.fieldSize - this.cellPadding;
+        this.smallSquareSide = this.squareSide / 5;
+        this.selectionBorderThickness = 5;
     }
 
     getField() {
