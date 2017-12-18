@@ -35,7 +35,7 @@ export default class GameField {
         this.lastRenderTime = new Date().getTime();
         this.cellAnimationTime = 500;
 
-        setInterval(() => this.renderField(), 1000 / 20);
+        setInterval(() => {return this.renderField();}, 1000 / 20);
     }
 
     getField() {
@@ -301,6 +301,14 @@ export default class GameField {
         }
         if (opponentSelection) {
             drawSelectionFrame(this.frameOpponentColor, opponentSelection);
+        }
+    }
+
+    loadFromArray(arrayField) {
+        for(let i = 0; i < this.fieldSize; i++) {
+            for(let j = 0; j < this.fieldSize; j++) {
+                this.field[i][j].alive = ((arrayField[i][j] === 1));
+            }
         }
     }
 }

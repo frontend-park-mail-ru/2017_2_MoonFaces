@@ -3,6 +3,9 @@ import gamesListViewTmpl from './gamesListView.pug';
 import gamesListTmpl from './game-list.pug';
 import statusWindowTmpl from './multiplayer-status.pug';
 import networking from '../../modules/networking';
+import gamaViewTmpl from './gameView.pug';
+import user from '../../services/user-service';
+import Client from './client';
 
 export default class MultiplayerView extends BaseView {
 
@@ -43,7 +46,7 @@ export default class MultiplayerView extends BaseView {
 
         for(const game in data.games) {
             context[game] = {
-                rating: data.games,
+                rating: data.games[game],
                 username: game,
             };
         }
@@ -65,6 +68,15 @@ export default class MultiplayerView extends BaseView {
     }
 
     initGame(data) {
-        this.appContainer.innerHTML = 'game started';
+        this.appContainer.innerHTML = gamaViewTmpl({username: user.login, opponent: data.opponent});
+        const client = new Client(
+            this.appContainer.getElementsByClassName('game_field-grid')[0],
+            this.appContainer.getElementsByClassName('game_field-field')[0],
+            this.appContainer.getElementsByClassName('game_player-score')[0],
+            this.appContainer.getElementsByClassName('game_opponent-score')[0],
+            document.getElementsByClassName('game_end-turn')[0],
+            this.appContainer,
+            data.game_field
+        );
     }
 }
