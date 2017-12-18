@@ -20,7 +20,6 @@ import AboutView from './views/about-view/about';
 import TopView from './views/top-view/top';
 import SignupView from './views/signup-view/signup';
 import ProfileView from './views/profile-view/profile';
-import GameView from './views/game-view/game';
 import SingleplayerView from './views/singleplayer-view/singleplayer';
 import MultiplayerView from './views/multiplayer-view/multiplayer';
 
@@ -36,9 +35,11 @@ import MultiplayerView from './views/multiplayer-view/multiplayer';
         '/game/singleplayer',
         '/game/multiplayer',
     ];
+
     const onlyUnauth = [
         '/',
     ];
+
     router
         .addRoute('/', SigninView)
         .addRoute('/about', AboutView)
@@ -47,7 +48,6 @@ import MultiplayerView from './views/multiplayer-view/multiplayer';
         .addRoute('/profile', ProfileView)
         .addRoute('/game/singleplayer', SingleplayerView)
         .addRoute('/game/multiplayer', MultiplayerView);
-
 
     user.isAuthenticated().then(() => {
         if(user.authorized) {
