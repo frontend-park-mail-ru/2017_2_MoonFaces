@@ -1,17 +1,22 @@
 @font-face {
-    font-family: Consolas;
+    font-family: Futura;
+    src: url('../fonts/futura.ttf');
+}
+
+@font-face {
+    font-family: Consola;
     src: url('../fonts/consola.ttf');
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: Consolas, serif;
+    font-family: Futura;
     background-color: $theme_color;
 }
 
 input{
-    font-family: Consolas, serif;
+    font-family: Futura;
 }
 
 .background{
@@ -36,6 +41,11 @@ input{
     margin: auto;
     display: block;
     box-sizing: border-box;
+
+}
+
+.full_height {
+    height: 100%;
 }
 
 .divider-center {
@@ -71,6 +81,13 @@ input{
     color: #fff;
 }
 
-.spacer{
-    height: 20px;
+.spacer {
+    height: 10px;
+}
+
+.game_lobby_container {
+    margin: 0;
+    color: white;
+    text-align: center;
+    font-size: 100%;
 }

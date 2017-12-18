@@ -25,7 +25,7 @@ export default class GameField {
         this.bindActions();
 
         this.lastRenderTime = new Date().getTime();
-        this.cellAnimationTime = 500;
+        this.cellAnimationTime = 400;
 
         setInterval(() => this.renderField(), 1000 / 20);
     }
