@@ -69,6 +69,7 @@ export default class MultiplayerView extends BaseView {
 
     initGame(data) {
         this.appContainer.innerHTML = gamaViewTmpl({username: user.login, opponent: data.opponent});
+        this.networking.dropAllEvents();
         const client = new Client(
             this.appContainer.getElementsByClassName('game_field-grid')[0],
             this.appContainer.getElementsByClassName('game_field-field')[0],
@@ -76,7 +77,9 @@ export default class MultiplayerView extends BaseView {
             this.appContainer.getElementsByClassName('game_opponent-score')[0],
             document.getElementsByClassName('game_end-turn')[0],
             this.appContainer,
-            data.game_field
+            data.game_field,
+            this.networking
         );
+        client.start();
     }
 }
