@@ -95,12 +95,10 @@ const config = {
     plugins: [
         extracktDefault,
         extracktDark,
-        new webpack.DefinePlugin({
-            'BACKEND_URL': JSON.stringify('https://bacterio.tech/restapi')
-        }),
     ],
 
     devServer: {
+        disableHostCheck: true,
         contentBase: path.join(__dirname, './dist/'),
         compress: true,
         port: 3000,
@@ -116,6 +114,17 @@ if (process.env.NODE_ENV === 'production') {
             sourceMaps: false,
             compact: false
         })
+    );
+    config.plugins.push(
+        new webpack.DefinePlugin({
+            'BACKEND_URL': JSON.stringify('https://bacterio.tech/restapi')
+        }),
+    );
+} else{
+    config.plugins.push(
+        new webpack.DefinePlugin({
+            'BACKEND_URL': JSON.stringify('http://bacterio.local/restapi')
+        }),
     );
 }
 
