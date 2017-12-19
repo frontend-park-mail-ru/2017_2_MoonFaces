@@ -22,12 +22,15 @@ class Networking {
     }
 
     disconnect() {
-        this.ws.close();
-        delete this;
+        if(this.ws) {
+            this.ws.close();
+            this.ws = null;
+        }
     }
 
     getWSUrl() {
-        return `ws://${window.location.hostname}/multiplayer`;
+        const wsProt = WS_PROT;
+        return `${wsProt}://${window.location.hostname}/multiplayer`;
     }
 
     bindSocket() {

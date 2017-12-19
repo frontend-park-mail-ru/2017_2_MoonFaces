@@ -13,6 +13,7 @@ class BaseView {
     }
 
     stop() {
+        this.preClose();
         this.events.forEach((unsub) => {
             unsub();
         });
@@ -25,6 +26,10 @@ class BaseView {
     render() {
         this.appContainer.innerHTML = this.getTemplate();
         this.postRender();
+    }
+
+    preClose() {
+
     }
 }
 
