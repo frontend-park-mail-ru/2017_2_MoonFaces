@@ -21,7 +21,8 @@ class Networking {
     }
 
     getWSUrl() {
-        return `ws://${window.location.hostname}/multiplayer`;
+        // return `ws://${window.location.hostname}/multiplayer`;
+        return `ws://localhost:8080/multiplayer`;
     }
 
     bindSocket() {

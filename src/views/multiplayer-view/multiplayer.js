@@ -1,20 +1,14 @@
 import BaseView from '../../modules/baseView';
-<<<<<<< HEAD
 import user from '../../services/user-service';
-import gamesListTmpl from './games-list.pug';
 import gameItemsTmpl from './gameItems.pug';
-// import networking from '../../modules/networking';
 import User from '../../services/user-service';
 import WSBus from '../../modules/wsBus';
-=======
 import gamesListViewTmpl from './gamesListView.pug';
 import gamesListTmpl from './game-list.pug';
 import statusWindowTmpl from './multiplayer-status.pug';
 import networking from '../../modules/networking';
 import gamaViewTmpl from './gameView.pug';
-import user from '../../services/user-service';
 import Client from './client';
->>>>>>> origin/ws-multiplayer
 
 export default class MultiplayerView extends BaseView {
 
@@ -28,7 +22,6 @@ export default class MultiplayerView extends BaseView {
         this.networking = networking.connect(() => {
             this.initGamesList();
         });
-    }
         // const getWSUrl = () => `ws://${window.location.hostname}:8081`;
         // this.ws = new WebSocket(getWSUrl());
         // this.wsBus = new WSBus(this.ws);
@@ -41,6 +34,7 @@ export default class MultiplayerView extends BaseView {
         // };
         // this.updateGameList([['Nagibator', 404], ['MrRobot777', 201], ['xXxPro100xXx', 99]]);
     }
+
 
     updateGameList(payload) {
         // this.listContainer = document.getElementsByClassName('games-container')[0];
@@ -74,7 +68,6 @@ export default class MultiplayerView extends BaseView {
     //         }));
     //     });
     // }
-}
 
 
     initGamesList() {
@@ -88,6 +81,7 @@ export default class MultiplayerView extends BaseView {
         const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
         listContainer.addEventListener('click', this.handleListSelect.bind(this));
     }
+
 
     createGame() {
         this.networking.dropAllEvents();
@@ -103,12 +97,14 @@ export default class MultiplayerView extends BaseView {
         }
     }
 
+
     connectToRoom(roomName) {
         this.networking.dropAllEvents();
         this.appContainer.innerHTML = statusWindowTmpl({message: 'Connectiong to room'});
         this.networking.send('JOIN_GAME', {player: roomName});
         this.networking.addEvent('CONNECTED', this.initGame.bind(this));
     }
+
 
     initGame(data) {
         this.appContainer.innerHTML = gamaViewTmpl({username: user.login, opponent: data.opponent});
