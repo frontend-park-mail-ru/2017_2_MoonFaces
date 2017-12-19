@@ -1,12 +1,18 @@
 class Networking {
     constructor() {
+        if(this.instance) {
+            return this.instance;
+        }
+        this.instance = this;
         this.events = {};
     }
 
     connect(callback) {
-        this.ws = new WebSocket(this.getWSUrl());
-        this.bindSocket();
-        this.ws.onopen = callback;
+        if(!this.ws) {
+            this.ws = new WebSocket(this.getWSUrl());
+            this.bindSocket();
+            this.ws.onopen = callback;
+        }
         return this;
     }
 
