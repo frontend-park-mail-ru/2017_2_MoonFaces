@@ -268,6 +268,10 @@ export default class GameField {
         };
     }
 
+    getUserSelection() {
+        return this.userSelection;
+    }
+
     forEachCell(f) {
         this.field.forEach((row, y) => {return row.forEach((col, x) => {return f(y, x);});});
     }
@@ -313,5 +317,9 @@ export default class GameField {
                 this.field[i][j].alive = ((arrayField[i][j] === 1));
             }
         }
+    }
+
+    setOpponentSelection(opponentSelection) {
+        this.opponentSelection = opponentSelection;
     }
 }

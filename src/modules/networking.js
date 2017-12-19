@@ -29,7 +29,6 @@ class Networking {
         this.ws.onmessage = (data) => {
             const message = JSON.parse(data.data);
             const key = message.type;
-            const payload = message.payload;
             if(key in this.events) {
                 this.events[key](message);
             }
