@@ -1,10 +1,9 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
-import gameItemsTmpl from './gameItems.pug';
 import User from '../../services/user-service';
 import WSBus from '../../modules/wsBus';
 import gamesListViewTmpl from './gamesListView.pug';
-import gamesListTmpl from './game-list.pug';
+import gamesListTmpl from './gameItems.pug';
 import statusWindowTmpl from './multiplayer-status.pug';
 import networking from '../../modules/networking';
 import gamaViewTmpl from './gameView.pug';
@@ -22,52 +21,21 @@ export default class MultiplayerView extends BaseView {
         this.networking = networking.connect(() => {
             this.initGamesList();
         });
-        // const getWSUrl = () => `ws://${window.location.hostname}:8081`;
-        // this.ws = new WebSocket(getWSUrl());
-        // this.wsBus = new WSBus(this.ws);
-        
-        // this.ws.onopen = () => {
-        //     console.log('connection established');
-        //     // networking.auth(User.login);
-        //     this.wsBus.addEvent('UPDATE_LIST', this.updateGameList);
-        //     this.wsPostOpen();
-        // };
-        // this.updateGameList([['Nagibator', 404], ['MrRobot777', 201], ['xXxPro100xXx', 99]]);
     }
 
 
-    updateGameList(payload) {
-        // this.listContainer = document.getElementsByClassName('games-container')[0];
-        this.listContainer = document.getElementById('games-container');
-        const data = {
-            games: payload
-        };
-        this.listContainer.innerHTML = gameItemsTmpl(data);
-        for (const game in payload) {
-            this.form = new Form(document.getElementById(`join-game-${payload[1]}`));
+    updateGameList(data) {
+        const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
+        const context = {};
+
+        for(const game in data.games) {
+            context[game] = {
+                rating: data.games[game],
+                username: game,
+            };
         }
-        // const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
-        // const context = {};
-
-        // for(const game in data.games) {
-        //     context[game] = {
-        //         rating: data.games[game],
-        //         username: game,
-        //     };
-        // }
-        // listContainer.innerHTML = gamesListTmpl({games:context});
-
+        listContainer.innerHTML = gamesListTmpl({games:context});
     }
-
-    // wsPostOpen() {
-    //     const createGame = document.getElementsByClassName('create-game')[0];
-    //     createGame.addEventListener('click', (event) => {
-    //         this.ws.send(JSON.stringify({
-    //             type: 'CREATE_GAME',
-    //             payload: {}
-    //         }));
-    //     });
-    // }
 
 
     initGamesList() {
@@ -80,6 +48,8 @@ export default class MultiplayerView extends BaseView {
         createGameButton.addEventListener('click', this.createGame.bind(this));
         const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
         listContainer.addEventListener('click', this.handleListSelect.bind(this));
+
+        // this.updateGameList({games: {'AA': 42, 'BB': 13}})
     }
 
 

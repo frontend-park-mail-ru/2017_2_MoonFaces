@@ -1,17 +1,16 @@
 - var i = 0;
 each game in games
-    div()
-        form(action="" id="join-game")
+    div
         div(class="game_lobby_container")
             div(class="columns outer-container")
                 div
-                    h3(class="half-width") #{game[1]}
+                    h3(class="half-width") #{game.rating}
                 div
-                    h2(class="base-width") #{game[0]}
+                    h2(class="base-width") #{game.username}
                 div
-                    input(type='submit' class='button-green base-width' value='join')
-                    input(type='hidden' value="#{game[1]}")
+                    a(class="button-green btn-game-item" data-name=game.username) join
 
+    div(class="spacer")
     if (++i < games.length)
         div(class="spacer")
 else
