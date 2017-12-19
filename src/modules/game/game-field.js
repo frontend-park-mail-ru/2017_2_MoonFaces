@@ -21,7 +21,7 @@ export default class GameField {
 
         this.maxCanvasSize = 400;
         this.setCanvasSize(window.innerWidth - 20);
-        window.addEventListener('resize', () => this.setCanvasSize(window.innerWidth - 20));
+        window.addEventListener('resize', () => {return this.setCanvasSize(window.innerWidth - 20);});
 
         this.renderField();
         this.bindActions();
@@ -46,7 +46,7 @@ export default class GameField {
 
 
     setCanvasSize(size) {
-        size = Math.min(size, this.maxCanvasSize)
+        size = Math.min(size, this.maxCanvasSize);
         this.cField.height = size;
         this.cField.width = size;
         this.cellPadding = 4;
@@ -221,6 +221,8 @@ export default class GameField {
             this.iStart = undefined;
             this.jStart = undefined;
 
+            this.opponentSelection = null;
+
             this.cField.addEventListener('touchmove', startLoop);
             this.cField.addEventListener('touchend', (e) => {
                 this.stopAnimation(startLoop, e);
@@ -230,6 +232,8 @@ export default class GameField {
         this.cField.addEventListener('mousedown', () => {
             this.iStart = undefined;
             this.jStart = undefined;
+
+            this.opponentSelection = null;
 
             this.cField.addEventListener('mousemove', startLoop);
             this.cField.addEventListener('mouseup', (e) => {
@@ -329,7 +333,9 @@ export default class GameField {
     loadFromArray(arrayField) {
         for(let i = 0; i < this.fieldSize; i++) {
             for(let j = 0; j < this.fieldSize; j++) {
-                this.field[i][j].alive = ((arrayField[i][j] === 1));
+                if(this.field[i][j].alive != arrayField[i][j]) {
+                    this.toggleCell(i, j);
+                }
             }
         }
     }

@@ -2,16 +2,16 @@ import GameField from '../../modules/game/game-field';
 
 export default class Client {
     constructor(grid, field, playerScore, opponentScore, endTurn, appContainer, initialMatrix, networking, playerName, opponentName) {
-        this.gameField = new GameField(grid, field, playerName=playerName, opponentName=opponentName);
+        this.gameField = new GameField(grid, field, playerName, opponentName);
         this.appContainer = appContainer;
 
         this.playerScore = playerScore;
         this.opponentScore = opponentScore;
 
         this.endTurn = endTurn;
-        this.field = this.gameField.getField();
         this.gameField.loadFromArray(initialMatrix);
         this.networking = networking;
+        this.countScores();
     }
 
     start() {
@@ -31,5 +31,11 @@ export default class Client {
         this.gameField.setOpponentSelection(data.opponent_selection);
         this.gameField.loadFromArray(data.game_field);
         this.gameField.renderField();
+        this.countScores();
+    }
+
+    countScores() {
+        this.playerScore.innerHTML = this.gameField.getPlayerScore();
+        this.opponentScore.innerHTML = this.gameField.getOpponentScore();
     }
 }
