@@ -1,9 +1,11 @@
 export default class GameField {
-    constructor(grid, field) {
+    constructor(grid, field, playerName=null, opponentName=null) {
         this.fieldSize = 8;
         this.neutralColor = '#fff';
-        this.playerColor = 'hsl(120, 50%, 50%)';
-        this.opponentColor = 'hsl(255, 50%, 50%)';
+        const playerHue = (playerName) ? this.nameToHue(playerName) : 120;
+        this.playerColor = `hsl(${playerHue}, 50%, 50%)`;
+        const opponentHue = (opponentName) ? this.nameToHue(opponentName) : 255;
+        this.opponentColor = `hsl(${opponentHue}, 50%, 50%)`;
         this.frameUserColor = 'hsl(130, 70%, 30%)';
         this.frameOpponentColor = 'hsl(265, 70%, 30%)';
         this.frameNeutralColor = 'hsla(130, 100%, 100%, 0.4)';
@@ -29,6 +31,19 @@ export default class GameField {
 
         setInterval(() => {return this.renderField();}, 1000 / 20);
     }
+
+
+    nameToHue(name) {
+        let hash = 5381;
+        let i = name.length;
+
+        while(i) {
+            hash = (hash * 33) ^ name.charCodeAt(--i);
+        }
+
+        return (hash >>> 0) % 255;
+    }
+
 
     setCanvasSize(size) {
         size = Math.min(size, this.maxCanvasSize)

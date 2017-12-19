@@ -87,7 +87,9 @@ export default class MultiplayerView extends BaseView {
             document.getElementsByClassName('game_end-turn')[0],
             this.appContainer,
             data.game_field,
-            this.networking
+            this.networking,
+            user.login,
+            data.opponent
         );
         client.start();
     }

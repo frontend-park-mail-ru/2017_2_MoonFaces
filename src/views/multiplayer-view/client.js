@@ -1,8 +1,8 @@
 import GameField from '../../modules/game/game-field';
 
 export default class Client {
-    constructor(grid, field, playerScore, opponentScore, endTurn, appContainer, initialMatrix, networking) {
-        this.gameField = new GameField(grid, field);
+    constructor(grid, field, playerScore, opponentScore, endTurn, appContainer, initialMatrix, networking, playerName, opponentName) {
+        this.gameField = new GameField(grid, field, playerName=playerName, opponentName=opponentName);
         this.appContainer = appContainer;
 
         this.playerScore = playerScore;
