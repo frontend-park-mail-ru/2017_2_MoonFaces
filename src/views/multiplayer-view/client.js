@@ -1,4 +1,6 @@
 import GameField from '../../modules/game/game-field';
+import user from '../../services/user-service';
+import GameScores from '../../modules/game/game-scores';
 
 export default class Client {
     constructor(grid, field, playerScore, opponentScore, endTurn, appContainer, initialMatrix, networking, playerName, opponentName) {
@@ -11,6 +13,8 @@ export default class Client {
         this.endTurn = endTurn;
         this.gameField.loadFromArray(initialMatrix);
         this.networking = networking;
+        this.playerName = playerName;
+        this.opponentName = opponentName;
         this.countScores();
     }
 
@@ -21,6 +25,7 @@ export default class Client {
 
     bindNetworkEvents() {
         this.networking.addEvent('FIELD_UPDATE', this.updateField.bind(this));
+        this.networking.addEvent('GAME_OVER', this.handelGameOver.bind(this));
     }
 
     sendSelection() {
@@ -37,5 +42,19 @@ export default class Client {
     countScores() {
         this.playerScore.innerHTML = this.gameField.getPlayerScore();
         this.opponentScore.innerHTML = this.gameField.getOpponentScore();
+    }
+
+    handelGameOver(data) {
+        user.score = data.score;
+        this.gameField.loadFromArray(data.game_field);
+        const gameScores = new GameScores(
+            this.playerName,
+            this.opponentName,
+            this.gameField.getPlayerScore(),
+            this.gameField.getOpponentScore(),
+            data.win,
+            this.appContainer
+        );
+        gameScores.show();
     }
 }
