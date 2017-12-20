@@ -19,7 +19,7 @@ export default class GameField {
 
         this.field = this.createField(this.fieldSize, this.fieldSize);
 
-        this.maxCanvasSize = 400;
+        this.maxCanvasSize = 450;
         this.setCanvasSize(window.innerWidth - 20);
         window.addEventListener('resize', () => {return this.setCanvasSize(window.innerWidth - 20);});
 
@@ -27,7 +27,7 @@ export default class GameField {
         this.bindActions();
 
         this.lastRenderTime = new Date().getTime();
-        this.cellAnimationTime = 400;
+        this.cellAnimationTime = 350;
 
         setInterval(() => {return this.renderField();}, 1000 / 20);
     }

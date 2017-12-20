@@ -1,21 +1,87 @@
-.game{
+
+$break_size: 800px;
+@mixin breakpoint_min($point) {
+    @media screen and (min-width: $point) { @content ; }
+}
+
+@mixin breakpoint_max($point) {
+    @media screen and (max-width: $point) { @content ; }
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+
+    // flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    @include breakpoint_min($break_size) {
+    }
+
+    &_user-info {
+        order: 1;
+        flex: 1;
+        display: inline-block;
+    }
+
+    &_main_container {
+        flex: 2;
+        order: 5;
+        @include breakpoint_min($break_size) {
+            order: 2;
+        }
+    }
+
+    &_opponent-info {
+        order: 3;
+        flex: 1;
+        display: inline-block;
+    }
+
     &_player-name {
+        box-sizing: border-box;
         color: $secondary_bg;
-        text-align: center;
-        margin: 5px;
+        text-align: right;
+        margin-right: 10%;
+        width: 80% !important;
+
+    }
+
+    &_opponent-name {
+        box-sizing: border-box;
+        color: $secondary_bg;
+        text-align: left;
+        margin-left: 10%;
     }
 
     &_score {
-        margin: auto;
         max-width: 100px;
         h2 {
             text-align: center;
             color: #fff;
             font-size: 32px;
-            padding: 0;
-            margin: 0;
+        }
+        &-user {
+            @extend .game_score;
+            margin-right: 10%;
+        }
+        &-opponent {
+            @extend .game_score;
+            margin-left: 10%;
         }
     }
+
+    // &_opponent_score {
+    //     margin-left: 10%;
+    //     max-width: 100px;
+    //     h2 {
+    //         text-align: center;
+    //         color: #fff;
+    //         font-size: 32px;
+    //         padding: 0;
+    //         margin: 0;
+    //     }
+    // }
 
     &_timebar {
         // $time: 100;
@@ -31,8 +97,8 @@
             position: absolute;
             z-index: 2;
         }
-        width: 400px;
-        height: 400px;
+        width: 450px;
+        height: 450px;
         padding: 0 10px;
         margin: auto;
     }
