@@ -51,8 +51,6 @@ export default class MultiplayerView extends BaseView {
         createGameButton.addEventListener('click', this.createGame.bind(this));
         const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
         listContainer.addEventListener('click', this.handleListSelect.bind(this));
-
-        this.updateGameList({games: {'AA': 42, 'BB': 13}})
     }
 
 

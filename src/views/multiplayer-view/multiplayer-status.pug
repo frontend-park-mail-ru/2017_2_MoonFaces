@@ -1,2 +1,10 @@
 div(class="base-width centered outer-container games-list")
-    div(class="games-container") #{message}
+    div(class="games-container")
+        div(class="game_lobby_container columns")
+            div
+                h2 #{message}
+
+div(class="spacer")
+div(class="columns base-width")
+    div(class="half-width centered outer-container")
+        a(href="/profile" class="button-gray") Back
