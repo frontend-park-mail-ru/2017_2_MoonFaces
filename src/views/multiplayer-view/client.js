@@ -1,6 +1,7 @@
 import GameField from '../../modules/game/game-field';
 import user from '../../services/user-service';
 import GameScores from '../../modules/game/game-scores';
+import multiplayerStatusTmpl from './multiplayer-status.pug';
 
 export default class Client {
     constructor(grid, field, playerScore, opponentScore, endTurn, appContainer, initialMatrix, networking, playerName, opponentName) {
@@ -26,6 +27,7 @@ export default class Client {
     bindNetworkEvents() {
         this.networking.addEvent('FIELD_UPDATE', this.updateField.bind(this));
         this.networking.addEvent('GAME_OVER', this.handelGameOver.bind(this));
+        this.networking.addEvent('OPPONENT_LOST', this.handleLostOpponent.bind(this));
     }
 
     sendSelection() {
@@ -56,5 +58,11 @@ export default class Client {
             this.appContainer
         );
         gameScores.show();
+        this.networking.disconnect();
+    }
+
+    handleLostOpponent(data) {
+        this.appContainer.innerHTML = multiplayerStatusTmpl({message: 'Opponent lost :('});
+        this.networking.disconnect();
     }
 }
