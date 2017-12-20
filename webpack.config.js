@@ -117,13 +117,15 @@ if (process.env.NODE_ENV === 'production') {
     );
     config.plugins.push(
         new webpack.DefinePlugin({
-            'BACKEND_URL': JSON.stringify('https://bacterio.tech/restapi')
+            'BACKEND_URL': JSON.stringify('https://bacterio.tech/restapi'),
+            'WS_PROT': JSON.stringify('wss')
         }),
     );
 } else{
     config.plugins.push(
         new webpack.DefinePlugin({
-            'BACKEND_URL': JSON.stringify('http://bacterio.local/restapi')
+            'BACKEND_URL': JSON.stringify('http://bacterio.local/restapi'),
+            'WS_PROT': JSON.stringify('ws')
         }),
     );
 }

@@ -23,6 +23,9 @@ export default class MultiplayerView extends BaseView {
         });
     }
 
+    preClose() {
+        this.networking.disconnect();
+    }
 
     updateGameList(data) {
         const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
