@@ -29,9 +29,9 @@ export default class MultiplayerView extends BaseView {
         const listContainer = this.appContainer.getElementsByClassName('games-container')[0];
         const context = {};
 
-        for(const game in data.games) {
+        for(const game in data.gamesList) {
             context[game] = {
-                rating: data.games[game],
+                rating: data.gamesList[game],
                 username: game,
             };
         }
