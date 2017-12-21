@@ -1,7 +1,5 @@
 import BaseView from '../../modules/baseView';
 import user from '../../services/user-service';
-import User from '../../services/user-service';
-import WSBus from '../../modules/wsBus';
 import gamesListViewTmpl from './gamesListView.pug';
 import gamesListTmpl from './gameItems.pug';
 import statusWindowTmpl from './multiplayer-status.pug';
@@ -79,7 +77,7 @@ export default class MultiplayerView extends BaseView {
 
 
     initGame(data) {
-        this.appContainer.innerHTML = gamaViewTmpl({username: user.login, opponent: data.opponent});
+        this.appContainer.innerHTML = gamaViewTmpl({username: user.login, opponent: data.opponentName});
         this.networking.dropAllEvents();
         const client = new Client(
             this.appContainer.getElementsByClassName('game_field-grid')[0],
@@ -91,7 +89,7 @@ export default class MultiplayerView extends BaseView {
             data.gameField,
             this.networking,
             user.login,
-            data.opponent
+            data.opponentName
         );
         client.start();
     }
