@@ -7,8 +7,9 @@
     }
     &_text{
         padding: 0 30px;
+        word-wrap: break-word;
     }
-}
-.about_text {
-    white-space: pre;
+    a{
+        color: #fff;
+    }
 }
