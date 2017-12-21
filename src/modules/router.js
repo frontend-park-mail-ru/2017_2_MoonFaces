@@ -24,7 +24,7 @@ class Router {
 
     start(path=null) {
         window.onpopstate = function() {
-            this.go(window.location.pathname);
+            this.go(window.location.pathname, true);
         }.bind(this);
 
         this.rootElement.addEventListener('click', (event) => {
@@ -44,7 +44,7 @@ class Router {
         this.go(window.location.pathname);
     }
 
-    go(route) {
+    go(route, isPopState=false) {
         let page = 0;
         const originalRoute = route;
 
@@ -61,8 +61,9 @@ class Router {
                     return false;
                 }
             }
-
-            window.history.pushState({}, '', originalRoute);
+            if(!isPopState) {
+                window.history.pushState({}, '', originalRoute);
+            }
 
             if (typeof item.view === 'function') {
                 item.view = new item.view(this.rootElement);
