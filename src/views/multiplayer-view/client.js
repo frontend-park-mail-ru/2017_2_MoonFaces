@@ -36,7 +36,7 @@ export default class Client {
 
     updateField(data) {
         this.gameField.setOpponentSelection(data.opponent_selection);
-        this.gameField.loadFromArray(data.game_field);
+        this.gameField.loadFromArray(data.gameField);
         this.gameField.renderField();
         this.countScores();
     }
@@ -48,7 +48,7 @@ export default class Client {
 
     handelGameOver(data) {
         user.score = data.score;
-        this.gameField.loadFromArray(data.game_field);
+        this.gameField.loadFromArray(data.gameField);
         const gameScores = new GameScores(
             this.playerName,
             this.opponentName,

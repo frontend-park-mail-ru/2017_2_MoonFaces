@@ -87,7 +87,7 @@ export default class MultiplayerView extends BaseView {
             this.appContainer.getElementsByClassName('game_opponent-score')[0],
             document.getElementsByClassName('game_end-turn')[0],
             this.appContainer,
-            data.game_field,
+            data.gameField,
             this.networking,
             user.login,
             data.opponent
