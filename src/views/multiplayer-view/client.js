@@ -35,7 +35,7 @@ export default class Client {
     }
 
     updateField(data) {
-        this.gameField.setOpponentSelection(data.opponentSelection);
+        this.gameField.setOpponentSelection(JSON.parse(data.opponentSelection));
         this.gameField.loadFromArray(data.gameField);
         this.gameField.renderField();
         this.countScores();
