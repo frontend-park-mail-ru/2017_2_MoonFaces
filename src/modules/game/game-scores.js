@@ -16,7 +16,7 @@ export default class GameScores {
         const winnerName = (this.scores1 > this.scores2) ? this.player1 : this.player2;
         const looserScore = (this.scores1 < this.scores2) ? this.scores1 : this.scores2;
         const looserName = (this.scores1 < this.scores2) ? this.player1 : this.player2;
-        const gameOverText = (this.scores1 > this.scores2) ? 'You win :)' : 'You Loose :(';
+        const gameOverText = (this.scores1 > this.scores2) ? 'You win' : 'You loose';
 
         const data = {
             gameOverText: gameOverText,

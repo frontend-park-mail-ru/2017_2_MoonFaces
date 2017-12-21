@@ -64,6 +64,7 @@ export default class MultiplayerView extends BaseView {
 
     handleListSelect(event) {
         if(event.target.classList.contains('btn-game-item')) {
+            
             this.connectToRoom(event.target.getAttribute('data-name'));
         }
     }
