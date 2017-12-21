@@ -1,10 +1,16 @@
-br
-
 div(class="game")
-    div(class="game_user-info" align="right")
-        h1(class='game_user-name game_player-name') #{username}
-        div(class="half_width game_score-user left outer-container")
-            h2(class='game_player-score') 0
+    div(class="game_scores-block")
+
+        div(class="game_player-info game_user-info" align="right")
+            h1(class='game_user-name game_player-name') #{username}
+            div(class="half_width game_score-user left outer-container")
+                h2(class='game_player-score') 0
+
+        div(class="game_player-info game_opponent-info" align="left")
+            h1(class='game_opponent-name game_player-name') #{opponent}
+            div(class="half_width game_score-opponent outer-container")
+                h2(class='game_opponent-score') 0
+
     div(class="game_main_container")
         div(class="base-width centered outer-container")
             a(class="button-red game_end-turn") End Turn
@@ -14,10 +20,6 @@ div(class="game")
             div(class="game_field")
                 canvas(class="game_field-grid")
                 canvas(class="game_field-field")
-    div(class="game_opponent-info" align="left")
-        h1(class='game_opponent-name game_player-name') #{opponent}
-        div(class="half_width game_score-opponent outer-container")
-            h2(class='game_opponent-score') 0
 
 br
 

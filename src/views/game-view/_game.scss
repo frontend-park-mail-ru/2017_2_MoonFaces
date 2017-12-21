@@ -15,7 +15,6 @@ $paddingSides: 50px;
 $paddingTop: 20px;
 
 .game {
-    min-width: 343px;
     position: relative;
     margin: auto;
 
@@ -122,83 +121,3 @@ $paddingTop: 20px;
     }
 
 }
-
-//
-//.game {
-//    &_main_container {
-//        flex: 2;
-//        order: 5;
-//        @include breakpoint_min($break_size) {
-//            order: 2;
-//        }
-//    }
-//
-//    &_opponent-info {
-//        order: 3;
-//        flex: 1;
-//        display: inline-block;
-//    }
-//
-//    &_player-name {
-//        box-sizing: border-box;
-//        color: $secondary_bg;
-//        text-align: right;
-//        margin-right: 10%;
-//    }
-//
-//    &_opponent-name {
-//        box-sizing: border-box;
-//        color: $secondary_bg;
-//        text-align: left;
-//        margin-left: 10%;
-//    }
-//
-//    &_score {
-//        max-width: 100px;
-//        h2 {
-//            text-align: center;
-//            color: #fff;
-//            font-size: 32px;
-//        }
-//        &-user {
-//            @extend .game_score;
-//            margin-right: 10%;
-//        }
-//        &-opponent {
-//            @extend .game_score;
-//            margin-left: 10%;
-//        }
-//    }
-//
-//    // &_opponent_score {
-//    //     margin-left: 10%;
-//    //     max-width: 100px;
-//    //     h2 {
-//    //         text-align: center;
-//    //         color: #fff;
-//    //         font-size: 32px;
-//    //         padding: 0;
-//    //         margin: 0;
-//    //     }
-//    // }
-//
-//    &_timebar {
-//        // $time: 100;
-//        background: hsl(150, 50%, 50%);
-//        width: 100%;
-//        height: 25px;
-//    }
-//
-//    &_field{
-//        &-grid, &-field{
-//            margin:  auto;
-//            padding: auto;
-//            position: absolute;
-//            z-index: 2;
-//        }
-//        width: 450px;
-//        height: 450px;
-//        padding: 0 10px;
-//        margin: auto;
-//    }
-//}
