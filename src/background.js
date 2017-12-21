@@ -1,5 +1,5 @@
 
-class Background {
+export default class Background {
     constructor(theme) {
         this.strokeColor = '#4gda6ff';
         this.backgroundColor = '#ff0000';
@@ -194,5 +194,3 @@ class Background {
         this.drawGrid();
     }
 }
-
-export default Background;

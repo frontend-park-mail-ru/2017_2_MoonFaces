@@ -47,8 +47,8 @@ class Themes {
             this.setCurrent();
             this.background.loadTheme(this.bgTheme);
         });
-        // this.background = new Background(this.bgTheme);
-        // this.background.start();
+        this.background = new Background(this.bgTheme);
+        this.background.start();
     }
 
     setCurrent() {
