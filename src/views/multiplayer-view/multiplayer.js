@@ -82,8 +82,8 @@ export default class MultiplayerView extends BaseView {
         const client = new Client(
             this.appContainer.getElementsByClassName('game_field-grid')[0],
             this.appContainer.getElementsByClassName('game_field-field')[0],
-            this.appContainer.getElementsByClassName('game_player-score')[0],
-            this.appContainer.getElementsByClassName('game_opponent-score')[0],
+            this.appContainer.getElementsByClassName('game_player-score'),
+            this.appContainer.getElementsByClassName('game_opponent-score'),
             document.getElementsByClassName('game_end-turn')[0],
             this.appContainer,
             data.gameField,
