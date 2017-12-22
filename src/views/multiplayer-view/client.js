@@ -32,9 +32,13 @@ export default class Client {
 
     sendSelection() {
         this.networking.send('SELECT_FIELD', {selection: this.gameField.getUserSelection()});
+        this.endTurn.innerHTML = 'Whaiting for opponent';
+        this.endTurn.classList.add('disabled');
     }
 
     updateField(data) {
+        this.endTurn.innerHTML = 'End Turn';
+        this.endTurn.classList.remove('disabled');
         this.gameField.setOpponentSelection(JSON.parse(data.opponentSelection));
         this.gameField.loadFromArray(data.gameField);
         this.gameField.renderField();

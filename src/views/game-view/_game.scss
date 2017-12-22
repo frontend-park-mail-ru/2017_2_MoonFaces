@@ -11,18 +11,24 @@ $break_size: 800px;
     }
 }
 
-$paddingSides: 50px;
+$paddingSides: 20px;
 $paddingTop: 20px;
 
 .game {
     position: relative;
     margin: auto;
 
-    @media (min-width: 1000px) {
-        width: 1000px;
+    &_end-turn.disabled {
+        pointer-events: none;
+        background: #00ff00;
+        background: darken($color_orange, 20%);
     }
 
-    @media (max-width: 950px ) {
+    @media (min-width: 1200px) {
+        width: 1200px;
+    }
+
+    @media (max-width: 1000px ) {
         &_scores-block{
             & > div{
                 width: 50%;
@@ -35,31 +41,66 @@ $paddingTop: 20px;
             h2{
                 margin: 0;
             }
+            box-sizing: border-box;
             margin-bottom: 10px;
         }
         &_player-info {
-
+            text-align: center;
+            padding: 5px;
+            box-sizing: border-box;
         }
         &_user-info {
-            text-align: left;
             display: inline-block;
         }
         &_opponent-info {
-            text-align: right;
             display: inline-block;
         }
+        &_score {
+            &-user {
+                margin: auto;
+            }
+            &-opponent {
+                margin: auto;
+            }
+        }
+
     }
-    @media (min-width: 950px) {
+    @media (min-width: 1000px) {
         &_player-info {
             position: absolute;
         }
         &_user-info {
-
+            text-align: left;
         }
         &_opponent-info {
-
+            text-align: right;
+        }
+        &_score {
+            &-user {
+                margin-right: 10%;
+                display: inline-block;
+            }
+            &-opponent {
+                margin-left: 10%;
+                display: inline-block;
+            }
         }
     }
+
+    &_score {
+        background: #ff0000 !important;
+        max-width: 100px;
+        &-user, &-opponent{
+            padding: 0;
+        }
+        &-user h2, &-opponent h2 {
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            margin: 20px;
+        }
+    }
+
     &_user-info {
         left: $paddingSides;
         top: $paddingTop;
@@ -84,23 +125,6 @@ $paddingTop: 20px;
         margin-left: 10%;
     }
 
-    &_score {
-        max-width: 100px;
-        h2 {
-            text-align: center;
-            color: #fff;
-            font-size: 32px;
-        }
-        &-user {
-            @extend .game_score;
-            margin-right: 10%;
-        }
-        &-opponent {
-            @extend .game_score;
-            margin-left: 10%;
-        }
-    }
-
     &_field {
         &-grid, &-field {
             margin: auto;
@@ -115,7 +139,6 @@ $paddingTop: 20px;
         @media (max-width: 450px) {
             height: 100vw;
         }
-        //box-sizing: content-box;
         padding: 0 10px;
         margin: auto;
     }
