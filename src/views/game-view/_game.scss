@@ -24,19 +24,64 @@ $paddingTop: 20px;
         background: darken($color_orange, 20%);
     }
 
+    &_end-turn {
+        @media (max-width: 1000px) {
+            width: 100%;
+        }
+    }
+
     @media (min-width: 1200px) {
         width: 1200px;
     }
 
-    @media (max-width: 1000px ) {
+    @media (max-width: 1000px) {
+        &_opponent-score {
+            margin-top: 10px;
+        }
+        &_player-score {
+            margin-top: 10px;
+        }
+    }
+    &_score {
+        &-user-small {
+            @media (max-width: 1000px) {
+                width: 30%;
+                margin-right: 10px;
+                height: 40px;
+            }
+            @media (min-width: 1000px) {
+                display: none;
+            }
+        }
+        &-opponent-small {
+            @media (max-width: 1000px) {
+                width: 30%;
+                margin-left: 10px;
+                height: 40px;
+            }
+            @media (min-width: 1000px) {
+                display: none;
+            }
+        }
+    }
+
+    &_end-turn {
+        @media (min-width: 1000px) {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1000px) {
         &_scores-block{
             & > div{
                 width: 50%;
             }
             width: 100%;
             .outer-container{
-                display: inline-block;
-                padding: 5px;
+                @media (min-width: 1000px) {
+                    display: inline-block;
+                    padding: 5px;
+                }
             }
             h2{
                 margin: 0;
@@ -61,20 +106,55 @@ $paddingTop: 20px;
             display: inline-block;
         }
         &_score {
-            &-user {
+            &-user-small {
+                @media (max-width: 1000px) {
+                    width: 30%;
+                    margin-right: 10px;
+                }
+                color: red;
+                @media (min-width: 1000px) {
+                    display: none;
+                }
+
                 margin: auto;
             }
-            &-opponent {
+            &-opponent-small {
+                @media (max-width: 1000px) {
+                    width: 30%;
+                    margin-left: 10px;
+                }
+                @media (min-width: 1000px) {
+                    display: none;
+                }
                 margin: auto;
             }
             &-user h2, &-opponent h2 {
                 font-size: 25px;
                 margin: 5px;
             }
+
+            @media (max-width: 1000px) {
+                &-user {
+                    display: none;
+                }
+
+                &-opponent {
+                    display: none;
+                }
+            }
+
+        }
+
+        &_score_and_end {
+            display: flex;
         }
 
     }
     @media (min-width: 1000px) {
+        // &_score_and_end {
+        //     display: flex;
+        // }
+
         &_player-info {
             position: absolute;
         }
@@ -106,9 +186,10 @@ $paddingTop: 20px;
         &-user, &-opponent{
             padding: 0;
         }
-        &-user h2, &-opponent h2 {
+        &-user h2, &-opponent h2, &-user-small h2, &-opponent-small h2 {
             text-align: center;
             color: #fff;
+            padding: 0;
         }
     }
 

@@ -11,8 +11,16 @@ div(class="game")
                 h2(class='game_opponent-score') 0
 
     div(class="game_main_container")
-        div(class="base-width centered outer-container")
-            a(class="button-red game_end-turn") End Turn
+
+        div(class="base-width game_score_and_end")
+            div(class="outer-container game_score-user-small left")
+                h2(class='game_player-score') 0
+
+            div(class="outer-container game_end-turn")
+                a(class="button-red") End Turn
+
+            div(class="outer-container game_score-opponent-small")
+                h2(class='game_opponent-score') 0
             //- div(class="game_timebar")
         br
         div(class="base-width centered outer-container")
