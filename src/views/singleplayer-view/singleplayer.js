@@ -9,6 +9,7 @@ class SingleplayerView extends BaseView {
     getTemplate() {
         const data = {
             username: user.login,
+            back:(user.authorized)? '/profile': '/',
         };
 
         return singleplayerTmpl(data);
