@@ -5,6 +5,7 @@ import './fonts/consola.ttf';
 import './fonts/futura.ttf';
 import './images/moon.png';
 import './images/sun.png';
+import './images/pixel.png';
 import 'file-loader?name=site.js!./site.js';
 import 'file-loader?name=serviceWorker.js!./serviceWorker.js';
 import './pixel.png';

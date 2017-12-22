@@ -11,6 +11,17 @@ $break_size: 800px;
     }
 }
 
+@keyframes time-animation {
+    from {
+        background-size: 0% 100%;
+        filter: hue-rotate(120deg);
+    }
+    to {
+        background-size: 100% 100%;
+        filter: hue-rotate(0deg);
+    }
+}
+
 $paddingSides: 20px;
 $paddingTop: 20px;
 
@@ -20,13 +31,39 @@ $paddingTop: 20px;
 
     &_end-turn.disabled {
         pointer-events: none;
-        background: #00ff00;
-        background: darken($color_orange, 20%);
+        // background: #00ff00;
+        // background: darken($color_orange, 90%);
+        background-size: 0% 0%;
+
     }
 
     &_end-turn {
         @media (max-width: 1000px) {
             width: 100%;
+        }
+        > a {
+        background-image: url('./images/pixel.png');
+        background-size: 00% 100%;
+        background-position-x: right;
+        background-repeat: no-repeat;
+        animation: time-animation;
+        animation-duration: 20s;
+        animation-timing-function: linear;
+        }
+    }
+
+    &_end-turn:hover {
+        @media (max-width: 1000px) {
+            width: 100%;
+        }
+        > a {
+        background-image: url('./images/pixel.png');
+        background-size: 0% 100%;
+        background-position-x: right;
+        background-repeat: no-repeat;
+        animation: time-animation;
+        animation-duration: 20s;
+        animation-timing-function: linear;
         }
     }
 
