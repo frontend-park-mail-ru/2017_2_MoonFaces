@@ -32,7 +32,7 @@ export default class Client {
 
     sendSelection() {
         this.networking.send('SELECT_FIELD', {selection: this.gameField.getUserSelection()});
-        this.endTurn.innerHTML = 'Whaiting for opponent';
+        this.endTurn.innerHTML = 'Waiting for opponent...';
         this.endTurn.classList.add('disabled');
     }
 
@@ -46,8 +46,10 @@ export default class Client {
     }
 
     countScores() {
-        this.playerScore.innerHTML = this.gameField.getPlayerScore();
-        this.opponentScore.innerHTML = this.gameField.getOpponentScore();
+        this.playerScore[0].innerHTML = this.gameField.getPlayerScore();
+        this.playerScore[1].innerHTML = this.gameField.getPlayerScore();
+        this.opponentScore[0].innerHTML = this.gameField.getOpponentScore();
+        this.opponentScore[1].innerHTML = this.gameField.getOpponentScore();
     }
 
     handelGameOver(data) {
