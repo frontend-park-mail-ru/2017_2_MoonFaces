@@ -1,21 +1,21 @@
-# MoonFaces
+# Bacterio
 
+#### Абстрактная тактическая пошаговая игра для двух игроков на основе Conway's Game of Life.
 
-## Master application [![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces.svg?branch=master)](https://travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces)
-### [http://moonfaces.herokuapp.com](http://moonfaces.herokuapp.com)
+## [Тут можно поиграть](https://bacterio.tech)
 
-## Develop application [![Build Status](https://travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces.svg?branch=develop)](https://travis-ci.org/frontend-park-mail-ru/2017_2_MoonFaces)
-### [http://bacterio.herokuapp.com/](http://bacterio.herokuapp.com/)
+## API
+### [Документация к API](https://app.swaggerhub.com/apis/EienKotonaru/Bacterio_API/1.0.0)
 
-## Swagger
-### [https://app.swaggerhub.com/apis/EienKotonaru/Bacterio_API/1.0.0](https://app.swaggerhub.com/apis/EienKotonaru/Bacterio_API/1.0.0)
+## [А тут бэк](https://github.com/java-park-mail-ru/MoonFaces-09-2017)
 
-## Members
+## Участники
+
 * [@Praron](https://github.com/Praron) - Ремизов Константин
 * [@EienKotonaru](https://github.com/EienKotonaru) - Могильников Илья
 * [@MainSkynetHackPro](https://github.com/MainSkynetHackPro) - Яминский Николай
 * [@777AvEnGeR777](https://github.com/777AvEnGeR777) - Соколов Михаил
 
-## Mentor
+## Ментор
 
 * [@vileven](https://github.com/vileven)
