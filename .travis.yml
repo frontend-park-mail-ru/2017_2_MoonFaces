@@ -3,7 +3,7 @@ node_js:
 - '8'
 branches:
   only:
-  - develop
+  - master
 script:
 - eval "$(ssh-agent -s)"
 - ssh-keyscan -H 185.188.183.115 >> ~/.ssh/known_hosts
