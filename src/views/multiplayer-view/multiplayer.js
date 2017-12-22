@@ -11,7 +11,7 @@ export default class MultiplayerView extends BaseView {
 
     getTemplate() {
         return statusWindowTmpl({
-            message: 'Connecting to Server...',
+            message: 'Connecting to the server...',
         });
     }
 
@@ -55,7 +55,7 @@ export default class MultiplayerView extends BaseView {
     createGame() {
         this.networking.dropAllEvents();
         this.networking.send('CREATE_GAME');
-        this.appContainer.innerHTML = statusWindowTmpl({message: 'Whaiting for opponent'});
+        this.appContainer.innerHTML = statusWindowTmpl({message: 'Waiting for opponent...'});
         this.networking.addEvent('OPPONENT_FOUND', this.initGame.bind(this));
     }
 
@@ -70,7 +70,7 @@ export default class MultiplayerView extends BaseView {
 
     connectToRoom(roomName) {
         this.networking.dropAllEvents();
-        this.appContainer.innerHTML = statusWindowTmpl({message: 'Connectiong to room'});
+        this.appContainer.innerHTML = statusWindowTmpl({message: 'Connecting to room...'});
         this.networking.send('JOIN_GAME', {player: roomName});
         this.networking.addEvent('CONNECTED', this.initGame.bind(this));
     }
