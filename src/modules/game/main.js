@@ -182,8 +182,12 @@ class Game {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 const trimCell = (cell) => {
-                    if (cell === -1) {cell = this.fieldSize - 1;}
-                    if (cell === this.fieldSize) {cell = 0;}
+                    if (cell === -1) {
+                        cell = this.fieldSize - 1;
+                    }
+                    if (cell === this.fieldSize) {
+                        cell = 0;
+                    }
                     return cell;
                 };
                 const neighboorRow = trimCell(row + i);

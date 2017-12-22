@@ -13,18 +13,23 @@ class BaseView {
     }
 
     stop() {
+        this.preClose();
         this.events.forEach((unsub) => {
             unsub();
         });
     }
 
-    setPage(){
+    setPage() {
 
     }
 
     render() {
         this.appContainer.innerHTML = this.getTemplate();
         this.postRender();
+    }
+
+    preClose() {
+
     }
 }
 

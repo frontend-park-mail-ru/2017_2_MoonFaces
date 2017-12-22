@@ -28,8 +28,6 @@ export default class SinglePlayer {
             this.gameField.opponentSelection.xMax = this.gameField.opponentSelection.xMin + this.randomInt(0, 7 - this.gameField.opponentSelection.xMin);
             this.gameField.opponentSelection.yMax = this.gameField.opponentSelection.yMin + this.randomInt(0, 7 - this.gameField.opponentSelection.yMin);
 
-            this.gameField.renderPlayerSelection(this.gameField.opponentSelection, true);
-
             const userMatrix = this.getAreaMatrix(this.gameField.userSelection);
             const opponentMatrix = this.getAreaMatrix(this.gameField.opponentSelection);
 
@@ -67,11 +65,13 @@ export default class SinglePlayer {
         this.gameField.renderField();
         const playerScore = this.gameField.getPlayerScore();
         const opponentScore = this.gameField.getOpponentScore();
-        this.playerScore.innerHTML = playerScore;
-        this.opponentScore.innerHTML = opponentScore;
-        if(this.gameIsOver(playerScore, opponentScore)) {
+        this.playerScore[0].innerHTML = playerScore;
+        this.playerScore[1].innerHTML = playerScore;
+        this.opponentScore[0].innerHTML = opponentScore;
+        this.opponentScore[1].innerHTML = opponentScore;
+        if (this.gameIsOver(playerScore, opponentScore)) {
             let win = false;
-            if(playerScore > opponentScore) {
+            if (playerScore > opponentScore) {
                 win = true;
             }
             const scores = new GameScores(
@@ -99,7 +99,7 @@ export default class SinglePlayer {
     getAreaMatrix(selection) {
         const result = this.getEmptyMatrix(this.gameField.fieldSize, this.gameField.fieldSize);
 
-        if(!selection) {
+        if (!selection) {
             return result;
         }
 
@@ -121,8 +121,8 @@ export default class SinglePlayer {
         for (let i = 0; i < this.gameField.fieldSize; i++) {
             for (let j = 0; j < this.gameField.fieldSize; j++) {
                 if (resultMatrix[i][j]) {
-                    if(this.field[i][j].change) {
-                        this.field[i][j].alive = !this.field[i][j].alive;
+                    if (this.field[i][j].change) {
+                        this.gameField.toggleCell(i, j);
                     }
                 }
             }

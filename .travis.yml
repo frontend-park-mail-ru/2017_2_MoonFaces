@@ -1,18 +1,16 @@
-sudo: required
-dist: trusty
 language: node_js
-node_js: 7
+node_js:
+- '8'
 branches:
   only:
-  - master
   - develop
-deploy:
-  provider: heroku
-  app:
-    master: moonfaces
-    develop: bacterio
-  api_key:
-    master:
-      secure: sSR1GXOS78eB2lEyayaOteWKFo2Ov3/iA0V8/be5gYWtWlA1ZfhJJTygzbjERA7dOOrvGqEnVfUQ8xERDSYGABGGQ4S0sqoGfhKk5bLgDefToNjy2tjMTeYxcza5YU5iZqCt6zVKBMQcZkUaaDvIx8EKooIc01q4ZajSydWxn8SPLpfpiLvbo9HGnEUKPukMYYaXOGiqPJSik+0zViDJ94TVaK2ftly7R14Rlor17brCDfKzBGeSMYot4cRlPcWnTFGdX+BXNcPDsLI+rYDqom02HyQ9g8ZzzsOZY+FSWX9h5FcQHhRw++7U3l7+66Csf4jKJ0aPjg0EKu6ZcXHbUG2FTE+3sLP8jk7Mu1B1/fT7ZReXQKnBWopM0cIqs2V7NiBWu4Rre7HHU4VdKjLCxgZQKnNJdISn/ezTEKyFOYDAr+VShLtFtc/znN6gbjyWYE4vo8NiEPiKEXfhwfxH4JpxYTcyNAcor+xTEs4PVe2PMEh35MqsRSptAaV74pql54jmfveHezu1/93dZA7jF3RTz3HITMSq3JVYjK8idiZTiEDaTwzyrUPUhDQqNDAophh2URbzKV1Hd1RRDW4bXky432ZnJSwWJzLnnhj5MfPLVYmZ5tYCl445J3ecI5MUOT6htgtZmIs8tawjKjClw35zF4xBZkvGEFJmn6IogPI=
-    develop:
-      secure: JQVqStvhXE+ZdOE5f8i0t5o9SWMMtTbk5GNRo+pUr69Kn7jLrvSg/7UnLe1BFCktRXu+AMQliLz/quiM1qmMr/GzOjYvj+eJfb7rG7z/1oqNgCtyE2chfKuuSK3HOAPdiJuNmg2ScfE6uSasvG5j4e45eQzokVW/n02VTitNMUSsCATNPwqMHSjWTMc4QxZLQMIdQ9Yeki9LFUe492LuDI9hHue4Yl8uAIwWH5o/w15d8V1dbJNnWnFROFMxSGMoQfl8gAoLL6T3VskQaNxhK30oQrWCH88znTk7KVrR4KFcAe8wfC8RHsjDPwV63kXK1VjIAcUybncV7E+YNr3E8/WnH0IUGFEw+/Mwriea8uvOSzmweH98JwbiG36M50S64IQNaOrjzfOrbELLmsVPRjScdGZ6brTRoHk3+nJmCGgJ3gLr5wcBg8finneZqo7xK+0AT/tVrwnAskAdF5Avfpbiez5li/ByN+smHBl0YP3aDOOC1mP/Vc0rSnhKT4dtA7ZbXqYKqg4SpTQ+33HTzlfMT3xsq8XysF/hrBI9wII0S4tmoYrbZUzHFQxY9fGV9NAtX4B+XWyp7TX+nBV2AGWl33rOI3iMpeJ7p7eTfYu5eactizTLcE0s0liq9u73fGFO/CRgi1SmmtwgbUFQV6xVJKq9u65Q47WiH3jCz5M=
+script:
+- eval "$(ssh-agent -s)"
+- ssh-keyscan -H 185.188.183.115 >> ~/.ssh/known_hosts
+- chmod 600 $HOME/.ssh/tpfront
+- ssh-add $HOME/.ssh/tpfront
+- npm run build
+- scp -r ./dist travis@185.188.183.115:/var/www/front
+before_install:
+- openssl aes-256-cbc -K $encrypted_5be7cd8cda3d_key -iv $encrypted_5be7cd8cda3d_iv
+  -in tpfront.enc -out $HOME/.ssh/tpfront -d
