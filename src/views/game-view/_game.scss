@@ -44,6 +44,11 @@ $paddingTop: 20px;
             box-sizing: border-box;
             margin-bottom: 5px;
         }
+
+        &_player-name {
+            font-size: 25px;
+            margin: 5px;
+        }
         &_player-info {
             text-align: center;
             padding: 5px;
@@ -61,6 +66,10 @@ $paddingTop: 20px;
             }
             &-opponent {
                 margin: auto;
+            }
+            &-user h2, &-opponent h2 {
+                font-size: 25px;
+                margin: 5px;
             }
         }
 
@@ -84,6 +93,10 @@ $paddingTop: 20px;
                 margin-left: 10%;
                 display: inline-block;
             }
+            &-user h2, &-opponent h2 {
+                font-size: 32px;
+                margin: 20px;
+            }
         }
     }
 
@@ -96,8 +109,6 @@ $paddingTop: 20px;
         &-user h2, &-opponent h2 {
             text-align: center;
             color: #fff;
-            font-size: 32px;
-            margin: 20px;
         }
     }
 
