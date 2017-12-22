@@ -65,8 +65,10 @@ export default class SinglePlayer {
         this.gameField.renderField();
         const playerScore = this.gameField.getPlayerScore();
         const opponentScore = this.gameField.getOpponentScore();
-        this.playerScore.innerHTML = playerScore;
-        this.opponentScore.innerHTML = opponentScore;
+        this.playerScore[0].innerHTML = playerScore;
+        this.playerScore[1].innerHTML = playerScore;
+        this.opponentScore[0].innerHTML = opponentScore;
+        this.opponentScore[1].innerHTML = opponentScore;
         if (this.gameIsOver(playerScore, opponentScore)) {
             let win = false;
             if (playerScore > opponentScore) {
