@@ -22,6 +22,7 @@ import SignupView from './views/signup-view/signup';
 import ProfileView from './views/profile-view/profile';
 import SingleplayerView from './views/singleplayer-view/singleplayer';
 import MultiplayerView from './views/multiplayer-view/multiplayer';
+import TutorailView from './views/tutorial-view/tutorial';
 
 (() => {
     const themes = new Themes();
@@ -47,7 +48,8 @@ import MultiplayerView from './views/multiplayer-view/multiplayer';
         .addRoute('/signup', SignupView)
         .addRoute('/profile', ProfileView)
         .addRoute('/game/singleplayer', SingleplayerView)
-        .addRoute('/game/multiplayer', MultiplayerView);
+        .addRoute('/game/multiplayer', MultiplayerView)
+        .addRoute('/tutorial', TutorailView);
 
     user.isAuthenticated().then(() => {
         if(user.authorized) {
